@@ -1,0 +1,32 @@
+<div class="example-container" [class.example-is-mobile]="mobileQuery.matches" *ngIf="shouldRun">
+      <mat-toolbar class="example-toolbar">
+      <button class="boton mt-2" mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
+      <div class="container" id="hora">
+        <a>{{totalString}}</a>
+      </div>
+    </mat-toolbar>
+  
+    <mat-sidenav-container class="example-sidenav-container"
+                           [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+      <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
+                   [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
+        <mat-nav-list>
+          <a mat-list-item [routerLink]="nav.route" *ngFor="let nav of fillerNav">
+            <mat-icon>{{nav.icon}}</mat-icon>
+            {{nav.name}}</a>
+        </mat-nav-list>
+      </mat-sidenav>
+  
+      <mat-sidenav-content class="contenido-menu">
+        <!-- <div class="container">
+          <app-clock></app-clock>
+        </div> -->
+        <div class="container mt-4">
+          <app-login></app-login>
+        </div>
+        
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </div>
+  
+  <div *ngIf="!shouldRun">Please open on Stackblitz to see result</div>

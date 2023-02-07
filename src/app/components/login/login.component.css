@@ -1,0 +1,33 @@
+form{
+    border: 1px solid rgb(30, 53, 154);
+    border-radius: 30px;
+    /* background-color: rgb(46, 45, 156) ; */
+    background-image: url(../../../assets/mockup-cypro-login.png);
+    background-size: cover;
+    background-position: center;
+    padding: 5%;
+} 
+.email{
+    margin-top: 40%;
+}
+
+.contra, .email{
+    font-family: Tahoma; font-size: 17px; font-style: normal;
+    font-weight: bold;
+}
+.btn{
+    font-family: Tahoma; font-size: 20px; font-style: normal;
+    font-weight: bold; 
+}
+
+#terminos{
+    font-family: Geneva; font-size: 15px; font-style: normal;
+}
+
+.colorInput{
+    background-color:rgba(0,31,70,255);
+    border-radius: 12px;
+    color: aliceblue;
+    font-family: Tahoma; font-size: 16px; font-style: normal;
+}
+

@@ -1,0 +1,22 @@
+<div class="col-sm-4 mx-auto h-75">
+    <form [formGroup]="form" (ngSubmit)="login()">
+        
+        <div class="email p-3 mb-1 ">
+            <label for="exampleFormControlInput1" class="">EMAIL</label>
+            <input formControlName="userName" type="email" class="form-control colorInput">
+        </div>
+        <div class="contra p-3 ">
+            <label for="exampleFormControlTextarea1" class="">CONTRASEÑA</label>
+            <input formControlName="pass" type="password" class="form-control colorInput">
+        </div>
+        <div id="terminos" class="container ms-4 mb-4">
+            <input type="checkbox" data-required="1"> ACEPTO los <a href="#">Términos y Condiciones</a>
+        </div>
+        <div class="boto p-3">
+            <button type="submit" class="btn btn-primary form-control">INICIAR</button>
+        </div>
+        <div class="container text-center">
+            <p>¿Olvidaste tu contraseña? <a href="#">Pincha Acá</a></p>
+        </div>
+    </form>
+</div>
