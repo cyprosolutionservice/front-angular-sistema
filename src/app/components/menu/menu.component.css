@@ -58,22 +58,17 @@
     background-size: cover;
     background-position: center;
   }
-  /* body{
-    background-image: url("../../../assets/mockup-cypro-fondo.png");
+
+
+@media only screen and (max-width: 767px) {
+  .contenido-menu{
+    background-image: url("../../../assets/mockup-cypro-mobile.png");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+  }
+  } 
 
-}
-
-@media only screen and (max-width: 767px) {
-    body {
-      background-image: url("../../../assets/mockup-cypro-mobile.png");
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center;
-    }
-  } */
 
   .start-icons{
     font-size: 230%;
@@ -84,9 +79,9 @@
     margin-top: 17px;
   }
 
-  .mat-list-item{
+  /* .mat-list-item{
     margin-bottom: 7%;
-  }
+  } */
 
   .slider-menu{
     background: rgba(46,75,131,255);
@@ -97,4 +92,11 @@
   }
 .icono-color{
   color: aliceblue;
+  margin-bottom: 7%;
 }
+
+@media only screen and (max-width: 1536px) {
+  .mat-list-item{
+    margin-bottom: 4%;
+  }
+  } 
