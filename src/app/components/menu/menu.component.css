@@ -50,6 +50,7 @@
   }
   #hora{
     margin-left: 8%;
+    font-size: 95%;
   }
   .contenido-menu{
     background-image: url("../../../assets/mockup-cypro-fondo.png");
@@ -73,3 +74,27 @@
       background-position: center;
     }
   } */
+
+  .start-icons{
+    font-size: 230%;
+  
+  }
+
+  .first-icon{
+    margin-top: 17px;
+  }
+
+  .mat-list-item{
+    margin-bottom: 7%;
+  }
+
+  .slider-menu{
+    background: rgba(46,75,131,255);
+  }
+  
+  .second-slider{
+    background: rgba(46,75,131,255);
+  }
+.icono-color{
+  color: aliceblue;
+}

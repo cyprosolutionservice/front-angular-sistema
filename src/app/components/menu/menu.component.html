@@ -8,20 +8,58 @@
   
     <mat-sidenav-container class="example-sidenav-container"
                            [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
-      <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
+      <mat-sidenav class="second-slider" #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
                    [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
-        <mat-nav-list>
-          <a mat-list-item [routerLink]="nav.route" *ngFor="let nav of fillerNav">
-            <mat-icon>{{nav.icon}}</mat-icon>
-            {{nav.name}}</a>
+    
+        <mat-nav-list class="slider-menu">
+          <a mat-list-item class="icono-color"><span class="material-symbols-outlined start-icons me-2">
+            grade
+            </span><p class="first-icon">INICIO </p></a>
+
+          <a mat-list-item class="icono-color"><span class="material-symbols-outlined start-icons me-2">
+            sync_saved_locally
+            </span>VENTA DIRECTA </a>
+
+          <a mat-list-item class="icono-color"><span class="material-symbols-outlined start-icons me-2">
+            restaurant_menu
+            </span>MESAS </a>
+          <a mat-list-item class="icono-color"><span class="material-symbols-outlined start-icons me-2">
+            description
+            </span>FACTURACIÓN </a>
+          <a mat-list-item class="icono-color"><span class="material-symbols-outlined start-icons me-2">
+            shopping_cart
+            </span>DELIVERY </a>
+          <a mat-list-item class="icono-color"><span class="material-symbols-outlined start-icons me-2">
+            groups
+            </span>CLIENTES </a>
+          <a mat-list-item class="icono-color"><span class="material-symbols-outlined start-icons me-2">
+            window
+            </span>PRODUCTOS </a>
+          <a mat-list-item class="icono-color"><span class="material-symbols-outlined start-icons me-2">
+            swap_vert
+            </span>OPERACIONES </a>
+          <a mat-list-item class="icono-color"><span class="material-symbols-outlined start-icons me-2">
+            bar_chart
+            </span>INFORMES </a>
+          <a mat-list-item class="icono-color"><span class="material-symbols-outlined start-icons me-2">
+            fact_check
+            </span>INVENTARIO </a>
+          <a mat-list-item class="icono-color"><span class="material-symbols-outlined start-icons2 me-2 ">
+            tune
+            </span>CONFIGURACIONES </a>
         </mat-nav-list>
       </mat-sidenav>
+
+      <!-- <mat-menu>
+        <button mat-menu-item 
+          *ngFor="let item of menuListItems">
+          <mat-icon>{{ item.menuIcon }}</mat-icon>
+          <span> {{ item.menuLinkText }}</span>
+        </button>
+      </mat-menu> -->
   
       <mat-sidenav-content class="contenido-menu">
-        <!-- <div class="container">
-          <app-clock></app-clock>
-        </div> -->
-        <div class="container mt-4">
+        <div class="container mt-2">
           <app-login></app-login>
         </div>
         
@@ -30,3 +68,21 @@
   </div>
   
   <div *ngIf="!shouldRun">Please open on Stackblitz to see result</div>
+
+  <!-- <mat-toolbar>
+    <button mat-icon-button 
+            [matMenuTriggerFor]="clickmenu">
+            <mat-icon>more_vert</mat-icon>
+    </button>
+    <span>Selected Menu {{selectedMenu}}</span>
+  </mat-toolbar>
+  
+  <mat-menu #clickmenu="matMenu">
+    <button mat-menu-item 
+            *ngFor="let item of menuListItems" 
+            (click)="clickMenuItem(item)" 
+            [disabled]="item.isDisabled">
+      <mat-icon>{{ item.menuIcon }}</mat-icon>
+      <span> {{ item.menuLinkText }}</span>
+    </button>
+  </mat-menu>   -->

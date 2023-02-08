@@ -18,6 +18,7 @@ import { AdminComponent } from './components/admin/admin.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { PrivateComponent } from './components/private/private.component';
+import {MatMenuModule} from '@angular/material/menu';
 
 //Modules
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -49,6 +50,7 @@ import { TokenInterceptorService } from './services/token-interceptor.service';
     MatSlideToggleModule,
     MatIconModule,
     MatToolbarModule,
+    MatMenuModule,
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule

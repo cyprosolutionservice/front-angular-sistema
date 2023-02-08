@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout'
 import { Observable } from 'rxjs';
 import { valorReloj, XsegundoService } from '../../services/xsegundo-service.service';
+import { MatMenuListItem } from 'src/app/Model/MatMenulistItem';
 
 @Component({
   selector: 'app-menu',
@@ -50,6 +51,21 @@ export class MenuComponent implements OnInit {
       this.totalString =` ${this.dia}, ${this.fecha} ${this.year} ${this.hora}:${this.minutos} ${this.ampm}`;
       console.log(this.totalString);
     });
+
+    this.menuListItems = [
+      {menuLinkText: 'Settings', 
+      menuIcon: 'settings',
+      isDisabled:false},
+      {menuLinkText: 'AboutUs',
+       menuIcon: 'people',
+       isDisabled:false},
+      {menuLinkText: 'Help', 
+       menuIcon: 'help',
+       isDisabled:false},
+      {menuLinkText:'Contact',
+       menuIcon:'contact',
+       isDisabled:true }
+];
   }
 
   ngOnDestroy(): void {
@@ -57,5 +73,12 @@ export class MenuComponent implements OnInit {
   }
 
   shouldRun = true;
+  menuListItems : MatMenuListItem[];
+  selectedMenu:any;
+
+  clickMenuItem(menuItem : MatMenuListItem){
+    console.log(menuItem);
+    this.selectedMenu = menuItem.menuLinkText;
+}
 }
 
