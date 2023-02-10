@@ -1,10 +1,10 @@
 export class UserData{
-    userName: string;
-    pass: string;
+    E_MAIL: string;
+    CLAVE: string;
 
 
-    constructor(userName: string, pass: string){
-        this.userName = userName;
-        this.pass = pass;
+    constructor(E_MAIL: string, CLAVE: string){
+        this.E_MAIL = E_MAIL;
+        this.CLAVE = E_MAIL;
     }
 }

@@ -23,8 +23,8 @@ export class LoginComponent implements OnInit {
               private router: Router,
               private fb: FormBuilder) { 
                 this.form = this.fb.group({
-                  userName: ['', Validators.required],
-                  pass: ['', [Validators.required]]
+                  E_MAIL: ['', Validators.required],
+                  CLAVE: ['', [Validators.required]]
                   
                 })
               }
@@ -33,8 +33,8 @@ export class LoginComponent implements OnInit {
 
   login(){
     const USER: UserData = {
-      userName: this.form.value.userName,
-      pass: this.form.value.pass
+      E_MAIL: this.form.value.E_MAIL,
+      CLAVE: this.form.value.CLAVE
     }
 
 

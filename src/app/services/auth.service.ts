@@ -8,7 +8,7 @@ import { LoginComponent } from '../components/login/login.component';
 })
 export class AuthService {
 
-  private URL = 'http://34.176.221.186:3000';
+  private URL = 'http://34.176.159.223:3000';
 
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService) { }
 

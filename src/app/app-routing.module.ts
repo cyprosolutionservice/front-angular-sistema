@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: 'private', component: PrivateComponent, canActivate: [AuthGuard]},
   { path: 'admin', component: AdminComponent, canActivate: [RoleGuard], data: { expectedRole: 'admin'}},
   { path: 'login', component: LoginComponent},
-  { path: '**', pathMatch: 'full', redirectTo: 'home'}
+  { path: '**', pathMatch: 'full', redirectTo: 'login'}
 ];
 
 @NgModule({
