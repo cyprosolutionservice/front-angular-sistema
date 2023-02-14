@@ -3,6 +3,7 @@ import { MediaMatcher } from '@angular/cdk/layout'
 import { Observable } from 'rxjs';
 import { valorReloj, XsegundoService } from '../../services/xsegundo-service.service';
 import { MatMenuListItem } from 'src/app/Model/MatMenulistItem';
+import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-menu',
@@ -20,6 +21,8 @@ export class MenuComponent implements OnInit {
   segundos: string;
   year: number;
   totalString: any;
+
+  boton: boolean = false;
 
   mobileQuery: MediaQueryList;
 
@@ -50,6 +53,8 @@ export class MenuComponent implements OnInit {
 
       this.totalString =` ${this.dia}, ${this.fecha} ${this.year} ${this.hora}:${this.minutos} ${this.ampm}`;
       console.log(this.totalString);
+
+      this.boton = LoginComponent.botonMenu;
     });
 
     this.menuListItems = [

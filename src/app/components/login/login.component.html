@@ -3,17 +3,25 @@
         
         <div class="email p-3 mb-1 ">
             <label for="exampleFormControlInput1" class="">EMAIL</label>
-            <input formControlName="E_MAIL" type="email" class="form-control colorInput">
+            <input formControlName="E_MAIL" type="email" class="form-control colorInput"
+            placeholder="ejemplo@algo.com">
         </div>
         <div class="contra p-3 ">
             <label for="exampleFormControlTextarea1" class="">CONTRASEÑA</label>
-            <input formControlName="CLAVE" type="password" class="form-control colorInput">
+            <input formControlName="CLAVE" type="password" class="form-control colorInput"
+            placeholder="Ingrese Clave">
         </div>
         <div id="terminos" class="container ms-4 mb-4">
-            <input type="checkbox" data-required="1"> ACEPTO los <a href="#">Términos y Condiciones</a>
+            <input type="checkbox" formControlName="acceptTerms"> ACEPTO los <a href="terminos">
+                Términos y Condiciones</a>
+            <div class="terminosError" *ngIf="form.hasError('required', 'acceptTerms')">
+                Acepte Terminos para continuar
+              </div>
+            <!-- <br>
+            <label><input formControlName="VALIDAR"  type="checkbox"> Acepto2 los términos del servicio</label> -->
         </div>
         <div class="boto p-3">
-            <button type="submit" class="btn btn-primary form-control">INICIAR</button>
+            <button type="submit" [disabled]="form.invalid" class="btn btn-primary form-control">INICIAR</button>
         </div>
         <div class="container text-center">
             <p>¿Olvidaste tu contraseña? <a href="#">Pincha Acá</a></p>

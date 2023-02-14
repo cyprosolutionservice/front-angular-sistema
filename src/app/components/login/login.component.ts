@@ -19,12 +19,15 @@ export class LoginComponent implements OnInit {
   user = new UserData('', '');
   static FAKE: string;
 
+  static botonMenu: boolean= false;
+
   constructor(private authService: AuthService,
               private router: Router,
               private fb: FormBuilder) { 
                 this.form = this.fb.group({
                   E_MAIL: ['', Validators.required],
-                  CLAVE: ['', [Validators.required]]
+                  CLAVE: ['', [Validators.required]],
+                  acceptTerms: [true, [Validators.requiredTrue]]
                   
                 })
               }
@@ -40,6 +43,7 @@ export class LoginComponent implements OnInit {
 
       this.authService.singin(USER).subscribe( (res:any) =>{
         if (res.token) {
+          LoginComponent.botonMenu = true;
           //console.log(res);
           LoginComponent.FAKE =res.token;
           localStorage.setItem('token','eyJhBNJ77fdhx.17$$23terOPOOUGVCVB.rpEYwq.DE_YNhuzxqW');
@@ -47,6 +51,7 @@ export class LoginComponent implements OnInit {
         }else{
           console.log('Usuario No encontrado en la base de Datos');
           alert('Error de clave');
+          LoginComponent.botonMenu = false;
         }
           
       });

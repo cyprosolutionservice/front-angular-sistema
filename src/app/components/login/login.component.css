@@ -31,3 +31,12 @@ form{
     font-family: Tahoma; font-size: 16px; font-style: normal;
 }
 
+.terminosError{
+    color: rgb(229, 77, 77);
+    font-weight: bold;
+}
+.form-control::placeholder{
+    color: rgb(212, 217, 220);
+    font-size: 92%;
+}
+

@@ -1,0 +1,10 @@
+
+.cuerpo{
+    background: rgba(46,75,131,255);
+    color: azure;
+    border-radius: 4%;
+    padding: 1%;
+}
+h3{
+    text-align: center;
+}

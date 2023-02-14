@@ -30,6 +30,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { JWT_OPTIONS } from '@auth0/angular-jwt';
 import { TokenInterceptorService } from './services/token-interceptor.service';
+import { TerminosComponent } from './components/terminos/terminos.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { TokenInterceptorService } from './services/token-interceptor.service';
     AdminComponent,
     HomeComponent,
     LoginComponent,
-    PrivateComponent
+    PrivateComponent,
+    TerminosComponent
   ],
   imports: [
     BrowserModule,
