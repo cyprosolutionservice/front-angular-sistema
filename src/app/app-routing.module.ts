@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './components/admin/admin.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
+import { Login2Component } from './components/login2/login2.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { PrivateComponent } from './components/private/private.component';
 import { TerminosComponent } from './components/terminos/terminos.component';
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'private', component: PrivateComponent, canActivate: [AuthGuard]},
   { path: 'admin', component: AdminComponent, canActivate: [RoleGuard], data: { expectedRole: 'admin'}},
   { path: 'login', component: LoginComponent},
+  { path: 'login2', component: Login2Component},
   { path: 'menu', component: MenuComponent, canActivate: [AuthGuard]},
   { path: '**', pathMatch: 'full', redirectTo: 'login'}
 ];

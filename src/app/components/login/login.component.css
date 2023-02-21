@@ -16,7 +16,7 @@ form{
     font-weight: bold;
 }
 .btn{
-    font-family: Tahoma; font-size: 20px; font-style: normal;
+    font-family: Tahoma; font-size: 22px; font-style: normal;
     font-weight: bold; 
 }
 
@@ -28,7 +28,7 @@ form{
     background-color:rgba(0,31,70,255);
     border-radius: 12px;
     color: aliceblue;
-    font-family: Tahoma; font-size: 16px; font-style: normal;
+    font-family: Tahoma; font-size: 19px; font-style: normal;
 }
 
 .terminosError{
@@ -36,7 +36,11 @@ form{
     font-weight: bold;
 }
 .form-control::placeholder{
-    color: rgb(212, 217, 220);
-    font-size: 92%;
+    color: rgba(191, 192, 193, 0.658);
+    font-size: 14px;
+}
+
+.etiquetas{
+    margin-bottom: 2px;
 }
 

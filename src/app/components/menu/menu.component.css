@@ -43,14 +43,18 @@
   .boton{
     background-color: rgba(116,135,165,255);
     border: 0;
+    margin-right: 1px;
   }
 
   .mat-toolbar{
     background-color: rgba(116,135,165,255);
   }
   #hora{
-    margin-left: 8%;
-    font-size: 95%;
+    margin-left: 2rem;
+    font-size: 21px
+  }
+  .usuario{
+    font-size: 21px
   }
   .contenido-menu{
     background-image: url("../../../assets/mockup-cypro-fondo.png");
@@ -68,6 +72,18 @@
     background-position: center;
   }
   } 
+
+  @media only screen and (max-width: 540px) {
+    #hora{
+      margin-left: 0px;
+      font-size: 15px
+    }
+    .usuario{
+      margin-left: 0px;
+      font-size: 14px
+    }
+   
+    } 
 
 
   .start-icons{

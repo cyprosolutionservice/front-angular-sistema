@@ -43,15 +43,18 @@ export class LoginComponent implements OnInit {
 
       this.authService.singin(USER).subscribe( (res:any) =>{
         if (res.token) {
-          LoginComponent.botonMenu = true;
+          // LoginComponent.botonMenu = true;
           //console.log(res);
+          //console.log('RESPUESTA AQUI ----> '+res.joinDatabase);
+          console.log('LOGEO1 EXITSOSO!!!')
           LoginComponent.FAKE =res.token;
+          localStorage.setItem('DB', res.joinDatabase);
           localStorage.setItem('token','eyJhBNJ77fdhx.17$$23terOPOOUGVCVB.rpEYwq.DE_YNhuzxqW');
-          this.router.navigate(['private']);  
+          this.router.navigate(['login2']);  
         }else{
           console.log('Usuario No encontrado en la base de Datos');
           alert('Error de clave');
-          LoginComponent.botonMenu = false;
+          // LoginComponent.botonMenu = false;
         }
           
       });

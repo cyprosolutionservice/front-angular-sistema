@@ -1,0 +1,89 @@
+.calculator {
+    margin: 20px auto;
+    max-width: 430px;
+    max-height: 500px;
+    background-color: rgba(46,75,131,255);
+    border-radius: 30px;
+    padding: 25px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    
+  }
+  
+  .display {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .button-row {
+    text-align: center;
+  }
+  
+  .btn {
+    background-color: rgba(0,31,68,255);
+    width: 75px;
+    height: 75px;
+    font-size: 24px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    margin-right: 20px;
+    margin-bottom: 20px;
+  }
+
+  
+  .btn:last-child {
+    margin-right: 0;
+    /* background-color: rgba(0,31,68,255); */
+  }
+  
+  .btn-secondary {
+    background-color: rgba(0,31,68,255);
+    color: rgba(46,75,131,255);
+    border: none;
+    border-radius: 25%;
+    font-size: 27px;
+    font-weight: bold;
+  }
+
+  .btn-secondary2 {
+    background-color: rgba(30,146,205,255);
+    color: aliceblue;
+    border: none;
+    border-radius: 25%;
+    font-size: 27px;
+    font-weight: bold;
+  }
+  
+  .btn-secondary:hover {
+    background-color: #e6e6e6;
+    background-color: rgba(0,31,68,255);
+  }
+  
+  .btn-danger {
+    background-color: #f44336;
+    color: #fff;
+  }
+  
+  .btn-danger:hover {
+    background-color: #e53935;
+  }
+  
+  .start-icons{
+    margin-top: 15%;
+    font-size: 200%;
+  
+  }
+  
+.data-input{
+    width: 265px;
+    height: 40px;
+    font-size: 25px;
+    background-color: rgba(0, 0, 0, 0.3);
+    color: aliceblue;
+}
+
+.etiqueta{
+    
+    font-size: 23px;
+    font-weight: bolder;
+    color: aliceblue;
+}

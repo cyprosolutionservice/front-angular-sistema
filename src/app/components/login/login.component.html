@@ -1,13 +1,13 @@
 <div class="col-sm-4 mx-auto h-75">
     <form [formGroup]="form" (ngSubmit)="login()">
         
-        <div class="email p-3 mb-1 ">
-            <label for="exampleFormControlInput1" class="">EMAIL</label>
+        <div class="email p-3 mb-1">
+            <label for="exampleFormControlInput1" class="etiquetas">EMAIL</label>
             <input formControlName="E_MAIL" type="email" class="form-control colorInput"
             placeholder="ejemplo@algo.com">
         </div>
         <div class="contra p-3 ">
-            <label for="exampleFormControlTextarea1" class="">CONTRASEÑA</label>
+            <label for="exampleFormControlTextarea1" class="etiquetas">CONTRASEÑA</label>
             <input formControlName="CLAVE" type="password" class="form-control colorInput"
             placeholder="Ingrese Clave">
         </div>

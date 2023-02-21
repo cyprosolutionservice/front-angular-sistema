@@ -1,7 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { LoginComponent } from '../components/login/login.component';
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +17,18 @@ export class AuthService {
   singin(user: any){
     return this.http.post(`${this.URL}/user/singin`, user);
   }
+
+  
+
+  singin2(user: any){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'x-db-name': localStorage.getItem('DB'),
+      })
+    };
+    return this.http.post(`${this.URL}/user/singin2`, user, httpOptions);
+  }
+  
 
   isAuth():boolean{
     const token = localStorage.getItem('token');

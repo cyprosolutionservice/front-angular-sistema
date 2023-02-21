@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { valorReloj, XsegundoService } from '../../services/xsegundo-service.service';
 import { MatMenuListItem } from 'src/app/Model/MatMenulistItem';
 import { LoginComponent } from '../login/login.component';
+import { Login2Component } from '../login2/login2.component';
 
 @Component({
   selector: 'app-menu',
@@ -25,6 +26,8 @@ export class MenuComponent implements OnInit {
   boton: boolean = false;
 
   mobileQuery: MediaQueryList;
+
+  usuario: string;
 
   // fillerNav = Array.from({length: 50}, (_, i) => `Nav Item ${i + 1}`);
   fillerNav = [
@@ -55,6 +58,7 @@ export class MenuComponent implements OnInit {
       console.log(this.totalString);
 
       this.boton = LoginComponent.botonMenu;
+      this.usuario = `Usuario: ${Login2Component.nombreBarra}`;
     });
 
     this.menuListItems = [
@@ -82,6 +86,7 @@ export class MenuComponent implements OnInit {
   selectedMenu:any;
 
   clickMenuItem(menuItem : MatMenuListItem){
+    
     console.log(menuItem);
     this.selectedMenu = menuItem.menuLinkText;
 }

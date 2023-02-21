@@ -31,6 +31,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { JWT_OPTIONS } from '@auth0/angular-jwt';
 import { TokenInterceptorService } from './services/token-interceptor.service';
 import { TerminosComponent } from './components/terminos/terminos.component';
+import { Login2Component } from './components/login2/login2.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { TerminosComponent } from './components/terminos/terminos.component';
     HomeComponent,
     LoginComponent,
     PrivateComponent,
-    TerminosComponent
+    TerminosComponent,
+    Login2Component
   ],
   imports: [
     BrowserModule,

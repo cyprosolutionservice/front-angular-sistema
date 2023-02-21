@@ -1,0 +1,37 @@
+<div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="calculator ">
+          <div class="container mb-4 text-center">
+            <label class="etiqueta mb-3" for="">CLAVE DE ACCESO</label>
+            <input class="data-input" type="password" [(ngModel)]="display" [ngModelOptions]="{standalone: true}">
+          </div>
+          <div class="button-row">
+            <button class="btn btn-secondary" (click)="handleClick('1')">1</button>
+            <button class="btn btn-secondary" (click)="handleClick('2')">2</button>
+            <button class="btn btn-secondary" (click)="handleClick('3')">3</button>
+          </div>
+          <div class="button-row">
+            <button class="btn btn-secondary" (click)="handleClick('4')">4</button>
+            <button class="btn btn-secondary" (click)="handleClick('5')">5</button>
+            <button class="btn btn-secondary" (click)="handleClick('6')">6</button>
+          </div>
+          <div class="button-row">
+            <button class="btn btn-secondary" (click)="handleClick('7')">7</button>
+            <button class="btn btn-secondary" (click)="handleClick('8')">8</button>
+            <button class="btn btn-secondary" (click)="handleClick('9')">9</button>
+          </div>
+          <div class="button-row">
+            <button class="btn btn-secondary2" (click)="handleClick('.')"><span class="material-symbols-outlined start-icons">
+                line_start_arrow_notch
+                </span></button>
+            <button class="btn btn-secondary" (click)="handleClick('0')">0</button>
+            <button class="btn btn-secondary2" (click)="login2()"><span class="material-symbols-outlined start-icons">
+                arrow_selector_tool
+                </span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
