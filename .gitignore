@@ -5,6 +5,9 @@
 /out-tsc
 /bazel-out
 
+#Variables globales
+global.ts
+
 # Node
 /node_modules
 npm-debug.log

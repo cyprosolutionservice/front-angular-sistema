@@ -90,6 +90,10 @@
     font-size: 230%;
   
   }
+  .icono-user{
+    font-size: 200%;
+  }
+
 
   .first-icon{
     margin-top: 17px;
@@ -115,4 +119,15 @@
   .mat-list-item{
     margin-bottom: 4%;
   }
-  } 
+  }
+  
+.btn-config{
+  background: rgba(46,75,131,255);
+  color: aliceblue;
+  border: 0;
+  margin-left: 0px;
+
+}
+
+
+

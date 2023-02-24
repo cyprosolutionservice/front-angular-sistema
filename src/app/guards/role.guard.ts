@@ -26,11 +26,11 @@ export class RoleGuard implements CanActivate {
 
     console.log('El Rol es -> ', deco['roleId']);
 
-    if(!this.authService.isAuth() || deco['roleId']!== expectedRole){
-      console.log('Usuario No Autorizado');
-      alert('No tienes permiso de admin');
-      return false
-    }
+    // if(!this.authService.isAuth() || deco['roleId']!== expectedRole){
+    //   console.log('Usuario No Autorizado');
+    //   alert('No tienes permiso de admin');
+    //   return false
+    // }
     return true;
   }
   

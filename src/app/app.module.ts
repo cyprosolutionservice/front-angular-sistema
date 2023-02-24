@@ -19,6 +19,8 @@ import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { PrivateComponent } from './components/private/private.component';
 import {MatMenuModule} from '@angular/material/menu';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import {MatSelectModule} from '@angular/material/select';
 
 //Modules
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -32,6 +34,10 @@ import { JWT_OPTIONS } from '@auth0/angular-jwt';
 import { TokenInterceptorService } from './services/token-interceptor.service';
 import { TerminosComponent } from './components/terminos/terminos.component';
 import { Login2Component } from './components/login2/login2.component';
+import { CrearUsuarioComponent } from './components/crear-usuario/crear-usuario.component';
+
+//Toastr
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -43,7 +49,8 @@ import { Login2Component } from './components/login2/login2.component';
     LoginComponent,
     PrivateComponent,
     TerminosComponent,
-    Login2Component
+    Login2Component,
+    CrearUsuarioComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +64,10 @@ import { Login2Component } from './components/login2/login2.component';
     MatMenuModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatTooltipModule,
+    MatSelectModule,
+    ToastrModule.forRoot()
 
   ],
   providers: [XsegundoService,

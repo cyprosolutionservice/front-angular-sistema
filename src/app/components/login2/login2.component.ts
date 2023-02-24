@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { UserData2 } from 'src/app/Model/UserData2';
 import { AuthService } from 'src/app/services/auth.service';
 import { LoginComponent } from '../login/login.component';
@@ -15,10 +16,7 @@ export class Login2Component implements OnInit {
 
 
   form: FormGroup;
-  // user = {
-  //   userName: 'kevin',
-  //   pass: '1234'
-  // }
+
   user = new UserData2('');
   static FAKE: string;
 
@@ -28,7 +26,8 @@ export class Login2Component implements OnInit {
 
   constructor(private authService: AuthService,
               private router: Router,
-              private fb: FormBuilder) {
+              private fb: FormBuilder,
+              private toastr: ToastrService) {
                 this.form = this.fb.group({
                   CLAVE: ['', [Validators.required]],
                   acceptTerms: [true, [Validators.requiredTrue]]
@@ -50,15 +49,19 @@ export class Login2Component implements OnInit {
       this.authService.singin2(USER).subscribe( (res:any) =>{
         if (res.token) {
           localStorage.setItem('usuario', res.parsedData.NOMBRE);
+          localStorage.setItem('rut', res.parsedData.RUTEMP);
           LoginComponent.botonMenu = true;
           Login2Component.nombreBarra = localStorage.getItem('usuario');
           // console.log('RESPUESTA AQUI ----> '+res);
           LoginComponent.FAKE =res.token;
-          localStorage.setItem('token','eyJhBNJ77fdhx.17$$23terOPOOUGVCVB.rpEYwq.DE_YNhuzxqW');
+          // localStorage.setItem('token','eyJhBNJ77fdhx.17$$23terOPOOUGVCVB.rpEYwq.DE_YNhuzxqW');
+          localStorage.setItem('token', res.token);
           this.router.navigate(['private']);
+          this.toastr.success('¡Login Exitoso!');
         }else{
           console.log('Usuario No encontrado en la base de Datos');
-          alert('Error de clave');
+          //alert('Error de clave');
+          this.toastr.error('Error', 'Usuario ó Clave incorrectos');
           LoginComponent.botonMenu = false;
         }
 

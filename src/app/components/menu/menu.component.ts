@@ -5,6 +5,9 @@ import { valorReloj, XsegundoService } from '../../services/xsegundo-service.ser
 import { MatMenuListItem } from 'src/app/Model/MatMenulistItem';
 import { LoginComponent } from '../login/login.component';
 import { Login2Component } from '../login2/login2.component';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-menu',
@@ -23,6 +26,7 @@ export class MenuComponent implements OnInit {
   year: number;
   totalString: any;
 
+  // boton: boolean = false;
   boton: boolean = false;
 
   mobileQuery: MediaQueryList;
@@ -38,10 +42,14 @@ export class MenuComponent implements OnInit {
   private _mobileQueryListener: () => void;
 
   constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher,
-              private segundo: XsegundoService) {
+              private segundo: XsegundoService,
+              private router: Router,
+              private toastr: ToastrService) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
+
+
   }
   ngOnInit() {
     this.datos$=this.segundo.getInfoReloj();
@@ -58,7 +66,9 @@ export class MenuComponent implements OnInit {
       console.log(this.totalString);
 
       this.boton = LoginComponent.botonMenu;
-      this.usuario = `Usuario: ${Login2Component.nombreBarra}`;
+      // this.usuario = `${Login2Component.nombreBarra}`;
+      // this.usuario = Login2Component.nombreBarra.toUpperCase();
+      this.usuario = Login2Component.nombreBarra;
     });
 
     this.menuListItems = [
@@ -90,5 +100,17 @@ export class MenuComponent implements OnInit {
     console.log(menuItem);
     this.selectedMenu = menuItem.menuLinkText;
 }
+
+irCrearUsuario(){
+  this.router.navigate(['crear-usuario']);
+}
+
+logOut(){
+  localStorage.removeItem('token');
+  this.router.navigate(['login']);
+  LoginComponent.botonMenu = false;
+  this.toastr.info('Sessión Cerrada!');
+}
+
 }
 

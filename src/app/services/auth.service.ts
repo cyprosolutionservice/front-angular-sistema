@@ -1,6 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { URL_DEV, URL_PROD } from 'src/global';
 import { LoginComponent } from '../components/login/login.component';
 
 
@@ -10,7 +12,8 @@ import { LoginComponent } from '../components/login/login.component';
 })
 export class AuthService {
 
-  private URL = 'http://34.176.159.223:3000';
+  private URL = URL_PROD;
+  private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService) { }
 
@@ -28,15 +31,29 @@ export class AuthService {
     };
     return this.http.post(`${this.URL}/user/singin2`, user, httpOptions);
   }
+
+  crearUsuer(user: any){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'x-db-name': localStorage.getItem('DB'),
+        'rut_id': localStorage.getItem('rut')
+      })
+    };
+    return this.http.post(`${this.URL}/user/create`, user, httpOptions);
+  }
   
 
-  isAuth():boolean{
-    const token = localStorage.getItem('token');
-    const fake = LoginComponent.FAKE;
-    //console.log('Este es el token->'+fake);
-    if(this.jwtHelper.isTokenExpired(fake) || !localStorage.getItem('token')){
-      return false;
-    }
-    return true;
+  setAuthenticated(value: boolean) {
+    this.isAuthenticatedSubject.next(value);
   }
+
+  isAuthenticated(): Observable<boolean> {
+    return this.isAuthenticatedSubject.asObservable();
+  }
+
+  getToken(): string {
+    return localStorage.getItem('token');
+  }
+
+
 }

@@ -1,0 +1,49 @@
+<div class="col-sm-4 mx-auto h-70">
+
+    <div class="card">
+
+        <span class="titulo">CREAR USUARIO</span>
+        <form [formGroup]="form" (ngSubmit)="crearUsuario()">
+
+            <div class="mt-2 mb-3">
+                <label for="exampleFormControlInput1" class="etiquetas">NOMBRE</label>
+                <input formControlName="NOMBRE" type="text" class="form-control colorInput"
+                    placeholder="Jose">
+            </div>
+            <div class="mt-2 mb-3">
+                <label for="exampleFormControlInput1" class="etiquetas">APELLIDO</label>
+                <input formControlName="APELLIDO" type="text" class="form-control colorInput"
+                    placeholder="perez">
+            </div>
+            <div class="mt-2 mb-3">
+                <label for="exampleFormControlTextarea1" class="etiquetas">CONTRASEÑA</label>
+                <input formControlName="CLAVE" type="text" class="form-control colorInput" placeholder="Ingrese Clave">
+            </div>
+            <div class="mb-2">
+                <label for="exampleFormControlInput1" class="etiquetas me-2">Roles: </label>
+                <mat-form-field appearance="fill">
+                    <mat-label>Rol</mat-label>
+                    <mat-select formControlName="ROL_ID">
+                        <mat-option [value]="rol" *ngFor="let rol of listRoles" [value]="rol.value">
+                            {{rol.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <!-- <label for="exampleFormControlTextarea1" class="etiquetas">ROL</label>
+            <input formControlName="ROL_ID" type="text" class="form-control colorInput"
+            placeholder="Ingrese Clave">
+            -->
+            </div>
+
+            <div class="botones">
+                <button type="submit" class="btn btn-secondary float-start">CANCELAR</button>
+                <button type="submit" [disabled]="form.invalid" class="btn btn-success float-end">GUARDAR</button>
+
+            </div>
+
+        </form>
+
+
+    </div>
+</div>

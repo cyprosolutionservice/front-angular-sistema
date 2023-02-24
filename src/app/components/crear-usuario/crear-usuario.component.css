@@ -1,11 +1,12 @@
-form{
-    border: 1px solid rgb(30, 53, 154);
+form,  .card{
+    background: rgba(46,75,131,255);
+    /* border: 1px solid rgb(30, 53, 154); */
     border-radius: 30px;
     /* background-color: rgb(46, 45, 156) ; */
-    background-image: url(../../../assets/mockup-cypro-login.png);
+    /* background-image: url(../../../assets/mockup-cypro-login.png); */
     background-size: cover;
     background-position: center;
-    padding: 5%;
+    padding: 6%;
 } 
 .email{
     margin-top: 40%;
@@ -16,12 +17,8 @@ form{
     font-weight: bold;
 }
 .btn{
-    font-family: Tahoma; font-size: 22px; font-style: normal;
+    font-family: Tahoma; font-size: 20px; font-style: normal;
     font-weight: bold; 
-}
-
-#terminos{
-    font-family: Geneva; font-size: 15px; font-style: normal;
 }
 
 .colorInput{
@@ -44,5 +41,19 @@ form{
     margin-bottom: 2px;
 }
 
+.botones{
+    
+    margin-bottom: 35px;
+}
 
+/* .opciones{
+    color: aliceblue;
+} */
+.titulo{
+    color: aliceblue;
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 2px;
 
+}
