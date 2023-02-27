@@ -12,11 +12,12 @@ import { AuthGuard } from './guards/auth.guard';
 import { RoleGuard } from './guards/role.guard';
 
 const routes: Routes = [
+  { path: 'login', component: LoginComponent},
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
   { path: 'terminos', component: TerminosComponent},
   { path: 'private', component: PrivateComponent, canActivate: [AuthGuard]},
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuard], data: { expectedRole: 'admin'}},
-  { path: 'login', component: LoginComponent},
+ 
   { path: 'login2', component: Login2Component, canActivate: [AuthGuard]},
   { path: 'menu', component: MenuComponent, canActivate: [AuthGuard]},
   { path: 'crear-usuario', component: CrearUsuarioComponent},
