@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { URL_DEV, URL_PROD } from 'src/global';
+//import { URL_DEV, URL_PROD } from 'src/global';
 import { LoginComponent } from '../components/login/login.component';
 
 
@@ -12,7 +12,7 @@ import { LoginComponent } from '../components/login/login.component';
 })
 export class AuthService {
 
-  private URL = URL_PROD;
+  private URL = 'http://34.176.159.223:3000';
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService) { }

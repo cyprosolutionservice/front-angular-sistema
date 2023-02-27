@@ -69,6 +69,10 @@ export class CrearUsuarioComponent implements OnInit {
     {value: 'ADMINISTRACION', viewValue: 'ADMINISTRACION'},
   ];
 
+  volverInicio(){
+    this.router.navigate(['home']);
+  }
+
 }
 
 

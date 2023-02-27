@@ -22,6 +22,7 @@ export class Login2Component implements OnInit {
 
   static botonMenu: boolean= false;
   static nombreBarra: string= '';
+  static CrearUserl2: boolean = false;
 
 
   constructor(private authService: AuthService,
@@ -50,6 +51,11 @@ export class Login2Component implements OnInit {
         if (res.token) {
           localStorage.setItem('usuario', res.parsedData.NOMBRE);
           localStorage.setItem('rut', res.parsedData.RUTEMP);
+          localStorage.setItem('rol', res.parsedData.ROL_ID);
+          let rol_Id =localStorage.getItem('rol');
+          if (rol_Id === 'ADMIN') {
+            Login2Component.CrearUserl2 = true;
+          }
           LoginComponent.botonMenu = true;
           Login2Component.nombreBarra = localStorage.getItem('usuario');
           // console.log('RESPUESTA AQUI ----> '+res);

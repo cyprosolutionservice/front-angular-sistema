@@ -30,14 +30,10 @@
                     </mat-select>
                 </mat-form-field>
 
-                <!-- <label for="exampleFormControlTextarea1" class="etiquetas">ROL</label>
-            <input formControlName="ROL_ID" type="text" class="form-control colorInput"
-            placeholder="Ingrese Clave">
-            -->
             </div>
 
             <div class="botones">
-                <button type="submit" class="btn btn-secondary float-start">CANCELAR</button>
+                <button (click)="volverInicio()" class="btn btn-secondary float-start">CANCELAR</button>
                 <button type="submit" [disabled]="form.invalid" class="btn btn-success float-end">GUARDAR</button>
 
             </div>

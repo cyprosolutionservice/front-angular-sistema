@@ -28,6 +28,7 @@ export class MenuComponent implements OnInit {
 
   // boton: boolean = false;
   boton: boolean = false;
+  crearUsuarioMenu: boolean =false;
 
   mobileQuery: MediaQueryList;
 
@@ -66,6 +67,7 @@ export class MenuComponent implements OnInit {
       console.log(this.totalString);
 
       this.boton = LoginComponent.botonMenu;
+      this.crearUsuarioMenu =Login2Component.CrearUserl2;
       // this.usuario = `${Login2Component.nombreBarra}`;
       // this.usuario = Login2Component.nombreBarra.toUpperCase();
       this.usuario = Login2Component.nombreBarra;
@@ -110,6 +112,10 @@ logOut(){
   this.router.navigate(['login']);
   LoginComponent.botonMenu = false;
   this.toastr.info('Sessión Cerrada!');
+}
+
+volverInicio(){
+  this.router.navigate(['home']);
 }
 
 }

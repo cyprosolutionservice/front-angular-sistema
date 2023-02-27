@@ -18,7 +18,7 @@
       [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
 
       <mat-nav-list class="slider-menu">
-        <a mat-list-item class="icono-color"><span class="material-symbols-outlined start-icons me-2">
+        <a mat-list-item (click)="volverInicio()" class="icono-color"><span class="material-symbols-outlined start-icons me-2">
             grade
           </span>
           <p class="first-icon">INICIO </p>
@@ -53,27 +53,12 @@
             fact_check
           </span>INVENTARIO </a>
 
-
-        <!-- <a mat-list-item class="icono-color"><span class="material-symbols-outlined start-icons me-2 ">
-        tune
-        </span>CONFIGURACIONES </a> -->
-
-        <!-- <a mat-list-item class="icono-color"><span class="material-symbols-outlined start-icons me-2 ">
-          tune
-          </span>
-        <button class="btn-config"  (click)="toggleMenu()">CONFIGURACIONES</button></a>
-        <ul *ngIf="showMenu" class="menu">
-          <li>Manzana</li>
-          <li>Pera</li>
-          <li>Piña</li>
-        </ul> -->
-
         <a mat-list-item class="icono-color"><span class="material-symbols-outlined start-icons me-2 ">
             tune
           </span>
-          <button class="btn-config" mat-button [matMenuTriggerFor]="menu">CONFIGURACIONES</button> </a>
-        <mat-menu #menu="matMenu" class="ms-5">
-          <button mat-menu-item (click)="irCrearUsuario()">Agregar usuario</button>
+          <button class="btn-config" mat-button [matMenuTriggerFor]="menu" >CONFIGURACIONES</button> </a>
+        <mat-menu #menu="matMenu" class="ms-5" >
+          <button mat-menu-item (click)="irCrearUsuario()" (click)="snav.toggle()" *ngIf="crearUsuarioMenu">Agregar usuario</button>
           <button mat-menu-item>Listar Usuarios</button>
         </mat-menu>
 
@@ -84,14 +69,6 @@
           </span>CERRAR SESIÓN </a>
       </mat-nav-list>
     </mat-sidenav>
-
-    <!-- <mat-menu>
-    <button mat-menu-item 
-      *ngFor="let item of menuListItems">
-      <mat-icon>{{ item.menuIcon }}</mat-icon>
-      <span> {{ item.menuLinkText }}</span>
-    </button>
-  </mat-menu> -->
 
     <mat-sidenav-content class="contenido-menu">
       <!-- <div class="container mt-2">
@@ -106,21 +83,3 @@
 </div>
 
 <div *ngIf="!shouldRun">Please open on Stackblitz to see result</div>
-
-<!-- <mat-toolbar>
-<button mat-icon-button 
-        [matMenuTriggerFor]="clickmenu">
-        <mat-icon>more_vert</mat-icon>
-</button>
-<span>Selected Menu {{selectedMenu}}</span>
-</mat-toolbar>
-
-<mat-menu #clickmenu="matMenu">
-<button mat-menu-item 
-        *ngFor="let item of menuListItems" 
-        (click)="clickMenuItem(item)" 
-        [disabled]="item.isDisabled">
-  <mat-icon>{{ item.menuIcon }}</mat-icon>
-  <span> {{ item.menuLinkText }}</span>
-</button>
-</mat-menu>   -->
