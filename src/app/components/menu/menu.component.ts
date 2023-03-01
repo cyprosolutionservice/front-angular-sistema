@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout'
 import { Observable } from 'rxjs';
 import { valorReloj, XsegundoService } from '../../services/xsegundo-service.service';
@@ -7,6 +7,7 @@ import { LoginComponent } from '../login/login.component';
 import { Login2Component } from '../login2/login2.component';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { MatExpansionPanel } from '@angular/material/expansion';
 
 
 @Component({
@@ -118,5 +119,23 @@ volverInicio(){
   this.router.navigate(['home']);
 }
 
+panelExpanded = false;
+submenuExpanded = false;
+
+panelOpened() {
+  // Cuando se abre el panel, restablece el estado del submenu
+  this.submenuExpanded = false;
+}
+
+toggleSubmenu() {
+  this.panelExpanded = false;
+  this.submenuExpanded = false;
+}
+
+@ViewChild('panel1') panel1: MatExpansionPanel;
+
+  cerrarPanel() {
+    this.panel1.close();
+  }
 }
 

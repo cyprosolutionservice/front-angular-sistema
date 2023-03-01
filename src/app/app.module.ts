@@ -21,6 +21,7 @@ import { PrivateComponent } from './components/private/private.component';
 import {MatMenuModule} from '@angular/material/menu';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import {MatSelectModule} from '@angular/material/select';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 //Modules
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -67,6 +68,7 @@ import { ToastrModule } from 'ngx-toastr';
     ReactiveFormsModule,
     MatTooltipModule,
     MatSelectModule,
+    MatExpansionModule,
     ToastrModule.forRoot()
 
   ],

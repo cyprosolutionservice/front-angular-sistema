@@ -1,12 +1,4 @@
-/* .example-container {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 0;
-    bottom: 10px;
-    left: 0;
-    right: 0;
-  } */
+
   .example-container {
     display: flex;
     flex-direction: column;
@@ -16,6 +8,7 @@
     left: 0;
     right: 0;
     background-image: url("../../../assets/mockup-cypro-fondo.png");
+    
   }
   
   .example-is-mobile .example-toolbar {
@@ -33,6 +26,7 @@
        causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts. */
     flex: 1;
   }
+
   
   .example-is-mobile .example-sidenav-container {
     /* When the sidenav is fixed, don't constrain the height of the sidenav container. This allows the
@@ -53,9 +47,6 @@
     margin-left: 2rem;
     font-size: 21px
   }
-  .usuario{
-    font-size: 21px
-  }
   .contenido-menu{
     background-image: url("../../../assets/mockup-cypro-fondo.png");
     background-repeat: no-repeat;
@@ -71,16 +62,17 @@
     background-size: cover;
     background-position: center;
   }
+  .icono2{
+    border-radius: 7px;
+    width: 38px;
+    height: 38px;
+  }
   } 
 
   @media only screen and (max-width: 540px) {
     #hora{
       margin-left: 0px;
       font-size: 15px
-    }
-    .usuario{
-      margin-left: 0px;
-      font-size: 14px
     }
    
     } 
@@ -105,10 +97,12 @@
 
   .slider-menu{
     background: rgba(46,75,131,255);
+
   }
   
   .second-slider{
-    background: rgba(46,75,131,255);
+    background-color: transparent;
+    border: none;
   }
 .icono-color{
   color: aliceblue;
@@ -129,5 +123,37 @@
 
 }
 
+
+.tituloConfig{
+  background-color: rgba(46,75,131,255);
+  margin-bottom: 0%;
+}
+
+.tituloLetra{
+  color: aliceblue;
+  padding-right: 0%;
+}
+
+.panelexpansionado{
+  color: azure;
+  background-color: rgba(0,32,73,255);
+
+}
+
+.mat-expansion-panel-header {
+  padding: 0 0px;
+
+}
+
+.mat-drawer-inner-container, .mat-drawner, .mat-drawer-container{
+  background-color: rgba(46,75,131,255);
+}
+
+.btn-configs{
+  margin-bottom: 8px;
+  border-radius: 15px;
+  background: rgba(46,75,131,255);
+  border: none;
+}
 
 

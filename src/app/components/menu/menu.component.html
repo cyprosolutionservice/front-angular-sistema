@@ -5,10 +5,14 @@
     <div class="container" id="hora">
       <a>{{totalString}}</a>
     </div>
-    <div class="container usuario">
-      <span class="material-symbols-outlined icono-user mt-2" matTooltip={{usuario}}>
+    <div class="container text-end">
+      <!-- <span class="material-symbols-outlined icono-user mt-2" matTooltip={{usuario}}>
         account_box
-      </span>
+      </span> -->
+      <i>
+        <img class="icono2" matTooltip={{usuario}} src="../../../assets/user.png">
+      </i>
+
       <!-- <a >{{usuario}}</a> -->
     </div>
   </mat-toolbar>
@@ -18,7 +22,8 @@
       [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
 
       <mat-nav-list class="slider-menu">
-        <a mat-list-item (click)="volverInicio()" class="icono-color"><span class="material-symbols-outlined start-icons me-2">
+        <a mat-list-item (click)="volverInicio()" class="icono-color"><span
+            class="material-symbols-outlined start-icons me-2">
             grade
           </span>
           <p class="first-icon">INICIO </p>
@@ -53,17 +58,41 @@
             fact_check
           </span>INVENTARIO </a>
 
-        <a mat-list-item class="icono-color"><span class="material-symbols-outlined start-icons me-2 ">
+        <!-- <a mat-list-item class="icono-color"><span class="material-symbols-outlined start-icons me-2 ">
             tune
           </span>
-          <button class="btn-config" mat-button [matMenuTriggerFor]="menu" >CONFIGURACIONES</button> </a>
-        <mat-menu #menu="matMenu" class="ms-5" >
-          <button mat-menu-item (click)="irCrearUsuario()" (click)="snav.toggle()" *ngIf="crearUsuarioMenu">Agregar usuario</button>
+          <button class="btn-config" mat-button [matMenuTriggerFor]="menu">CONFIGURACIONES</button> </a>
+        <mat-menu #menu="matMenu" class="ms-5">
+          <button mat-menu-item (click)="irCrearUsuario()" (click)="snav.toggle()" *ngIf="crearUsuarioMenu">Agregar
+            usuario</button>
           <button mat-menu-item>Listar Usuarios</button>
-        </mat-menu>
+        </mat-menu> -->
 
+        <mat-expansion-panel hideToggle #panel1 class="panelexpansionado">
+          <mat-expansion-panel-header class="tituloConfig">
+            <a mat-list-item class="icono-color"><span class="material-symbols-outlined start-icons me-2 ">
+                tune
+              </span>
+              <mat-panel-title class="tituloLetra"> CONFIGURACIONES</mat-panel-title> </a>
+          </mat-expansion-panel-header>
+          <mat-nav-list>
+          <!-- <mat-panel-description>
+            <button mat-button (click)="cerrarPanel()" (click)="snav.toggle()">Cerrar panel</button>
+          </mat-panel-description> -->
+          <div class="container submenu text-center">
+            <div class="container">
+              <button class="btn btn-secondary btn-configs" (click)="cerrarPanel()" (click)="irCrearUsuario()" 
+              (click)="snav.toggle()" *ngIf="crearUsuarioMenu">Agregar usuario</button>
+            </div>
+            <div class="container">
+              <button class="btn btn-secondary btn-configs">Listar usuario</button>
+            </div>
 
-        <a mat-list-item (click)="logOut()" (click)="snav.toggle()" class="icono-color"><span
+          </div>
+        </mat-nav-list>
+          </mat-expansion-panel>
+
+        <a mat-list-item (click)="logOut()" (click)="snav.toggle()" class="icono-color mb-3"><span
             class="material-symbols-outlined start-icons me-2 ">
             search_off
           </span>CERRAR SESIÓN </a>

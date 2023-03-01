@@ -26,4 +26,16 @@ body{
   font-size: 20px;
 }
 
+.icono2{
+  border-radius: 8px;
+  width: 48px;
+  height: 48px;
+}
+
+::-webkit-scrollbar {
+  display: none;
+  margin: 0%;
+  padding: 0%;
+}
+
 
