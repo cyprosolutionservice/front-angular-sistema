@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './components/admin/admin.component';
 import { CrearUsuarioComponent } from './components/crear-usuario/crear-usuario.component';
 import { HomeComponent } from './components/home/home.component';
+import { ListarUsuariosComponent } from './components/listar-usuarios/listar-usuarios.component';
 import { LoginComponent } from './components/login/login.component';
 import { Login2Component } from './components/login2/login2.component';
 import { MenuComponent } from './components/menu/menu.component';
@@ -16,11 +17,11 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
   { path: 'terminos', component: TerminosComponent},
   { path: 'private', component: PrivateComponent, canActivate: [AuthGuard]},
+  { path: 'listar-usuarios', component: ListarUsuariosComponent, canActivate: [AuthGuard]},
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuard], data: { expectedRole: 'admin'}},
- 
   { path: 'login2', component: Login2Component, canActivate: [AuthGuard]},
   { path: 'menu', component: MenuComponent, canActivate: [AuthGuard]},
-  { path: 'crear-usuario', component: CrearUsuarioComponent},
+  { path: 'crear-usuario', component: CrearUsuarioComponent, canActivate: [AuthGuard]},
   { path: '**', pathMatch: 'full', redirectTo: 'login'}
 ];
 

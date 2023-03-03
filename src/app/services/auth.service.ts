@@ -13,6 +13,7 @@ import { LoginComponent } from '../components/login/login.component';
 export class AuthService {
 
   private URL = 'http://34.176.159.223:3000';
+  // private URL = 'http://localhost:3000';
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService) { }
@@ -40,6 +41,16 @@ export class AuthService {
       })
     };
     return this.http.post(`${this.URL}/user/create`, user, httpOptions);
+  }
+
+  obtenerUsers(){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'x-db-name': localStorage.getItem('DB'),
+        'rut_id': localStorage.getItem('rut')
+      })
+    };
+    return this.http.get(`${this.URL}/user/v1/obtener/usuarios`, httpOptions);
   }
   
 

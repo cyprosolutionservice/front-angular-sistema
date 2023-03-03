@@ -17,7 +17,7 @@ export class CrearUsuarioComponent implements OnInit {
   }
   form: FormGroup;
 
-  user = new UserDataCreate('', '', '', '');
+  // user = new UserDataCreate('', '', '', '');
   static FAKE: string;
 
 
@@ -28,6 +28,7 @@ export class CrearUsuarioComponent implements OnInit {
                 this.form = this.fb.group({
                   NOMBRE: ['', Validators.required],
                   APELLIDO: ['', Validators.required],
+                  CORREO:['', Validators.required],
                   CLAVE: ['', [Validators.required]],
                   ROL_ID: ['', [Validators.required]],
                   
@@ -40,6 +41,7 @@ export class CrearUsuarioComponent implements OnInit {
     const USER: UserDataCreate = {
       NOMBRE: this.form.value.NOMBRE,
       APELLIDO: this.form.value.APELLIDO,
+      E_MAIL: this.form.value.CORREO,
       CLAVE: this.form.value.CLAVE,
       ROL_ID: this.form.value.ROL_ID
     }
@@ -65,8 +67,8 @@ export class CrearUsuarioComponent implements OnInit {
   listRoles: any[] = [
     {value: 'ADMIN', viewValue: 'ADMIN'},
     {value: 'GARZON', viewValue: 'GARZON'},
-    {value: 'OPERACIONES', viewValue: 'OPERACIONES'},
-    {value: 'ADMINISTRACION', viewValue: 'ADMINISTRACION'},
+    {value: 'USUARIO', viewValue: 'USUARIO'},
+    {value: 'VENDEDOR', viewValue: 'VENDEDOR'},
   ];
 
   volverInicio(){

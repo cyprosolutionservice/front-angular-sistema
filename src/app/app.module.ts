@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { XsegundoService } from './services/xsegundo-service.service';
-import { NavbarComponent } from './navbar/navbar.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -39,11 +38,11 @@ import { CrearUsuarioComponent } from './components/crear-usuario/crear-usuario.
 
 //Toastr
 import { ToastrModule } from 'ngx-toastr';
+import { ListarUsuariosComponent } from './components/listar-usuarios/listar-usuarios.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent,
     MenuComponent,
     AdminComponent,
     HomeComponent,
@@ -51,7 +50,8 @@ import { ToastrModule } from 'ngx-toastr';
     PrivateComponent,
     TerminosComponent,
     Login2Component,
-    CrearUsuarioComponent
+    CrearUsuarioComponent,
+    ListarUsuariosComponent
   ],
   imports: [
     BrowserModule,

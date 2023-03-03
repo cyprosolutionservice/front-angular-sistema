@@ -15,11 +15,7 @@ import { ToastrService } from 'ngx-toastr';
 export class LoginComponent implements OnInit {
 
   form: FormGroup;
-  // user = {
-  //   userName: 'kevin',
-  //   pass: '1234'
-  // }
-  user = new UserData('', '');
+
   static FAKE: string;
 
   static botonMenu: boolean = false;
@@ -55,13 +51,11 @@ export class LoginComponent implements OnInit {
       } else {
         console.log('Usuario No encontrado en la base de Datos');
         alert('Error de clave');
-        // LoginComponent.botonMenu = false;   
       }
     }, error => {
       if (error.status === 401) {
         console.log('Error de Autorizacion 2023');
         this.toastr.error('Error', 'Usuario o Clave incorrectos');
-        //alert('Error de Usuario ó clave');
       }
     });
   }

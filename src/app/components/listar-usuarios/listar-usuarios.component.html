@@ -1,0 +1,36 @@
+    <div class="container listado p-3">
+
+        <div class="car-body text-center p-2 ">
+            <p class="titulo mt-2">LISTADO DE USUARIOS</p>
+            <table *ngIf="listUsers.length > 0" class="table table-hover ">
+                <thead class="encabezados">
+                    <tr>
+                        <th scope="col">DATOS</th>
+                        <th scope="col">CLAVE</th>
+                        <th scope="col">ROL</th>
+                        <!-- <th scope="col">Estatus</th> -->
+                        <!-- <th scope="col"></th> -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of listUsers">
+                        <td (click)="getEvento(user)">{{ user.NOMBRE}} <br> {{ user.APELLIDO }} <br> {{ user.E_MAIL }}</td>
+                        <!-- <td>{{ user.APELLIDO }}</td> -->
+                        <!-- <td>{{ user.E_MAIL }}</td> -->
+                        <td (click)="getEvento(user)">{{ user.CLAVE }}</td>
+                        <td (click)="getEvento(user)">{{ user.ROL_ID }} <br>
+                            <p [ngClass]="{'activo': user.ACTIVO.data == '1', 'inactivo': user.ACTIVO.data == '0'}">
+                                {{ user.ACTIVO.data == '1' ? 'Activo' : 'Inactivo' }} </p>
+                        </td>
+                        <!-- <td>  <i> <span class="material-symbols-outlined iconos text-primary">
+                                    drive_file_rename_outline
+                                    </span> </i>
+                                </td> -->
+                    </tr>
+                </tbody>
+            </table>
+            <h5 class="text-start mt-4" *ngIf="listUsers.length == 0">No hay Usuarios para mostrar</h5>
+        </div>
+
+    </div>
+

@@ -16,8 +16,16 @@
                     placeholder="perez">
             </div>
             <div class="mt-2 mb-3">
+                <label for="exampleFormControlInput1" class="etiquetas">CORREO</label>
+                <input formControlName="CORREO" type="text" class="form-control colorInput"
+                    placeholder="ejemplo@gmail.com">
+            </div>
+            <div class="mt-2 mb-3">
                 <label for="exampleFormControlTextarea1" class="etiquetas">CONTRASEÑA</label>
-                <input formControlName="CLAVE" type="text" class="form-control colorInput" placeholder="Ingrese Clave">
+                <!-- <input formControlName="CLAVE" type="text" pattern="[1-9]" min="4" class="form-control colorInput" placeholder="Ingrese Clave"> -->
+                <input formControlName="CLAVE" type="number" ondrop="return false;" onpaste="return false;"
+                onkeypress="return event.charCode>=48 && event.charCode<=57" required 
+                class="form-control colorInput" placeholder="Ingrese Clave"/>
             </div>
             <div class="mb-2">
                 <label for="exampleFormControlInput1" class="etiquetas me-2">Roles: </label>

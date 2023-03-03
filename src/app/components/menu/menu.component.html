@@ -12,8 +12,6 @@
       <i>
         <img class="icono2" matTooltip={{usuario}} src="../../../assets/user.png">
       </i>
-
-      <!-- <a >{{usuario}}</a> -->
     </div>
   </mat-toolbar>
 
@@ -58,16 +56,6 @@
             fact_check
           </span>INVENTARIO </a>
 
-        <!-- <a mat-list-item class="icono-color"><span class="material-symbols-outlined start-icons me-2 ">
-            tune
-          </span>
-          <button class="btn-config" mat-button [matMenuTriggerFor]="menu">CONFIGURACIONES</button> </a>
-        <mat-menu #menu="matMenu" class="ms-5">
-          <button mat-menu-item (click)="irCrearUsuario()" (click)="snav.toggle()" *ngIf="crearUsuarioMenu">Agregar
-            usuario</button>
-          <button mat-menu-item>Listar Usuarios</button>
-        </mat-menu> -->
-
         <mat-expansion-panel hideToggle #panel1 class="panelexpansionado">
           <mat-expansion-panel-header class="tituloConfig">
             <a mat-list-item class="icono-color"><span class="material-symbols-outlined start-icons me-2 ">
@@ -85,7 +73,8 @@
               (click)="snav.toggle()" *ngIf="crearUsuarioMenu">Agregar usuario</button>
             </div>
             <div class="container">
-              <button class="btn btn-secondary btn-configs">Listar usuario</button>
+              <button class="btn btn-secondary btn-configs" (click)="cerrarPanel()" (click)="irListarUsuarios()" 
+              (click)="snav.toggle()" *ngIf="crearUsuarioMenu">Listar usuario</button>
             </div>
 
           </div>
@@ -100,9 +89,6 @@
     </mat-sidenav>
 
     <mat-sidenav-content class="contenido-menu">
-      <!-- <div class="container mt-2">
-      <app-login></app-login>
-    </div> -->
       <div class="container mt-4">
         <router-outlet></router-outlet>
       </div>
