@@ -108,6 +108,9 @@ irCrearUsuario(){
 irListarUsuarios(){
   this.router.navigate(['listar-usuarios']);
 }
+irListarFamilias(){
+  this.router.navigate(['listar-familias']);
+}
 
 logOut(){
   localStorage.removeItem('token');

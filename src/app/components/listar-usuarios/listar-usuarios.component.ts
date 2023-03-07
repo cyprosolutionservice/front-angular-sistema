@@ -35,6 +35,8 @@ export class ListarUsuariosComponent implements OnInit {
 
   getEvento(user: any){
     console.log('Hicciste click en '+user.NOMBRE);
+    // localStorage.setItem('id', user.CODUSUARIO);
+    this.router.navigate(['editar-usuario', user.CODUSUARIO]);
   }
 
 }

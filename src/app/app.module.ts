@@ -39,6 +39,10 @@ import { CrearUsuarioComponent } from './components/crear-usuario/crear-usuario.
 //Toastr
 import { ToastrModule } from 'ngx-toastr';
 import { ListarUsuariosComponent } from './components/listar-usuarios/listar-usuarios.component';
+import { EditarUsuarioComponent } from './components/editar-usuario/editar-usuario.component';
+import { ListarFamiliasComponent } from './components/listar-familias/listar-familias.component';
+import { CrearFamiliaComponent } from './components/crear-familia/crear-familia.component';
+
 
 @NgModule({
   declarations: [
@@ -51,7 +55,10 @@ import { ListarUsuariosComponent } from './components/listar-usuarios/listar-usu
     TerminosComponent,
     Login2Component,
     CrearUsuarioComponent,
-    ListarUsuariosComponent
+    ListarUsuariosComponent,
+    EditarUsuarioComponent,
+    ListarFamiliasComponent,
+    CrearFamiliaComponent,
   ],
   imports: [
     BrowserModule,

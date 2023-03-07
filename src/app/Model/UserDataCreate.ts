@@ -4,6 +4,7 @@ export class UserDataCreate{
     E_MAIL: string;
     CLAVE: string;
     ROL_ID: string;
+    ACTIVO?: number;
 
 
     constructor(NOMBRE: string, APELLIDO:string, E_MAIL:string, CLAVE: string, ROL_ID: string){

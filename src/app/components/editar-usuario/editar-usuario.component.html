@@ -2,7 +2,7 @@
 
     <div class="card">
 
-        <span class="titulo">CREAR USUARIO</span>
+        <span class="titulo">EDITAR USUARIO</span>
         <form [formGroup]="form" (ngSubmit)="crearUsuario()">
 
             <div class="mt-2 mb-3">
@@ -26,13 +26,25 @@
                 <input formControlName="CLAVE" type="text" pattern="[0-9]*" minlength="1" maxlength="19"
                 class="form-control colorInput" placeholder="Ingrese Clave" inputmode="numeric"/>
             </div>
-            <div class="mb-2">
-                <label for="exampleFormControlInput1" class="etiquetas me-2">Roles: </label>
+            <div class="mb-2 ms-3">
+                <label for="exampleFormControlInput1" class="etiquetas me-2">ROLES: </label>
                 <mat-form-field appearance="fill">
                     <mat-label>Rol</mat-label>
                     <mat-select formControlName="ROL_ID">
                         <mat-option [value]="rol" *ngFor="let rol of listRoles" [value]="rol.value">
                             {{rol.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+            </div>
+            <div class="mb-2">
+                <label for="exampleFormControlInput1" class="etiquetas me-2">ESTADOS: </label>
+                <mat-form-field appearance="fill">
+                    <mat-label>Estado</mat-label>
+                    <mat-select formControlName="ACTIVO">
+                        <mat-option [value]="estado" *ngFor="let estado of listEstado" [value]="estado.value">
+                            {{estado.viewValue}}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
