@@ -45,4 +45,29 @@ form{
 }
 
 
+.input-container {
+    position: relative;
+    display: block;
+  }
+  
+  .show-hide {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 1.2em;
+    color: #ccc;
+  }
+  
+  .show-hide i:hover {
+    color: #333;
+  }
 
+
+
+  .clave-error{
+    color: rgb(233, 93, 93);
+    font-weight: bold;
+    font-size: 14px;
+}

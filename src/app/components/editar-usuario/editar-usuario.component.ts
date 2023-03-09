@@ -20,6 +20,7 @@ export class EditarUsuarioComponent implements OnInit {
   static FAKE: string;
 
   id:string | null;
+  hide = true;
 
 
   constructor(private authService: AuthService,
@@ -30,8 +31,8 @@ export class EditarUsuarioComponent implements OnInit {
                 this.form = this.fb.group({
                   NOMBRE: ['', Validators.required],
                   APELLIDO: ['', Validators.required],
-                  CORREO:['', Validators.required],
-                  CLAVE: ['', [Validators.required]],
+                  CORREO:['', [Validators.required, Validators.pattern(/^[a-zA-Z][a-zA-Z0-9._-]*@[a-zA-Z][a-zA-Z0-9._-]*[a-zA-Z](\.[a-zA-Z]+)+$/)]],
+                  CLAVE: ['', [Validators.required,  Validators.pattern('^[0-9]*$')]],
                   ROL_ID: ['', [Validators.required]],
                   ACTIVO: ['', [Validators.required]]
                   
@@ -59,8 +60,8 @@ export class EditarUsuarioComponent implements OnInit {
         this.router.navigate(['/']);
       }, error => {
         console.log(error),
-        this.form.reset();
-        this.toastr.error('Error No se Pudo editar el producto', 'Operacion Fallida')
+        // this.form.reset();
+        this.toastr.error('Clave Duplicada', 'Operacion Fallida')
       })
     }
    
@@ -96,6 +97,13 @@ export class EditarUsuarioComponent implements OnInit {
         console.log('Data de ACTIVO -->'+data.ACTIVO.data);
       })
     }
+  }
+
+ password: string;
+  showPassword: boolean = false;
+
+  togglePassword(): void {
+    this.showPassword = !this.showPassword;
   }
 
 }

@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { MatExpansionPanel } from '@angular/material/expansion';
 
+import { MatSidenav } from '@angular/material/sidenav';
+
 function capitalizeInitials(str: string): string {
   const words = str.split(' ');
 
@@ -44,6 +46,8 @@ export class MenuComponent implements OnInit {
   boton: boolean = false;
   crearUsuarioMenu: boolean =false;
 
+  isSidenavInitialized: boolean= false;
+
   mobileQuery: MediaQueryList;
 
   usuario: string;
@@ -58,7 +62,8 @@ export class MenuComponent implements OnInit {
   constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher,
               private segundo: XsegundoService,
               private router: Router,
-              private toastr: ToastrService) {
+              private toastr: ToastrService,
+              ) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
@@ -82,8 +87,10 @@ export class MenuComponent implements OnInit {
       this.boton = LoginComponent.botonMenu;
       this.crearUsuarioMenu =Login2Component.CrearUserl2;
       this.usuario = Login2Component.nombreBarra;
+      this.isSidenavInitialized = LoginComponent.botonMenu;
     });
-
+   
+    this.isSidenavInitialized = true;
   }
   
 
@@ -129,5 +136,8 @@ volverInicio(){
   cerrarPanel() {
     this.panel1.close();
   }
+
+
+ 
 }
 

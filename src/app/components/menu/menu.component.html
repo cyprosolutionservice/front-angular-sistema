@@ -1,5 +1,6 @@
 <div class="example-container" [class.example-is-mobile]="mobileQuery.matches" *ngIf="shouldRun">
-  <mat-toolbar class="example-toolbar">
+
+  <mat-toolbar class="example-toolbar ">
     <button [disabled]="boton==false" class="boton mt-2" mat-icon-button
       (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
     <div class="container" id="hora">
@@ -16,7 +17,7 @@
   </mat-toolbar>
 
   <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
-    <mat-sidenav class="second-slider" #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
+    <mat-sidenav #sidenav class="second-slider" [opened]="isSidenavInitialized" #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
       [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
 
       <mat-nav-list class="slider-menu">
@@ -48,7 +49,7 @@
             window
           </span>PRODUCTOS </a>
 
-          <!-- <mat-expansion-panel hideToggle #panel2 class="panelexpansionado">
+        <!-- <mat-expansion-panel hideToggle #panel2 class="panelexpansionado">
             <mat-expansion-panel-header class="tituloConfig">
               <a mat-list-item class="icono-color"><span class="material-symbols-outlined start-icons me-2">
                 window
@@ -101,22 +102,22 @@
               <mat-panel-title class="tituloLetra"> CONFIGURACIONES</mat-panel-title> </a>
           </mat-expansion-panel-header>
           <mat-nav-list>
-          <!-- <mat-panel-description>
+            <!-- <mat-panel-description>
             <button mat-button (click)="cerrarPanel()" (click)="snav.toggle()">Cerrar panel</button>
           </mat-panel-description> -->
-          <div class="container submenu text-center">
-            <div class="container">
-              <button class="btn btn-secondary btn-configs" (click)="cerrarPanel()" (click)="irCrearUsuario()" 
-              (click)="snav.toggle()" *ngIf="crearUsuarioMenu">Agregar usuario</button>
-            </div>
-            <div class="container">
-              <button class="btn btn-secondary btn-configs" (click)="cerrarPanel()" (click)="irListarUsuarios()" 
-              (click)="snav.toggle()" *ngIf="crearUsuarioMenu">Listar usuario</button>
-            </div>
+            <div class="container submenu text-center">
+              <div class="container">
+                <button class="btn btn-secondary btn-configs" (click)="cerrarPanel()" (click)="irCrearUsuario()"
+                  (click)="snav.toggle()" *ngIf="crearUsuarioMenu">Agregar usuario</button>
+              </div>
+              <div class="container">
+                <button class="btn btn-secondary btn-configs" (click)="cerrarPanel()" (click)="irListarUsuarios()"
+                  (click)="snav.toggle()" *ngIf="crearUsuarioMenu">Listar usuario</button>
+              </div>
 
-          </div>
-        </mat-nav-list>
-          </mat-expansion-panel>
+            </div>
+          </mat-nav-list>
+        </mat-expansion-panel>
 
         <a mat-list-item (click)="logOut()" (click)="snav.toggle()" class="icono-color mb-3"><span
             class="material-symbols-outlined start-icons me-2 ">

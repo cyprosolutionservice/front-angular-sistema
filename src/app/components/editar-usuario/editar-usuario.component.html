@@ -7,25 +7,58 @@
 
             <div class="mt-2 mb-3">
                 <label for="exampleFormControlInput1" class="etiquetas">NOMBRE</label>
-                <input formControlName="NOMBRE" type="text" class="form-control colorInput"
-                    placeholder="Jose">
+                <input formControlName="NOMBRE" type="text" class="form-control colorInput" placeholder="Jose">
+                <div *ngIf="form.get('NOMBRE').invalid && form.get('NOMBRE').touched">
+                    <div *ngIf="form.get('NOMBRE')?.hasError('required')">
+                        <p class="clave-error">Por favor, complete el campo.</p>
+                    </div>
+                </div>
             </div>
             <div class="mt-2 mb-3">
                 <label for="exampleFormControlInput1" class="etiquetas">APELLIDO</label>
-                <input formControlName="APELLIDO" type="text" class="form-control colorInput"
-                    placeholder="perez">
+                <input formControlName="APELLIDO" type="text" class="form-control colorInput" placeholder="perez">
+                <div *ngIf="form.get('APELLIDO').invalid && form.get('APELLIDO').touched">
+                    <div *ngIf="form.get('APELLIDO')?.hasError('required')">
+                        <p class="clave-error">Por favor, complete el campo.</p>
+                    </div>
+                </div>
             </div>
             <div class="mt-2 mb-3">
                 <label for="exampleFormControlInput1" class="etiquetas">CORREO</label>
-                <input formControlName="CORREO" type="text" class="form-control colorInput"
+                <input formControlName="CORREO" type="email" class="form-control colorInput"
                     placeholder="ejemplo@gmail.com">
+                    <div *ngIf="form.get('CORREO').invalid && form.get('CORREO').touched">
+                        <div *ngIf="form.get('CORREO')?.hasError('required')">
+                            <p class="clave-error">Por favor, complete el campo.</p>
+                        </div>
+                        <div *ngIf="form.get('CORREO')?.hasError('pattern') && !form.get('CORREO')?.hasError('required')">
+                            <p class="clave-error"> Por favor, ingrese un correo Valido.</p>
+                        </div>
+                    </div>
             </div>
-            <div class="mt-2 mb-3">
+
+
+            <div class="input-container mt-2 mb-3">
                 <label for="exampleFormControlTextarea1" class="etiquetas">CONTRASEÑA</label>
-                <!-- <input formControlName="CLAVE" type="text" pattern="[1-9]" min="4" class="form-control colorInput" placeholder="Ingrese Clave"> -->
-                <input formControlName="CLAVE" type="text" pattern="[0-9]*" minlength="1" maxlength="19"
-                class="form-control colorInput" placeholder="Ingrese Clave" inputmode="numeric"/>
+                <input class="form-control colorInput" formControlName="CLAVE" minlength="3" maxlength="19"
+                    inputmode="numeric" type="{{showPassword ? 'text' : 'password'}}" [(ngModel)]="password">
+                <span class="show-hide" (click)="togglePassword()">
+                    <i>
+                        <span class="material-symbols-outlined mt-4">
+                            {{showPassword ? 'visibility' : 'visibility_off'}}
+                        </span>
+                    </i>
+                </span>
+                <div *ngIf="form.get('CLAVE').invalid && form.get('CLAVE').touched">
+                    <div *ngIf="form.get('CLAVE')?.hasError('required')">
+                        <p class="clave-error">Por favor, complete el campo.</p>
+                    </div>
+                    <div *ngIf="form.get('CLAVE')?.hasError('pattern') && !form.get('CLAVE')?.hasError('required')">
+                        <p class="clave-error"> Por favor, ingrese solo números.</p>
+                    </div>
+                </div>
             </div>
+
             <div class="mb-2 ms-3">
                 <label for="exampleFormControlInput1" class="etiquetas me-2">ROLES: </label>
                 <mat-form-field appearance="fill">
@@ -53,11 +86,12 @@
 
             <div class="botones">
                 <button (click)="volverInicio()" class="btn btn-secondary float-start">CANCELAR</button>
-                <button type="submit" [disabled]="form.invalid" class="btn btn-success float-end">GUARDAR</button>
+                <button type="submit" [disabled]="form.invalid" class="btn btn-warning float-end">ACTUALIZAR</button>
 
             </div>
 
         </form>
+
 
 
     </div>

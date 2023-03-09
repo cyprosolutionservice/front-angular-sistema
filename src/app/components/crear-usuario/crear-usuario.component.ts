@@ -28,8 +28,8 @@ export class CrearUsuarioComponent implements OnInit {
                 this.form = this.fb.group({
                   NOMBRE: ['', Validators.required],
                   APELLIDO: ['', Validators.required],
-                  CORREO:['', Validators.required],
-                  CLAVE: ['', [Validators.required]],
+                  CORREO:['', [Validators.required, Validators.pattern(/^[a-zA-Z][a-zA-Z0-9._-]*@[a-zA-Z][a-zA-Z0-9._-]*[a-zA-Z](\.[a-zA-Z]+)+$/)]],
+                  CLAVE: ['', [Validators.required,  Validators.pattern('^[0-9]*$')]],
                   ROL_ID: ['', [Validators.required]],
                   
                 })
@@ -73,6 +73,13 @@ export class CrearUsuarioComponent implements OnInit {
 
   volverInicio(){
     this.router.navigate(['home']);
+  }
+
+  password: string;
+  showPassword: boolean = false;
+
+  togglePassword(): void {
+    this.showPassword = !this.showPassword;
   }
 
 }

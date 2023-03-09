@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private toastr: ToastrService) {
     this.form = this.fb.group({
-      E_MAIL: ['', Validators.required],
+      E_MAIL: ['', [Validators.required, Validators.pattern(/^[a-zA-Z][a-zA-Z0-9._-]*@[a-zA-Z][a-zA-Z0-9._-]*[a-zA-Z](\.[a-zA-Z]+)+$/)]],
       CLAVE: ['', [Validators.required]],
       acceptTerms: [true, [Validators.requiredTrue]]
 
@@ -59,4 +59,14 @@ export class LoginComponent implements OnInit {
       }
     });
   }
+
+  
+ password: string;
+ showPassword: boolean = false;
+
+ togglePassword(): void {
+   this.showPassword = !this.showPassword;
+ }
+
+ hide = true;
 }

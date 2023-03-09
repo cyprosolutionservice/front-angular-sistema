@@ -21,6 +21,9 @@ import {MatMenuModule} from '@angular/material/menu';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import {MatSelectModule} from '@angular/material/select';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatFormFieldModule} from '@angular/material/form-field';
+
+
 
 //Modules
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -76,6 +79,7 @@ import { CrearFamiliaComponent } from './components/crear-familia/crear-familia.
     MatTooltipModule,
     MatSelectModule,
     MatExpansionModule,
+    MatFormFieldModule,
     ToastrModule.forRoot()
 
   ],
