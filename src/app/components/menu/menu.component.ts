@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout'
 import { Observable } from 'rxjs';
 import { valorReloj, XsegundoService } from '../../services/xsegundo-service.service';
@@ -10,6 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 import { MatExpansionPanel } from '@angular/material/expansion';
 
 import { MatSidenav } from '@angular/material/sidenav';
+import { EditarUsuarioComponent } from '../editar-usuario/editar-usuario.component';
 
 function capitalizeInitials(str: string): string {
   const words = str.split(' ');
@@ -47,6 +48,7 @@ export class MenuComponent implements OnInit {
   crearUsuarioMenu: boolean =false;
 
   isSidenavInitialized: boolean= false;
+  static checkMenu: boolean= false;
 
   mobileQuery: MediaQueryList;
 
@@ -87,16 +89,25 @@ export class MenuComponent implements OnInit {
       this.boton = LoginComponent.botonMenu;
       this.crearUsuarioMenu =Login2Component.CrearUserl2;
       this.usuario = Login2Component.nombreBarra;
-      this.isSidenavInitialized = LoginComponent.botonMenu;
+      if (LoginComponent.botonMenu || EditarUsuarioComponent.editBoton || MenuComponent.checkMenu) {
+        this.isSidenavInitialized = true;
+      }
+      
     });
-   
-    this.isSidenavInitialized = true;
+    this.segundo.sidenavOpen$.subscribe(open => {
+      this.sidenavOpen = open;
+      if (open) {
+        this.sidenav.open();
+      } else {
+        this.sidenav.close();
+      }
+    });
   }
   
 
-  ngOnDestroy(): void {
-    this.mobileQuery.removeListener(this._mobileQueryListener);
-  }
+  // ngOnDestroy(): void {
+  //   this.mobileQuery.removeListener(this._mobileQueryListener);
+  // }
 
   shouldRun = true;
   menuListItems : MatMenuListItem[];
@@ -122,8 +133,14 @@ irListarFamilias(){
 logOut(){
   localStorage.removeItem('token');
   localStorage.removeItem('DB');
+  localStorage.removeItem('rol');
+  localStorage.removeItem('rut');
+  localStorage.removeItem('usuario');
   this.router.navigate(['login']);
   LoginComponent.botonMenu = false;
+  this.isSidenavInitialized = false;
+  MenuComponent.checkMenu = false
+
   this.toastr.info('Sessión Cerrada!');
 }
 
@@ -137,7 +154,17 @@ volverInicio(){
     this.panel1.close();
   }
 
+  @ViewChild('panel2') panel2: MatExpansionPanel;
 
- 
+  cerrarPanel2() {
+    this.panel1.close();
+  }
+
+
+
+  @ViewChild('sidenav') sidenav: MatSidenav;
+  sidenavOpen: boolean = false;
 }
+
+
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {timer, Observable, Subject} from 'rxjs';
+import {timer, Observable, Subject, BehaviorSubject} from 'rxjs';
 import {map, shareReplay} from 'rxjs/operators';
 
 
@@ -25,7 +25,19 @@ export class XsegundoService {
   weekday: string;
   months: string;
 
+  //
+  private sidenavOpenSubject = new BehaviorSubject<boolean>(false);
+  sidenavOpen$ = this.sidenavOpenSubject.asObservable();
 
+  toggleSidenav() {
+    this.sidenavOpenSubject.next(!this.sidenavOpenSubject.value);
+  }
+
+  updateSidenavOpen(open: boolean) {
+    this.sidenavOpenSubject.next(open);
+  
+  }
+//
   constructor() {
     this.clock = timer(0,1000).pipe(map(t => new Date()),shareReplay(1));
 

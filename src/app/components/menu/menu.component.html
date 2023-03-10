@@ -16,8 +16,9 @@
     </div>
   </mat-toolbar>
 
+  <!-- [opened]="isSidenavInitialized" -->
   <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
-    <mat-sidenav #sidenav class="second-slider" [opened]="isSidenavInitialized" #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
+    <mat-sidenav #sidenav class="second-slider" [opened]="sidenavOpen" #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
       [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
 
       <mat-nav-list class="slider-menu">
@@ -45,11 +46,11 @@
             groups
           </span>CLIENTES </a>
 
-        <a mat-list-item class="icono-color"><span class="material-symbols-outlined start-icons me-2">
+        <!-- <a mat-list-item class="icono-color"><span class="material-symbols-outlined start-icons me-2">
             window
-          </span>PRODUCTOS </a>
+          </span>PRODUCTOS </a> -->
 
-        <!-- <mat-expansion-panel hideToggle #panel2 class="panelexpansionado">
+        <mat-expansion-panel hideToggle #panel2 class="panelexpansionado">
             <mat-expansion-panel-header class="tituloConfig">
               <a mat-list-item class="icono-color"><span class="material-symbols-outlined start-icons me-2">
                 window
@@ -64,7 +65,7 @@
                 (click)="snav.toggle()" >ARTICULOS</button>
               </div>
               <div class="container">
-                <button class="btn btn-secondary btn-configs" (click)="irListarFamilias()" 
+                <button class="btn btn-secondary btn-configs" (click)="irListarFamilias()" (click)="cerrarPanel2()"
                 (click)="snav.toggle()" >FAMILIAS</button>
               </div>
               <div class="container">
@@ -82,7 +83,7 @@
   
             </div>
           </mat-nav-list>
-            </mat-expansion-panel> -->
+            </mat-expansion-panel>
 
         <a mat-list-item class="icono-color"><span class="material-symbols-outlined start-icons me-2">
             swap_vert

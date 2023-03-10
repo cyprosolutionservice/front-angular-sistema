@@ -19,7 +19,7 @@
         <div class="input-container mt-2 mb-3 p-3 contra">
             <label for="exampleFormControlTextarea1" class="etiquetas">CONTRASEÑA</label>
             <input class="form-control colorInput" formControlName="CLAVE"
-             minlength="3" maxlength="19" 
+             minlength="3" maxlength="19"  placeholder="password" 
              type="{{showPassword ? 'text' : 'password'}}" [(ngModel)]="password">
             <span class="show-hide" (click)="togglePassword()">
               <i>

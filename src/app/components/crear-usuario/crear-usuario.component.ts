@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { UserDataCreate } from 'src/app/Model/UserDataCreate';
 import { AuthService } from 'src/app/services/auth.service';
+import { XsegundoService } from 'src/app/services/xsegundo-service.service';
 
 @Component({
   selector: 'app-crear-usuario',
@@ -24,6 +25,7 @@ export class CrearUsuarioComponent implements OnInit {
   constructor(private authService: AuthService,
               private router: Router,
               private fb: FormBuilder,
+              private segundo: XsegundoService,
               private toastr: ToastrService) { 
                 this.form = this.fb.group({
                   NOMBRE: ['', Validators.required],
@@ -52,6 +54,8 @@ export class CrearUsuarioComponent implements OnInit {
           console.log(USER.ROL_ID);
           console.log('Usuario creado EXITOSAMENTE!')
           this.router.navigate(['private']); 
+          this.segundo.toggleSidenav();
+          this.segundo.updateSidenavOpen(true);
           this.toastr.info('Exito', 'Usuario Creado!')
         }else{
           console.log('Usuario No encontrado en la base de Datos');
@@ -72,7 +76,9 @@ export class CrearUsuarioComponent implements OnInit {
   ];
 
   volverInicio(){
-    this.router.navigate(['home']);
+    this.router.navigate(['private']);
+    this.segundo.toggleSidenav();
+    this.segundo.updateSidenavOpen(true);
   }
 
   password: string;
