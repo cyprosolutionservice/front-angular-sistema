@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { UserDataCreate } from 'src/app/Model/UserDataCreate';
 import { AuthService } from 'src/app/services/auth.service';
+import { MenuService } from 'src/app/services/menu.service';
 import { XsegundoService } from 'src/app/services/xsegundo-service.service';
 import { LoginComponent } from '../login/login.component';
 import { MenuComponent } from '../menu/menu.component';
@@ -31,7 +32,7 @@ export class EditarUsuarioComponent implements OnInit {
   constructor(private authService: AuthService,
               private router: Router,
               private fb: FormBuilder,
-              private segundo: XsegundoService,
+              private menuService: MenuService,
               private toastr: ToastrService,
               private aRoute: ActivatedRoute) { 
                 this.form = this.fb.group({
@@ -66,8 +67,8 @@ export class EditarUsuarioComponent implements OnInit {
         this.router.navigate(['private']);
         //EditarUsuarioComponent.editBoton = true;
         // MenuComponent.checkMenu = true;
-        this.segundo.toggleSidenav();
-        this.segundo.updateSidenavOpen(true);
+        this.menuService.toggleSidenav();
+        this.menuService.updateSidenavOpen(true);
       }, error => {
         console.log(error),
         // this.form.reset();
@@ -91,8 +92,8 @@ export class EditarUsuarioComponent implements OnInit {
 
   volverInicio(){
     this.router.navigate(['private']);
-    this.segundo.toggleSidenav();
-    this.segundo.updateSidenavOpen(true);
+    this.menuService.toggleSidenav();
+    this.menuService.updateSidenavOpen(true);
   }
 
   esEditar(){

@@ -25,7 +25,7 @@ export class AuthService {
     return this.http.post(`${this.URL}/user/singin`, user);
   }
 
-  
+
 
   singin2(user: any){
     const httpOptions = {
@@ -82,7 +82,16 @@ export class AuthService {
     };
     return this.http.get(`${this.URL}/product/get/family`, httpOptions);
   }
-  
+
+  crearFamilia(family: any){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'x-db-name': localStorage.getItem('DB')
+      })
+    };
+    return this.http.post(`${this.URL}/product/create/family`, family, httpOptions);
+  }
+
 
   setAuthenticated(value: boolean) {
     this.isAuthenticatedSubject.next(value);

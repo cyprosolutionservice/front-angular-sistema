@@ -1,1 +1,28 @@
-<p>crear-familia works!</p>
+<div class="col-sm-4 mx-auto h-70">
+
+    <div class="card">
+
+        <span class="titulo">CREAR FAMILIA</span>
+        <form [formGroup]="form" (ngSubmit)="crearFamilia()">
+
+            <div class="mt-2 mb-3">
+                <label for="exampleFormControlInput1" class="etiquetas">NOMBRE</label>
+                <input formControlName="NOMBRE" type="text" class="form-control colorInput" placeholder="Jose">
+                <div *ngIf="form.get('NOMBRE').invalid && form.get('NOMBRE').touched">
+                    <div *ngIf="form.get('NOMBRE')?.hasError('required')">
+                        <p class="clave-error">Por favor, complete el campo.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="botones">
+                <button (click)="volverInicio()" class="btn btn-secondary float-start">CANCELAR</button>
+                <button type="submit" [disabled]="form.invalid" class="btn btn-success float-end">GUARDAR</button>
+
+            </div>
+
+        </form>
+
+
+    </div>
+</div>

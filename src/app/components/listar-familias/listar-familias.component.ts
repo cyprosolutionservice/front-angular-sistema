@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
+import { MenuService } from 'src/app/services/menu.service';
 
 @Component({
   selector: 'app-listar-familias',
@@ -14,6 +15,7 @@ export class ListarFamiliasComponent implements OnInit {
 
   constructor(private authService: AuthService,
     private router: Router,
+    private menuService: MenuService,
     private toastr: ToastrService) { }
 
   ngOnInit(): void {
@@ -40,6 +42,11 @@ export class ListarFamiliasComponent implements OnInit {
 
   irCrearFamilia(){
     this.router.navigate(['crear-familia']);
+  }
+  volver(){
+    this.router.navigate(['private']);
+    this.menuService.toggleSidenav();
+    this.menuService.updateSidenavOpen(true);
   }
 
 }

@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { UserData2 } from 'src/app/Model/UserData2';
 import { AuthService } from 'src/app/services/auth.service';
+import { MenuService } from 'src/app/services/menu.service';
 import { XsegundoService } from 'src/app/services/xsegundo-service.service';
 import { LoginComponent } from '../login/login.component';
 import { MenuComponent } from '../menu/menu.component';
@@ -30,7 +31,7 @@ export class Login2Component implements OnInit {
   constructor(private authService: AuthService,
               private router: Router,
               private fb: FormBuilder,
-              private segundo: XsegundoService,
+              private menuService: MenuService,
               private toastr: ToastrService) {
                 this.form = this.fb.group({
                   CLAVE: ['', [Validators.required]],
@@ -50,7 +51,7 @@ export class Login2Component implements OnInit {
       CLAVE: this.display
     }
 
-    console.log('AQUI ESTA DISPLAY---> '+this.display)
+    //console.log('AQUI ESTA DISPLAY---> '+this.display)
 
       this.authService.singin2(USER).subscribe( (res:any) =>{
         if (res.token) {
@@ -69,8 +70,8 @@ export class Login2Component implements OnInit {
           localStorage.setItem('token', res.token);
           this.router.navigate(['private']);
           //MenuComponent.checkMenu = true;
-          this.segundo.toggleSidenav();
-          this.segundo.updateSidenavOpen(true);
+          this.menuService.toggleSidenav();
+          this.menuService.updateSidenavOpen(true);
           this.toastr.success('¡Login Exitoso!');
         }else{
           console.log('Usuario No encontrado en la base de Datos');

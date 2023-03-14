@@ -11,6 +11,7 @@ import { MatExpansionPanel } from '@angular/material/expansion';
 
 import { MatSidenav } from '@angular/material/sidenav';
 import { EditarUsuarioComponent } from '../editar-usuario/editar-usuario.component';
+import { MenuService } from 'src/app/services/menu.service';
 
 function capitalizeInitials(str: string): string {
   const words = str.split(' ');
@@ -63,6 +64,7 @@ export class MenuComponent implements OnInit {
 
   constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher,
               private segundo: XsegundoService,
+              private menuService: MenuService,
               private router: Router,
               private toastr: ToastrService,
               ) {
@@ -94,7 +96,7 @@ export class MenuComponent implements OnInit {
       }
       
     });
-    this.segundo.sidenavOpen$.subscribe(open => {
+    this.menuService.sidenavOpen$.subscribe(open => {
       this.sidenavOpen = open;
       if (open) {
         this.sidenav.open();
@@ -157,7 +159,7 @@ volverInicio(){
   @ViewChild('panel2') panel2: MatExpansionPanel;
 
   cerrarPanel2() {
-    this.panel1.close();
+    this.panel2.close();
   }
 
 

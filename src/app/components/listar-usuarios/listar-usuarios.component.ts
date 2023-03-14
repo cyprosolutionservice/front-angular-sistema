@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
+import { MenuService } from 'src/app/services/menu.service';
 
 @Component({
   selector: 'app-listar-usuarios',
@@ -14,6 +15,7 @@ export class ListarUsuariosComponent implements OnInit {
 
   constructor(private authService: AuthService,
     private router: Router,
+    private menuService: MenuService,
     private toastr: ToastrService) { }
 
   ngOnInit(): void {
@@ -37,6 +39,12 @@ export class ListarUsuariosComponent implements OnInit {
     console.log('Hicciste click en '+user.NOMBRE);
     // localStorage.setItem('id', user.CODUSUARIO);
     this.router.navigate(['editar-usuario', user.CODUSUARIO]);
+  }
+
+  volver(){
+    this.router.navigate(['private']);
+    this.menuService.toggleSidenav();
+    this.menuService.updateSidenavOpen(true);
   }
 
 }
