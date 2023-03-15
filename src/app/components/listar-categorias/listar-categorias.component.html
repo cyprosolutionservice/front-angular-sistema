@@ -1,0 +1,29 @@
+<div class="container listado p-3">
+
+    <div class="car-body text-center p-2 ">
+        <p class="titulo mt-2">LISTADO DE CATEGORIAS</p>
+        <button type="submit" class="btn btn-success float-end">CREAR NUEVA</button>
+        <button type="submit" class="btn btn-secondary float-start mb-3" (click)="volver()">VOLVER</button>
+        <table *ngIf="listCategorias.length > 0" class="table table-hover ">
+            <thead class="encabezados">
+                <tr>
+                    <th scope="col">CATEGORIA</th>
+                    <th scope="col">FAMILIA</th>
+                    <th scope="col">DEPARTAMENTO</th>
+                    <!-- <th scope="col">Estatus</th> -->
+                    <!-- <th scope="col"></th> -->
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let categoria of listCategorias">
+                    <td (click)="getEvento(categoria)">{{ categoria.CATEGORY}}</td>
+                    <td (click)="getEvento(categoria)">{{ categoria.FAMILY }}</td>
+                    <td (click)="getEvento(categoria)">{{ categoria.DEPARTAMENT }} <br>
+                </tr>
+            </tbody>
+        </table>
+        <h5 class="text-start mt-4" *ngIf="listCategorias.length == 0">No hay Categorias para mostrar</h5>
+    </div>
+
+</div>
+

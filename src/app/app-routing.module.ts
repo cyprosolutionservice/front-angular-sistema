@@ -1,10 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './components/admin/admin.component';
+import { CrearCategoriaComponent } from './components/crear-categoria/crear-categoria.component';
+import { CrearDepartamentoComponent } from './components/crear-departamento/crear-departamento.component';
 import { CrearFamiliaComponent } from './components/crear-familia/crear-familia.component';
 import { CrearUsuarioComponent } from './components/crear-usuario/crear-usuario.component';
 import { EditarUsuarioComponent } from './components/editar-usuario/editar-usuario.component';
 import { HomeComponent } from './components/home/home.component';
+import { ListarCategoriasComponent } from './components/listar-categorias/listar-categorias.component';
+import { ListarDepartamentosComponent } from './components/listar-departamentos/listar-departamentos.component';
 import { ListarFamiliasComponent } from './components/listar-familias/listar-familias.component';
 import { ListarUsuariosComponent } from './components/listar-usuarios/listar-usuarios.component';
 import { LoginComponent } from './components/login/login.component';
@@ -27,6 +31,10 @@ const routes: Routes = [
   { path: 'crear-usuario', component: CrearUsuarioComponent, canActivate: [AuthGuard]},
   { path: 'editar-usuario/:id', component: EditarUsuarioComponent, canActivate: [AuthGuard]},
   { path: 'listar-familias', component: ListarFamiliasComponent, canActivate: [AuthGuard]},
+  { path: 'listar-departamentos', component: ListarDepartamentosComponent, canActivate: [AuthGuard]},
+  { path: 'crear-departamento', component: CrearDepartamentoComponent, canActivate: [AuthGuard]},
+  { path: 'listar-categorias', component: ListarCategoriasComponent, canActivate: [AuthGuard]},
+  { path: 'crear-categoria', component: CrearCategoriaComponent, canActivate: [AuthGuard]},
   { path: 'crear-familia', component: CrearFamiliaComponent, canActivate: [AuthGuard]},
   
   { path: '**', pathMatch: 'full', redirectTo: 'login'}

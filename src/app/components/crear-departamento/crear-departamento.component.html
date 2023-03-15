@@ -1,0 +1,42 @@
+<div class="col-sm-4 mx-auto h-70">
+
+    <div class="card">
+
+        <span class="titulo">CREAR DEPARTAMENTO</span>
+        <form [formGroup]="form" (ngSubmit)="crearDepartamento()">
+
+            <div class="mt-2 mb-3">
+                <label for="exampleFormControlInput1" class="etiquetas">NOMBRE</label>
+                <input formControlName="NOMBRE" type="text" class="form-control colorInput" placeholder="ENTRADAS">
+                <div *ngIf="form.get('NOMBRE').invalid && form.get('NOMBRE').touched">
+                    <div *ngIf="form.get('NOMBRE')?.hasError('required')">
+                        <p class="clave-error">Por favor, complete el campo.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-2">
+                <label for="exampleFormControlInput1" class="etiquetas me-2">Familias: </label>
+                <mat-form-field appearance="fill">
+                    <mat-label>Family</mat-label>
+                    <mat-select formControlName="CODFAMILIA">
+                        <mat-option [value]="family" *ngFor="let family of listFamilies" 
+                        [value]="family.CODFAMILIA">
+                            {{family.NOMBRE}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+            </div>
+
+            <div class="botones">
+                <button (click)="volverInicio()" class="btn btn-secondary float-start">CANCELAR</button>
+                <button type="submit" [disabled]="form.invalid" class="btn btn-success float-end">GUARDAR</button>
+
+            </div>
+
+        </form>
+
+
+    </div>
+</div>

@@ -45,6 +45,10 @@ import { ListarUsuariosComponent } from './components/listar-usuarios/listar-usu
 import { EditarUsuarioComponent } from './components/editar-usuario/editar-usuario.component';
 import { ListarFamiliasComponent } from './components/listar-familias/listar-familias.component';
 import { CrearFamiliaComponent } from './components/crear-familia/crear-familia.component';
+import { ListarDepartamentosComponent } from './components/listar-departamentos/listar-departamentos.component';
+import { CrearDepartamentoComponent } from './components/crear-departamento/crear-departamento.component';
+import { ListarCategoriasComponent } from './components/listar-categorias/listar-categorias.component';
+import { CrearCategoriaComponent } from './components/crear-categoria/crear-categoria.component';
 
 
 @NgModule({
@@ -62,6 +66,10 @@ import { CrearFamiliaComponent } from './components/crear-familia/crear-familia.
     EditarUsuarioComponent,
     ListarFamiliasComponent,
     CrearFamiliaComponent,
+    ListarDepartamentosComponent,
+    CrearDepartamentoComponent,
+    ListarCategoriasComponent,
+    CrearCategoriaComponent,
   ],
   imports: [
     BrowserModule,

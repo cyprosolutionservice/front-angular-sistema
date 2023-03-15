@@ -92,6 +92,33 @@ export class AuthService {
     return this.http.post(`${this.URL}/product/create/family`, family, httpOptions);
   }
 
+  getDepartaments(){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'x-db-name': localStorage.getItem('DB'),
+      })
+    };
+    return this.http.get(`${this.URL}/product/get/departament`, httpOptions);
+  }
+
+  crearDepartament(departament: any){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'x-db-name': localStorage.getItem('DB')
+      })
+    };
+    return this.http.post(`${this.URL}/product/create/departament`, departament, httpOptions);
+  }
+
+  getCategorias(){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'x-db-name': localStorage.getItem('DB'),
+      })
+    };
+    return this.http.get(`${this.URL}/product/get/categories`, httpOptions);
+  }
+
 
   setAuthenticated(value: boolean) {
     this.isAuthenticatedSubject.next(value);

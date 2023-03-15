@@ -1,0 +1,29 @@
+<div class="container listado p-3">
+
+    <div class="car-body text-center p-2 ">
+        <p class="titulo mt-2">LISTADO DEPARTAMENTOS</p>
+        <button type="submit" class="btn btn-success float-end">CREAR NUEVO</button>
+        <!-- <button type="submit" class="btn btn-success float-end" (click)="irCrearDepartamento()">CREAR NUEVO</button> -->
+        <button type="submit" class="btn btn-secondary float-start mb-3" (click)="volver()">VOLVER</button>
+        <table *ngIf="listDepartaments.length > 0" class="table table-hover ">
+            <thead class="encabezados">
+                <tr>
+                    <th scope="col">DEPARTAMENTO</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let departamento of listDepartaments">
+                    <td (click)="getEvento(departamento)">{{ departamento.NOMBRE}}</td>
+                
+                    <!-- <td>  <i> <span class="material-symbols-outlined iconos text-primary">
+                                drive_file_rename_outline
+                                </span> </i>
+                            </td> -->
+                </tr>
+            </tbody>
+        </table>
+        
+        <h5 class="text-start mt-4" *ngIf="listDepartaments.length == 0">No hay Departamentos para mostrar</h5>
+    </div>
+
+</div>

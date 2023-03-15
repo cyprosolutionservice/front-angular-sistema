@@ -100,7 +100,7 @@ export class MenuComponent implements OnInit {
       this.sidenavOpen = open;
       if (open) {
         this.sidenav.open();
-      } else {
+      } else if( this.sidenav && this.sidenav.close){
         this.sidenav.close();
       }
     });
@@ -166,6 +166,14 @@ volverInicio(){
 
   @ViewChild('sidenav') sidenav: MatSidenav;
   sidenavOpen: boolean = false;
+
+  irListarDepartamentos(){
+    this.router.navigate(['listar-departamentos']);
+  }
+
+  irListarCategorias(){
+    this.router.navigate(['listar-categorias']);
+  }
 }
 
 

@@ -1,0 +1,65 @@
+
+
+.activo {
+    color: #00FF00;
+  }
+  
+  .inactivo {
+    color: #cc0000f7;
+  }
+
+  .listado{
+    width: 600px;
+    background: rgba(46,75,131,255);
+    border: none;
+    border-radius: 19px;
+    margin-bottom: 5px;
+    margin-top: 45px;
+  }
+
+  .titulo{
+    color: aliceblue;
+    font-size: 1.9rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 3rem;
+
+}
+
+  .car-body{
+    background: rgba(46,75,131,255);
+    border: none;
+  }
+
+
+.table{
+    border: black;
+    color: aliceblue;
+    font-size: 14px;
+}
+
+.encabezados{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 19px;
+}
+td{
+    cursor: pointer;
+}
+@media only screen and (max-width: 767px) {
+    .listado{
+        width: 366px;
+        
+    }
+    .titulo{
+        font-size: 25px;
+        margin-bottom: 2rem;
+    }
+    .encabezados{
+        font-size: 17px;
+    }
+    .table{
+        font-size: 12px;
+    }
+}
+
+
