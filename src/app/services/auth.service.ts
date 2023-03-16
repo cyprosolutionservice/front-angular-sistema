@@ -65,6 +65,15 @@ export class AuthService {
     return this.http.get(`${this.URL}/user/get/${id}`, httpOptions);
   }
 
+  getRoles(): Observable<any>{
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'x-db-name': localStorage.getItem('DB'),
+      })
+    };
+    return this.http.get(`${this.URL}/user/v1/get/roles`, httpOptions);
+  }
+
   actualizarUser(id: string, user: UserDataCreate): Observable<any>{
     const httpOptions = {
       headers: new HttpHeaders({

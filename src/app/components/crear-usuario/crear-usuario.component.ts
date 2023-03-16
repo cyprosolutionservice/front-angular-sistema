@@ -1,7 +1,9 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { catchError, throwError } from 'rxjs';
 import { UserDataCreate } from 'src/app/Model/UserDataCreate';
 import { AuthService } from 'src/app/services/auth.service';
 import { MenuService } from 'src/app/services/menu.service';
@@ -38,6 +40,7 @@ export class CrearUsuarioComponent implements OnInit {
                 })
               }
   ngOnInit(): void {
+    this.getRoles();
   }
 
   crearUsuario(){
@@ -69,12 +72,12 @@ export class CrearUsuarioComponent implements OnInit {
  
    
   }
-  listRoles: any[] = [
-    {value: 'ADMIN', viewValue: 'ADMIN'},
-    {value: 'GARZON', viewValue: 'GARZON'},
-    {value: 'USUARIO', viewValue: 'USUARIO'},
-    {value: 'VENDEDOR', viewValue: 'VENDEDOR'},
-  ];
+  // listRoles: any[] = [
+  //   {value: 'ADMIN', viewValue: 'ADMIN'},
+  //   {value: 'GARZON', viewValue: 'GARZON'},
+  //   {value: 'USUARIO', viewValue: 'USUARIO'},
+  //   {value: 'VENDEDOR', viewValue: 'VENDEDOR'},
+  // ];
 
   volverInicio(){
     this.router.navigate(['private']);
@@ -87,6 +90,34 @@ export class CrearUsuarioComponent implements OnInit {
 
   togglePassword(): void {
     this.showPassword = !this.showPassword;
+  }
+
+  listRoles: any[] = [];
+
+  getRoles(){
+    this.authService.getRoles()
+    .pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error.status === 400) {
+          console.log(error.error);
+        } else {
+          console.error('Roles error occurred!');
+          this.toastr.error('Error', 'Desconocido');
+          console.error(error);
+        }
+        return throwError(() => error);
+      })
+    )
+    .subscribe( (res:any) =>{
+      if (res) {
+      console.log(res);
+      this.listRoles = res;
+      }else{
+        console.log('Roles No encontrados en la base de Datos');
+        this.toastr.error('Error', 'Error al buscar Roles')
+      }
+        
+    });
   }
 
 }

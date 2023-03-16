@@ -65,8 +65,8 @@
                 <mat-form-field appearance="fill">
                     <mat-label>Rol</mat-label>
                     <mat-select formControlName="ROL_ID">
-                        <mat-option [value]="rol" *ngFor="let rol of listRoles" [value]="rol.value">
-                            {{rol.viewValue}}
+                        <mat-option [value]="rol" *ngFor="let rol of listRoles" [value]="rol.ROL_ID">
+                            {{rol.ROL_ID}}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
