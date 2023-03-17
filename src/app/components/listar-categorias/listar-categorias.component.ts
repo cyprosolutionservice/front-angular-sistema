@@ -45,4 +45,8 @@ export class ListarCategoriasComponent implements OnInit {
     this.menuService.updateSidenavOpen(true);
   }
 
+  irCrearCategoria(){
+    this.router.navigate(['crear-categoria']);
+  }
+
 }

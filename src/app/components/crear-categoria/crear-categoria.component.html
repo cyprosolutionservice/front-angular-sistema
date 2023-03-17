@@ -1,1 +1,59 @@
-<p>crear-categoria works!</p>
+<div class="col-sm-4 mx-auto h-70">
+
+    <div class="card">
+
+        <span class="titulo">CREAR CATEGORIA</span>
+        <form [formGroup]="form" (ngSubmit)="crearCategoria()">
+
+            <div class="mt-2 mb-3">
+                <label for="exampleFormControlInput1" class="etiquetas">NOMBRE</label>
+                <input formControlName="NOMBRE" type="text" class="form-control colorInput" 
+                placeholder="CHOCOLATES">
+                <div *ngIf="form.get('NOMBRE').invalid && form.get('NOMBRE').touched">
+                    <div *ngIf="form.get('NOMBRE')?.hasError('required')">
+                        <p class="clave-error">Por favor, complete el campo.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="familiabox mb-2">
+                <label for="exampleFormControlInput1" class="etiquetas me-2">Familias: </label>
+                <br>
+                <mat-form-field appearance="fill">
+                    <mat-label>Family</mat-label>
+                    <mat-select formControlName="CODFAMILIA">
+                        <mat-option [value]="family" *ngFor="let family of listFamilies" 
+                        [value]="family.CODFAMILIA">
+                            {{family.NOMBRE}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+            </div>
+
+            <div class="mb-2">
+                <label for="exampleFormControlInput1" class="etiquetas me-2">DEPARTAMENTOS: </label>
+                <br>
+                <mat-form-field appearance="fill">
+                    <mat-label>Departament</mat-label>
+                    <mat-select formControlName="CODDEPARTAMENTO">
+                        <mat-option [value]="departamento" *ngFor="let departamento of listDepartaments" 
+                        [value]="departamento.CODDEPARTAMENTO">
+                            {{departamento.NOMBRE}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+            </div>
+
+            <div class="botones">
+                <button (click)="volverInicio()" class="btn btn-secondary float-start">CANCELAR</button>
+                <button type="submit" [disabled]="form.invalid" class="btn btn-success float-end">GUARDAR</button>
+
+            </div>
+
+        </form>
+
+
+    </div>
+</div>

@@ -128,6 +128,14 @@ export class AuthService {
     return this.http.get(`${this.URL}/product/get/categories`, httpOptions);
   }
 
+  createCategory(departament: any){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'x-db-name': localStorage.getItem('DB')
+      })
+    };
+    return this.http.post(`${this.URL}/product/create/category`, departament, httpOptions);
+  }
 
   setAuthenticated(value: boolean) {
     this.isAuthenticatedSubject.next(value);
