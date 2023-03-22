@@ -1,30 +1,38 @@
-<div class="container listado p-3">
+<div class="container listado p-3 text-center">
+    <p class="titulo mt-2">LISTADO DEPARTAMENTOS</p>
 
-    <div class="car-body text-center p-2 ">
-        <p class="titulo mt-2">LISTADO DEPARTAMENTOS</p>
-        <button type="submit" class="btn btn-success float-end" (click)="irCrearDepartamento()">CREAR NUEVO</button>
-        <button type="submit" class="btn btn-secondary float-start mb-3" (click)="volver()">VOLVER</button>
-        <table *ngIf="listDepartaments.length > 0" class="table table-hover ">
-            <thead class="encabezados">
-                <tr>
-                    <th scope="col">FAMILIA</th>
-                    <th scope="col">DEPARTAMENTO</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let departamento of listDepartaments">
-                    <td (click)="getEvento(departamento)">{{ departamento.FAMILY}}</td>
-                    <td (click)="getEvento(departamento)">{{ departamento.NOMBRE}}</td>
-                
-                    <!-- <td>  <i> <span class="material-symbols-outlined iconos text-primary">
-                                drive_file_rename_outline
-                                </span> </i>
-                            </td> -->
-                </tr>
-            </tbody>
-        </table>
-        
-        <h5 class="text-start mt-4" *ngIf="listDepartaments.length == 0">No hay Departamentos para mostrar</h5>
-    </div>
+    <button type="submit" class="btn btn-success float-end" (click)="irCrearDepartamento()">CREAR NUEVO</button>
+    <button type="submit" class="btn btn-secondary float-start mb-3" (click)="volver()">VOLVER</button>
+    <!-- <div class="select-container">
+        <div class="familiabox mb-2 box1">
+            <label for="exampleFormControlInput1" class="etiquetas me-2">Familias: </label>
+            <mat-form-field appearance="fill">
+                <mat-label>Family</mat-label>
+                <mat-select [(ngModel)]="selectedFamily" (selectionChange)="filtrarDepartamentos()">
+                    <mat-option value="Todos">Todos</mat-option>
+                    <mat-option *ngFor="let family of listFamilies" [value]="family.NOMBRE">
+                        {{family.NOMBRE}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div> -->
+    <table *ngIf="filteredDepartamentos.length > 0" class="table table-hover ">
+        <thead class="encabezados">
+            <tr>
+                <th scope="col">FAMILIA</th>
+                <th scope="col">DEPARTAMENTO</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let departamento of filteredDepartamentos">
+                <td (click)="getEvento(departamento)">{{ departamento.FAMILY}}</td>
+                <td (click)="getEvento(departamento)">{{ departamento.NOMBRE}}</td>
+
+            </tr>
+        </tbody>
+    </table>
+
+    <h5 class="text-start mt-4" *ngIf="filteredDepartamentos.length == 0">No hay Departamentos para mostrar</h5>
 
 </div>

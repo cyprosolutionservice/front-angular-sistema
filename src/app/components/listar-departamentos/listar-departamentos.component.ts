@@ -22,8 +22,33 @@ export class ListarDepartamentosComponent implements OnInit {
 
   ngOnInit(): void {
     this.obtenerDepartamentos();
+    this.obtenerFamilias();
   }
 
+  selectedFamily: string = '';
+  filteredDepartamentos: any [] = [];
+  listFamilies: any [] = [];
+
+  filtrarDepartamentos() {
+    if (this.selectedFamily === 'Todos') {
+      this.filteredDepartamentos = this.listDepartaments;
+    } else {
+      this.filteredDepartamentos = this.listDepartaments.filter(depa => depa.FAMILY === this.selectedFamily);
+    }
+  }
+
+  obtenerFamilias(){
+    this.authService.getFamilies().subscribe( (res:any) =>{
+      if (!res.error) {
+      console.log(res);
+      this.listFamilies = res;
+      }else{
+        console.log('Familias No encontrado en la base de Datos');
+        this.toastr.error('Error', 'Error al buscar Familias')
+      }
+        
+    });
+  }
   obtenerDepartamentos(){
     this.authService.getDepartaments()
     .pipe(
@@ -43,6 +68,7 @@ export class ListarDepartamentosComponent implements OnInit {
       if (res) {
       //console.log(res);
       this.listDepartaments = res;
+      this.filteredDepartamentos = res;
       }else{
         console.log('Departamentos no encontrados en la base de Datos');
         this.toastr.error('Error', 'Error al buscar Departamentos')

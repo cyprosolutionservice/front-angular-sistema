@@ -45,6 +45,11 @@
 td{
     cursor: pointer;
 }
+
+.select-container{
+  display: inline-flex;
+  
+}
 @media only screen and (max-width: 767px) {
     .listado{
         width: 366px;
@@ -60,6 +65,10 @@ td{
     }
     .table{
         font-size: 12px;
+    }
+    .mat-form-field-type-mat-select{
+      width: 150px;
+      margin-top: 10px;
     }
 }
 

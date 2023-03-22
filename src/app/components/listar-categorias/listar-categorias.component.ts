@@ -16,10 +16,34 @@ export class ListarCategoriasComponent implements OnInit {
   constructor(private authService: AuthService,
     private router: Router,
     private menuService: MenuService,
-    private toastr: ToastrService) { }
+    private toastr: ToastrService) { 
+      
+    }
+  
 
   ngOnInit(): void {
     this.obtenerCategorias();
+    
+  }
+
+ 
+  listFamilies : any[] = [];
+  listDepartamento: any [] = [];
+
+  filteredCategorias: any[] = [];
+  selectedFamily: string = '';
+  selectedDepartamento: string = '';
+
+  filtrarCategorias() {
+    if (this.selectedFamily === 'Todos' && this.selectedDepartamento === 'Todos') {
+      this.filteredCategorias = this.listCategorias;
+    } else {
+      this.filteredCategorias = this.listCategorias.filter(
+        categoria =>
+          (!this.selectedFamily || this.selectedFamily === 'Todos' || categoria.FAMILY === this.selectedFamily) &&
+          (!this.selectedDepartamento || this.selectedDepartamento === 'Todos' || categoria.DEPARTAMENT === this.selectedDepartamento)
+      );
+    }
   }
 
   obtenerCategorias(){
@@ -27,6 +51,10 @@ export class ListarCategoriasComponent implements OnInit {
       if (!res.error) {
       console.log(res);
       this.listCategorias = res;
+      this.filteredCategorias = res;
+      this.listFamilies = Array.from(new Set(res.map(categoria => categoria.FAMILY)));
+      this.listDepartamento = Array.from(new Set(res.map(categoria => categoria.DEPARTAMENT)));
+      console.log('Esta es la Familia -> '+this.listFamilies);
       }else{
         console.log('Usuarios No encontrado en la base de Datos');
         this.toastr.error('Error', 'Error al buscar Categorias')

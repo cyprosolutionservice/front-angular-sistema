@@ -110,6 +110,16 @@ export class AuthService {
     return this.http.get(`${this.URL}/product/get/departament`, httpOptions);
   }
 
+  getDepartamentsByFamily(){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'x-db-name': localStorage.getItem('DB'),
+        'cod-family': localStorage.getItem('cod-family')
+      })
+    };
+    return this.http.get(`${this.URL}/product/get/departament/by/family`, httpOptions);
+  }
+
   crearDepartament(departament: any){
     const httpOptions = {
       headers: new HttpHeaders({

@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { catchError, throwError } from 'rxjs';
@@ -32,13 +32,25 @@ export class CrearCategoriaComponent implements OnInit {
                 this.form = this.fb.group({
                   NOMBRE: ['', Validators.required],
                   CODFAMILIA: ['', [Validators.required]],
-                  CODDEPARTAMENTO: ['', [Validators.required]],
+                  CODDEPARTAMENTO: ['',[Validators.required]],
                   
                 })
               }
+    isDepartmentsDisabled = true;
+   
+    onFamilyChange() {
+      let selectedFamily = this.form.controls['CODFAMILIA'].value;
+      this.form.controls['CODDEPARTAMENTO'].setValue(null);
+      localStorage.setItem('cod-family', selectedFamily);
+      this.obtenerDepartamentos();
+     
+      console.log(selectedFamily);
+      this.isDepartmentsDisabled = false;
+    }
+
   ngOnInit(): void {
     this.obtenerFamilias();
-    this.obtenerDepartamentos();
+    //this.obtenerDepartamentos();
   }
 
   crearCategoria(){
@@ -125,9 +137,10 @@ export class CrearCategoriaComponent implements OnInit {
   }
 
   listDepartaments: any[] = [];
+  
 
   obtenerDepartamentos(){
-    this.authService.getDepartaments()
+    this.authService.getDepartamentsByFamily()
     .pipe(
       catchError((error: HttpErrorResponse) => {
         if (error.status === 400) {
@@ -142,12 +155,13 @@ export class CrearCategoriaComponent implements OnInit {
       })
     )
     .subscribe( (res:any) =>{
-      if (res) {
+      if (res.length >0) {
       //console.log(res);
       this.listDepartaments = res;
       }else{
+        this.listDepartaments = null;
         console.log('Departamentos no encontrados en la base de Datos');
-        this.toastr.error('Error', 'Error al buscar Departamentos')
+        this.toastr.error('Familia Sin Departamento', 'Error')
       }
         
     });
