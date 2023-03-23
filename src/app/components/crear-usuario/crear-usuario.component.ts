@@ -54,8 +54,8 @@ export class CrearUsuarioComponent implements OnInit {
       this.authService.crearUsuer(USER).subscribe( (res:any) =>{
         if (!res.error) {
           // LoginComponent.botonMenu = true;
-          console.log(res);
-          console.log(USER.ROL_ID);
+          // console.log(res);
+          // console.log(USER.ROL_ID);
           console.log('Usuario creado EXITOSAMENTE!')
           this.router.navigate(['private']); 
           this.menuService.toggleSidenav();
@@ -110,7 +110,7 @@ export class CrearUsuarioComponent implements OnInit {
     )
     .subscribe( (res:any) =>{
       if (res) {
-      console.log(res);
+      //console.log(res);
       this.listRoles = res;
       }else{
         console.log('Roles No encontrados en la base de Datos');

@@ -61,7 +61,7 @@ export class CrearDepartamentoComponent implements OnInit {
       .subscribe( (res:any) =>{
         if (!res.error) {
           // LoginComponent.botonMenu = true;
-          console.log(res);
+          //console.log(res);
           console.log('Departamento creado EXITOSAMENTE!')
           this.router.navigate(['private']); 
           this.menuService.toggleSidenav();
@@ -117,7 +117,7 @@ export class CrearDepartamentoComponent implements OnInit {
     )
     .subscribe( (res:any) =>{
       if (res) {
-      console.log(res);
+      //console.log(res);
       this.listFamilies = res;
       }else{
         console.log('Familias No encontrado en la base de Datos');

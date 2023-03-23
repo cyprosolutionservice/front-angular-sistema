@@ -26,8 +26,9 @@ export class ListarDepartamentosComponent implements OnInit {
   }
 
   selectedFamily: string = '';
-  filteredDepartamentos: any [] = [];
-  listFamilies: any [] = [];
+  filteredDepartamentos: any[] = [];
+  sortedDepartamentos: any[] = [];
+  listFamilies: any[] = [];
 
   filtrarDepartamentos() {
     if (this.selectedFamily === 'Todos') {
@@ -37,55 +38,58 @@ export class ListarDepartamentosComponent implements OnInit {
     }
   }
 
-  obtenerFamilias(){
-    this.authService.getFamilies().subscribe( (res:any) =>{
+  obtenerFamilias() {
+    this.authService.getFamilies().subscribe((res: any) => {
       if (!res.error) {
-      console.log(res);
-      this.listFamilies = res;
-      }else{
+       // console.log(res);
+        this.listFamilies = res;
+      } else {
         console.log('Familias No encontrado en la base de Datos');
         this.toastr.error('Error', 'Error al buscar Familias')
       }
-        
+
     });
   }
-  obtenerDepartamentos(){
+  obtenerDepartamentos() {
     this.authService.getDepartaments()
-    .pipe(
-      catchError((error: HttpErrorResponse) => {
-        if (error.status === 400) {
-          console.log(error.error);
-          //this.toastr.error('Error', 'Departamento YA existe');
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          if (error.status === 400) {
+            console.log(error.error);
+            //this.toastr.error('Error', 'Departamento YA existe');
+          } else {
+            console.error('Unknown error occurred!');
+            this.toastr.error('Error', 'Desconocido');
+            console.error(error);
+          }
+          return throwError(() => error);
+        })
+      )
+      .subscribe((res: any) => {
+        if (res) {
+          //console.log(res);
+          this.listDepartaments = res;
+          this.filteredDepartamentos = res;
+          // this.filteredDepartamentos.sort((a, b) => a.FAMILY.localeCompare(b.FAMILY));
         } else {
-          console.error('Unknown error occurred!');
-          this.toastr.error('Error', 'Desconocido');
-          console.error(error);
+          console.log('Departamentos no encontrados en la base de Datos');
+          this.toastr.error('Error', 'Error al buscar Departamentos')
         }
-        return throwError(() => error);
-      })
-    )
-    .subscribe( (res:any) =>{
-      if (res) {
-      //console.log(res);
-      this.listDepartaments = res;
-      this.filteredDepartamentos = res;
-      }else{
-        console.log('Departamentos no encontrados en la base de Datos');
-        this.toastr.error('Error', 'Error al buscar Departamentos')
-      }
-        
-    });
+
+      });
   }
 
-  getEvento(departamento: any){
-    console.log('Hicciste click en '+departamento.NOMBRE);
+
+
+  getEvento(departamento: any) {
+    // console.log('Hicciste click en ' + departamento.NOMBRE);
     // localStorage.setItem('id', user.CODUSUARIO);
   }
 
-  irCrearDepartamento(){
+  irCrearDepartamento() {
     this.router.navigate(['crear-departamento']);
   }
-  volver(){
+  volver() {
     this.router.navigate(['private']);
     this.menuService.toggleSidenav();
     this.menuService.updateSidenavOpen(true);

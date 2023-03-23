@@ -49,8 +49,8 @@ export class CrearFamiliaComponent implements OnInit {
       ).subscribe( (res:any) =>{
         if (!res.error) {
           // LoginComponent.botonMenu = true;
-          console.log('****Entró en el primero***'+res);
-          console.log('Familia creada EXITOSAMENTE!')
+          // console.log('****Entró en el primero***'+res);
+          // console.log('Familia creada EXITOSAMENTE!')
           this.router.navigate(['private']); 
           this.menuService.toggleSidenav();
           this.menuService.updateSidenavOpen(true);

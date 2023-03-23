@@ -25,7 +25,7 @@ export class ListarUsuariosComponent implements OnInit {
   obtenerUsuarios(){
     this.authService.obtenerUsers().subscribe( (res:any) =>{
       if (!res.error) {
-      console.log(res);
+      //console.log(res);
       this.listUsers = res;
       }else{
         console.log('Usuarios No encontrado en la base de Datos');
@@ -36,7 +36,7 @@ export class ListarUsuariosComponent implements OnInit {
   }
 
   getEvento(user: any){
-    console.log('Hicciste click en '+user.NOMBRE);
+    // console.log('Hicciste click en '+user.NOMBRE);
     // localStorage.setItem('id', user.CODUSUARIO);
     this.router.navigate(['editar-usuario', user.CODUSUARIO]);
   }

@@ -117,7 +117,7 @@ export class MenuComponent implements OnInit {
 
   clickMenuItem(menuItem : MatMenuListItem){
     
-    console.log(menuItem);
+    //console.log(menuItem);
     this.selectedMenu = menuItem.menuLinkText;
 }
 

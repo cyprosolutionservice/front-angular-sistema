@@ -49,12 +49,15 @@ export class ListarCategoriasComponent implements OnInit {
   obtenerCategorias(){
     this.authService.getCategorias().subscribe( (res:any) =>{
       if (!res.error) {
-      console.log(res);
+      //console.log(res);
       this.listCategorias = res;
       this.filteredCategorias = res;
       this.listFamilies = Array.from(new Set(res.map(categoria => categoria.FAMILY)));
-      this.listDepartamento = Array.from(new Set(res.map(categoria => categoria.DEPARTAMENT)));
-      console.log('Esta es la Familia -> '+this.listFamilies);
+      this.listDepartamento = Array.from(new Set(res.map(categoria => categoria.DEPARTAMENT))).sort();
+
+      //console.log('Esta es la lista de Departamentos-> '+this.listDepartamento);
+
+      //console.log('Esta es la Familia -> '+this.listFamilies);
       }else{
         console.log('Usuarios No encontrado en la base de Datos');
         this.toastr.error('Error', 'Error al buscar Categorias')
@@ -64,7 +67,7 @@ export class ListarCategoriasComponent implements OnInit {
   }
 
   getEvento(categoria: any){
-    console.log('Hicciste click en '+categoria.CATEGORY);
+    //('Hicciste click en '+categoria.CATEGORY);
   }
 
   volver(){

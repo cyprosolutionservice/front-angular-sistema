@@ -3,7 +3,7 @@
 
     <button type="submit" class="btn btn-success float-end" (click)="irCrearDepartamento()">CREAR NUEVO</button>
     <button type="submit" class="btn btn-secondary float-start mb-3" (click)="volver()">VOLVER</button>
-    <!-- <div class="select-container">
+    <div class="select-container">
         <div class="familiabox mb-2 box1">
             <label for="exampleFormControlInput1" class="etiquetas me-2">Familias: </label>
             <mat-form-field appearance="fill">
@@ -16,7 +16,7 @@
                 </mat-select>
             </mat-form-field>
         </div>
-    </div> -->
+    </div>
     <table *ngIf="filteredDepartamentos.length > 0" class="table table-hover ">
         <thead class="encabezados">
             <tr>

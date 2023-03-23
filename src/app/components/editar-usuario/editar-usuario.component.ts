@@ -59,7 +59,7 @@ export class EditarUsuarioComponent implements OnInit {
       ROL_ID: this.form.value.ROL_ID,
       ACTIVO: this.form.value.ACTIVO
     }
-    console.log('este es el valor de Clave ->'+USER.CLAVE);
+    //console.log('este es el valor de Clave ->'+USER.CLAVE);
     if (this.id !== null) {
       // Editamos producto
       this.authService.actualizarUser(this.id, USER).subscribe(data => {
@@ -107,7 +107,7 @@ export class EditarUsuarioComponent implements OnInit {
           ROL_ID: data.ROL_ID,
           ACTIVO: data.ACTIVO.data
         })
-        console.log('Data de ACTIVO -->'+data.ACTIVO.data);
+        //console.log('Data de ACTIVO -->'+data.ACTIVO.data);
       })
     }
   }

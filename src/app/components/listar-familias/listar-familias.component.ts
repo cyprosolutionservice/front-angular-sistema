@@ -25,7 +25,7 @@ export class ListarFamiliasComponent implements OnInit {
   obtenerFamilias(){
     this.authService.getFamilies().subscribe( (res:any) =>{
       if (!res.error) {
-      console.log(res);
+      //console.log(res);
       this.listFamilies = res;
       }else{
         console.log('Familias No encontrado en la base de Datos');
@@ -36,7 +36,7 @@ export class ListarFamiliasComponent implements OnInit {
   }
 
   getEvento(familia: any){
-    console.log('Hicciste click en '+familia.NOMBRE);
+   // console.log('Hicciste click en '+familia.NOMBRE);
     // localStorage.setItem('id', user.CODUSUARIO);
   }
 

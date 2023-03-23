@@ -44,7 +44,7 @@ export class CrearCategoriaComponent implements OnInit {
       localStorage.setItem('cod-family', selectedFamily);
       this.obtenerDepartamentos();
      
-      console.log(selectedFamily);
+      //console.log(selectedFamily);
       this.isDepartmentsDisabled = false;
     }
 
@@ -76,8 +76,8 @@ export class CrearCategoriaComponent implements OnInit {
       .subscribe( (res:any) =>{
         if (!res.error) {
           // LoginComponent.botonMenu = true;
-          console.log(res);
-          console.log('Categoria creada EXITOSAMENTE!')
+          // console.log(res);
+          // console.log('Categoria creada EXITOSAMENTE!')
           this.router.navigate(['private']); 
           this.menuService.toggleSidenav();
           this.menuService.updateSidenavOpen(true);
@@ -126,7 +126,7 @@ export class CrearCategoriaComponent implements OnInit {
     )
     .subscribe( (res:any) =>{
       if (res) {
-      console.log(res);
+      //console.log(res);
       this.listFamilies = res;
       }else{
         console.log('Familias No encontrado en la base de Datos');
@@ -158,6 +158,8 @@ export class CrearCategoriaComponent implements OnInit {
       if (res.length >0) {
       //console.log(res);
       this.listDepartaments = res;
+      //console.log('Este es el metodo Departamento->'+res.NOMBRE);
+      
       }else{
         this.listDepartaments = null;
         console.log('Departamentos no encontrados en la base de Datos');
