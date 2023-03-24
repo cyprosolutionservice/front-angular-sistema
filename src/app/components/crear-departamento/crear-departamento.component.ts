@@ -86,7 +86,7 @@ export class CrearDepartamentoComponent implements OnInit {
   // ];
 
   volverInicio(){
-    this.router.navigate(['private']);
+    this.router.navigate(['listar-departamentos']);
     // this.menuService.toggleSidenav();
     // this.menuService.updateSidenavOpen(true);
   }
