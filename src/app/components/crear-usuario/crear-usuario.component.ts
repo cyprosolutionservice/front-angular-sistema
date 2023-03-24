@@ -57,9 +57,9 @@ export class CrearUsuarioComponent implements OnInit {
           // console.log(res);
           // console.log(USER.ROL_ID);
           console.log('Usuario creado EXITOSAMENTE!')
-          this.router.navigate(['private']); 
-          this.menuService.toggleSidenav();
-          this.menuService.updateSidenavOpen(true);
+          this.router.navigate(['listar-usuarios']); 
+          // this.menuService.toggleSidenav();
+          // this.menuService.updateSidenavOpen(true);
           this.toastr.info('Exito', 'Usuario Creado!')
         }else{
           console.log('Usuario No encontrado en la base de Datos');
@@ -80,9 +80,9 @@ export class CrearUsuarioComponent implements OnInit {
   // ];
 
   volverInicio(){
-    this.router.navigate(['private']);
-    this.menuService.toggleSidenav();
-    this.menuService.updateSidenavOpen(true);
+    this.router.navigate(['listar-usuarios']);
+    // this.menuService.toggleSidenav();
+    // this.menuService.updateSidenavOpen(true);
   }
 
   password: string;

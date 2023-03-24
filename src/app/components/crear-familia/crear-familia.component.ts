@@ -51,9 +51,9 @@ export class CrearFamiliaComponent implements OnInit {
           // LoginComponent.botonMenu = true;
           // console.log('****Entró en el primero***'+res);
           // console.log('Familia creada EXITOSAMENTE!')
-          this.router.navigate(['private']); 
-          this.menuService.toggleSidenav();
-          this.menuService.updateSidenavOpen(true);
+          this.router.navigate(['listar-familias']); 
+          // this.menuService.toggleSidenav();
+          // this.menuService.updateSidenavOpen(true);
           this.toastr.info('Exito', 'Familia Creada!')
         }else{
           console.log('Usuario No encontrado en la base de Datos');
@@ -69,9 +69,9 @@ export class CrearFamiliaComponent implements OnInit {
 
   
   volverInicio(){
-    this.router.navigate(['private']);
-    this.menuService.toggleSidenav();
-    this.menuService.updateSidenavOpen(true);
+    this.router.navigate(['listar-familias']);
+    // this.menuService.toggleSidenav();
+    // this.menuService.updateSidenavOpen(true);
   }
 
 }

@@ -64,7 +64,7 @@ export class EditarUsuarioComponent implements OnInit {
       // Editamos producto
       this.authService.actualizarUser(this.id, USER).subscribe(data => {
         this.toastr.info('Actualizacion de USUARIO Completada', '!Usuario Actualizado!')
-        this.router.navigate(['private']);
+        this.router.navigate(['listar-usuarios']);
         //EditarUsuarioComponent.editBoton = true;
         // MenuComponent.checkMenu = true;
         this.menuService.toggleSidenav();
@@ -91,7 +91,7 @@ export class EditarUsuarioComponent implements OnInit {
   ];
 
   volverInicio(){
-    this.router.navigate(['private']);
+    this.router.navigate(['listar-usuarios']);
     this.menuService.toggleSidenav();
     this.menuService.updateSidenavOpen(true);
   }

@@ -16,7 +16,7 @@ export class CrearDepartamentoComponent implements OnInit {
 
 
   volverPrivate(){
-    this.router.navigate(['private']);  
+    this.router.navigate(['listar-departamentos']);  
   }
   form: FormGroup;
 
@@ -63,9 +63,9 @@ export class CrearDepartamentoComponent implements OnInit {
           // LoginComponent.botonMenu = true;
           //console.log(res);
           console.log('Departamento creado EXITOSAMENTE!')
-          this.router.navigate(['private']); 
-          this.menuService.toggleSidenav();
-          this.menuService.updateSidenavOpen(true);
+          this.router.navigate(['listar-departamentos']); 
+          // this.menuService.toggleSidenav();
+          // this.menuService.updateSidenavOpen(true);
           this.toastr.info('Exito', 'Departamento Creado!')
         }else{
           console.log('Departamento No creado en la base de Datos');
@@ -87,8 +87,8 @@ export class CrearDepartamentoComponent implements OnInit {
 
   volverInicio(){
     this.router.navigate(['private']);
-    this.menuService.toggleSidenav();
-    this.menuService.updateSidenavOpen(true);
+    // this.menuService.toggleSidenav();
+    // this.menuService.updateSidenavOpen(true);
   }
 
   password: string;

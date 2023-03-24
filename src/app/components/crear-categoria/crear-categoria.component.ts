@@ -78,9 +78,9 @@ export class CrearCategoriaComponent implements OnInit {
           // LoginComponent.botonMenu = true;
           // console.log(res);
           // console.log('Categoria creada EXITOSAMENTE!')
-          this.router.navigate(['private']); 
-          this.menuService.toggleSidenav();
-          this.menuService.updateSidenavOpen(true);
+          this.router.navigate(['listar-categorias']); 
+          // this.menuService.toggleSidenav();
+          // this.menuService.updateSidenavOpen(true);
           this.toastr.info('Exito', 'Categoria Creada!')
         }else{
           console.log('Departamento No creado en la base de Datos');
@@ -95,9 +95,9 @@ export class CrearCategoriaComponent implements OnInit {
   }
 
   volverInicio(){
-    this.router.navigate(['private']);
-    this.menuService.toggleSidenav();
-    this.menuService.updateSidenavOpen(true);
+    this.router.navigate(['listar-categorias']);
+    // this.menuService.toggleSidenav();
+    // this.menuService.updateSidenavOpen(true);
   }
 
   password: string;
