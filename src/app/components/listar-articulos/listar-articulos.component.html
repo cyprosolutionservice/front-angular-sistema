@@ -1,9 +1,10 @@
 <div class="container listado p-3">
 
-    <p class="titulo mt-2">LISTADO DE CATEGORIAS</p>
-    <button type="submit" class="btn btn-success float-end" (click)="irCrearCategoria()">CREAR NUEVA</button>
+    <p class="titulo mt-2">LISTADO DE ARTICULOS</p>
+    <button type="submit" class="btn btn-success float-end" (click)="irCrearArticulo()">CREAR NUEVO</button>
     <button type="submit" class="btn btn-secondary float-start mb-3" (click)="volver()">VOLVER</button>
-    <div class="select-container">
+
+    <!-- <div class="select-container">
         <div class="familiabox mb-2 box1">
             <label for="exampleFormControlInput1" class="etiquetas me-2">Familias: </label>
             <mat-form-field appearance="fill">
@@ -28,25 +29,33 @@
                 </mat-select>
             </mat-form-field>
         </div>
-    </div>
+    </div> -->
 
-    <table *ngIf="filteredCategorias.length > 0" class="table table-hover ">
+    <table *ngIf="listProducts.length > 0" class="table table-hover text-center">
         <thead class="encabezados">
             <tr>
+                <th scope="col">
+                    <span class="desktop-only">{{ codTitle }}</span>
+                    <span class="mobile-only">COD</span>
+                </th>
+                <th scope="col">DESCRIPCION</th>
                 <th scope="col">FAMILIA</th>
-                <th scope="col">DEPARTAMENTO</th>
+                <th scope="col">
+                    <span class="desktop-only">{{ depaTitle }}</span>
+                    <span class="mobile-only">DEPA</span>
+                </th>
                 <th scope="col">CATEGORIA</th>
-                <!-- <th scope="col">Estatus</th> -->
-                <!-- <th scope="col"></th> -->
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let categoria of filteredCategorias">
-                <td (click)="getEvento(categoria)">{{ categoria.FAMILY }}</td>
-                <td (click)="getEvento(categoria)">{{ categoria.DEPARTAMENT }} <br>
-                <td (click)="getEvento(categoria)">{{ categoria.CATEGORY}}</td>
+            <tr *ngFor="let producto of listProducts">
+                <td (click)="getEvento(producto)">{{ producto.CODPRODUCTO }}</td>
+                <td (click)="getEvento(producto)">{{ producto.DESCRIPCION }} <br>
+                <td (click)="getEvento(producto)">{{ producto.FAMILY}}</td>
+                <td (click)="getEvento(producto)">{{ producto.DEPARTAMENT}}</td>
+                <td (click)="getEvento(producto)">{{ producto.CATEGORY}}</td>
             </tr>
         </tbody>
     </table>
-    <h5 class="text-start mt-4" *ngIf="filteredCategorias.length == 0">No hay Categorias para mostrar</h5>
+    <h5 class="text-start mt-4" *ngIf="listProducts.length == 0">No hay ARTICULOS para mostrar</h5>
 </div>

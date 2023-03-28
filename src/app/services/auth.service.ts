@@ -4,6 +4,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { BehaviorSubject, Observable } from 'rxjs';
 //import { URL_DEV, URL_PROD } from 'src/global';
 import { LoginComponent } from '../components/login/login.component';
+import { Producto } from '../Model/Product';
 import { UserData } from '../Model/UserData';
 import { UserDataCreate } from '../Model/UserDataCreate';
 
@@ -120,6 +121,16 @@ export class AuthService {
     return this.http.get(`${this.URL}/product/get/departament/by/family`, httpOptions);
   }
 
+  getCategoriesByDepa(){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'x-db-name': localStorage.getItem('DB'),
+        'cod-depa': localStorage.getItem('cod-depa')
+      })
+    };
+    return this.http.get(`${this.URL}/product/get/categories/by/departaments`, httpOptions);
+  }
+
   crearDepartament(departament: any){
     const httpOptions = {
       headers: new HttpHeaders({
@@ -146,6 +157,25 @@ export class AuthService {
     };
     return this.http.post(`${this.URL}/product/create/category`, departament, httpOptions);
   }
+
+  getProducts(){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'x-db-name': localStorage.getItem('DB'),
+      })
+    };
+    return this.http.get(`${this.URL}/product/get/products`, httpOptions);
+  }
+
+  createProduct(producto: any){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'x-db-name': localStorage.getItem('DB')
+      })
+    };
+    return this.http.post(`${this.URL}/product/create/product`, producto, httpOptions);
+  }
+
 
   setAuthenticated(value: boolean) {
     this.isAuthenticatedSubject.next(value);

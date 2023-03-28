@@ -14,10 +14,6 @@ import { MenuService } from 'src/app/services/menu.service';
 })
 export class CrearCategoriaComponent implements OnInit {
 
-
-  volverPrivate(){
-    this.router.navigate(['private']);  
-  }
   form: FormGroup;
 
   // user = new UserDataCreate('', '', '', '');

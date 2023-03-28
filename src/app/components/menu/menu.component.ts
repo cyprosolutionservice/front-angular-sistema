@@ -131,6 +131,9 @@ irListarUsuarios(){
 irListarFamilias(){
   this.router.navigate(['listar-familias']);
 }
+irListarProdutos(){
+  this.router.navigate(['listar-articulos']);
+}
 
 logOut(){
   localStorage.removeItem('token');

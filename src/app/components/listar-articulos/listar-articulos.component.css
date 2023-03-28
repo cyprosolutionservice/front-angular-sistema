@@ -1,0 +1,97 @@
+
+
+.activo {
+    color: #00FF00;
+  }
+  
+  .inactivo {
+    color: #cc0000f7;
+  }
+
+  .listado{
+    width: 632px;
+    background: rgba(46,75,131,255);
+    border: none;
+    border-radius: 19px;
+    margin-bottom: 5px;
+    margin-top: 45px;
+  }
+
+  .titulo{
+    color: aliceblue;
+    font-size: 1.9rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 3rem;
+
+}
+
+  .car-body{
+    background: rgba(46,75,131,255);
+    border: none;
+  }
+
+
+.table{
+    border: black;
+    color: aliceblue;
+    font-size: 14px;
+}
+
+.encabezados{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 19px;
+}
+td{
+    cursor: pointer;
+}
+
+.select-container{
+  display: inline-flex;
+  
+}
+
+.mat-form-field-type-mat-select{
+  width: 185px;
+}
+.box1{
+  margin-right: 15px;
+}
+
+.mobile-only {
+    display: none;
+}
+
+@media only screen and (max-width: 767px) {
+
+    .desktop-only {
+        display: none;
+      }
+    
+      .mobile-only {
+        display: inline;
+      }
+    .listado{
+        width: 368px;
+        
+    }
+    .titulo{
+        font-size: 23px;
+        margin-bottom: 2rem;
+    }
+    .encabezados{
+        font-size: 11.6px;
+        font-weight: bold;
+    }
+    .table{
+        font-size: 8.9px;
+    }
+    .mat-form-field-type-mat-select{
+      width: 165px;
+    }
+    .box1{
+      margin-right: 10px;
+    }
+}
+
+

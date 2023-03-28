@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './components/admin/admin.component';
+import { CrearArticuloComponent } from './components/crear-articulo/crear-articulo.component';
 import { CrearCategoriaComponent } from './components/crear-categoria/crear-categoria.component';
 import { CrearDepartamentoComponent } from './components/crear-departamento/crear-departamento.component';
 import { CrearFamiliaComponent } from './components/crear-familia/crear-familia.component';
 import { CrearUsuarioComponent } from './components/crear-usuario/crear-usuario.component';
 import { EditarUsuarioComponent } from './components/editar-usuario/editar-usuario.component';
 import { HomeComponent } from './components/home/home.component';
+import { ListarArticulosComponent } from './components/listar-articulos/listar-articulos.component';
 import { ListarCategoriasComponent } from './components/listar-categorias/listar-categorias.component';
 import { ListarDepartamentosComponent } from './components/listar-departamentos/listar-departamentos.component';
 import { ListarFamiliasComponent } from './components/listar-familias/listar-familias.component';
@@ -35,6 +37,8 @@ const routes: Routes = [
   { path: 'crear-departamento', component: CrearDepartamentoComponent, canActivate: [AuthGuard]},
   { path: 'listar-categorias', component: ListarCategoriasComponent, canActivate: [AuthGuard]},
   { path: 'crear-categoria', component: CrearCategoriaComponent, canActivate: [AuthGuard]},
+  { path: 'listar-articulos', component: ListarArticulosComponent, canActivate: [AuthGuard]},
+  { path: 'crear-articulo', component: CrearArticuloComponent, canActivate: [AuthGuard]},
   { path: 'crear-familia', component: CrearFamiliaComponent, canActivate: [AuthGuard]},
   
   { path: '**', pathMatch: 'full', redirectTo: 'login'}

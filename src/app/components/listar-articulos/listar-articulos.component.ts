@@ -1,19 +1,19 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { catchError, throwError } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { MenuService } from 'src/app/services/menu.service';
 
 @Component({
-  selector: 'app-listar-categorias',
-  templateUrl: './listar-categorias.component.html',
-  styleUrls: ['./listar-categorias.component.css']
+  selector: 'app-listar-articulos',
+  templateUrl: './listar-articulos.component.html',
+  styleUrls: ['./listar-articulos.component.css']
 })
-export class ListarCategoriasComponent implements OnInit {
+export class ListarArticulosComponent implements OnInit {
 
   listCategorias: any[] = [];
+
+  listProducts: any[] = [];
 
   constructor(private authService: AuthService,
     private router: Router,
@@ -21,10 +21,19 @@ export class ListarCategoriasComponent implements OnInit {
     private toastr: ToastrService) { 
       
     }
+
+    depaTitle = 'DEPARTAMENTO';
+    codTitle = 'CODIGO';
   
 
   ngOnInit(): void {
-    this.obtenerCategorias();
+    // this.obtenerCategorias();
+    this.obtenerProductos();
+
+    if (window.innerWidth < 767) {
+      this.depaTitle = 'DEPA';
+      this.codTitle = 'COD';
+    }
     
   }
 
@@ -68,6 +77,28 @@ export class ListarCategoriasComponent implements OnInit {
     });
   }
 
+  obtenerProductos(){
+    this.authService.getProducts().subscribe( (res:any) =>{
+      if (!res.error) {
+      //console.log(res);
+      this.listProducts = res;
+      console.log(res);
+
+      // this.filteredCategorias = res;
+      // this.listFamilies = Array.from(new Set(res.map(categoria => categoria.FAMILY)));
+      // this.listDepartamento = Array.from(new Set(res.map(categoria => categoria.DEPARTAMENT))).sort();
+
+      //console.log('Esta es la lista de Departamentos-> '+this.listDepartamento);
+
+      //console.log('Esta es la Familia -> '+this.listFamilies);
+      }else{
+        console.log('Usuarios No encontrado en la base de Datos');
+        this.toastr.error('Error', 'Error al buscar Categorias')
+      }
+        
+    });
+  }
+
   getEvento(categoria: any){
     //('Hicciste click en '+categoria.CATEGORY);
   }
@@ -78,10 +109,9 @@ export class ListarCategoriasComponent implements OnInit {
     this.menuService.updateSidenavOpen(true);
   }
 
-  irCrearCategoria(){
-    this.router.navigate(['crear-categoria']);
-  }
 
- 
+  irCrearArticulo(){
+    this.router.navigate(['crear-articulo']);
+  }
 
 }
