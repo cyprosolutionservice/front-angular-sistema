@@ -1,8 +1,18 @@
 <div class="container listado p-3">
 
     <p class="titulo mt-2">LISTADO DE ARTICULOS</p>
-    <button type="submit" class="btn btn-success float-end" (click)="irCrearArticulo()">CREAR NUEVO</button>
+  
+    <!-- <button type="submit" class="btn btn-success float-end" (click)="irCrearArticulo()">CREAR NUEVO</button> -->
+    <button type="submit" class="btn btn-success float-end">CREAR NUEVO</button>
     <button type="submit" class="btn btn-secondary float-start mb-3" (click)="volver()">VOLVER</button>
+  
+
+    <div class="select-container ">
+        
+        <input type="text" class="form-control colorInput" placeholder="Buscador" 
+        (keyup)="onSearchKeyUp($event)">
+    </div>
+      
 
     <!-- <div class="select-container">
         <div class="familiabox mb-2 box1">
@@ -34,26 +44,28 @@
     <table *ngIf="listProducts.length > 0" class="table table-hover text-center">
         <thead class="encabezados">
             <tr>
-                <th scope="col">
+                <!-- <th scope="col">
                     <span class="desktop-only">{{ codTitle }}</span>
                     <span class="mobile-only">COD</span>
-                </th>
-                <th scope="col">DESCRIPCION</th>
+                </th> -->
+                <th scope="col">NOMBRE</th>
                 <th scope="col">FAMILIA</th>
                 <th scope="col">
                     <span class="desktop-only">{{ depaTitle }}</span>
                     <span class="mobile-only">DEPA</span>
                 </th>
                 <th scope="col">CATEGORIA</th>
+                <th scope="col">PRECIO</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let producto of listProducts">
-                <td (click)="getEvento(producto)">{{ producto.CODPRODUCTO }}</td>
+                <!-- <td (click)="getEvento(producto)">{{ producto.CODPRODUCTO }}</td> -->
                 <td (click)="getEvento(producto)">{{ producto.DESCRIPCION }} <br>
                 <td (click)="getEvento(producto)">{{ producto.FAMILY}}</td>
                 <td (click)="getEvento(producto)">{{ producto.DEPARTAMENT}}</td>
                 <td (click)="getEvento(producto)">{{ producto.CATEGORY}}</td>
+                <td (click)="getEvento(producto)">{{ producto.PRECIO}}</td>
             </tr>
         </tbody>
     </table>

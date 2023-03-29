@@ -47,7 +47,9 @@ td{
 }
 
 .select-container{
-  display: inline-flex;
+  display: block;
+  margin-bottom: 15px;
+  max-width: 310px;
   
 }
 
@@ -62,6 +64,17 @@ td{
     display: none;
 }
 
+.colorInput{
+  background-color:rgba(0,31,70,255);
+  border-radius: 12px;
+  color: aliceblue;
+  font-family: Tahoma; font-size: 19px; font-style: normal;
+}
+
+.form-control::placeholder{
+  color: rgba(221, 230, 240, 0.658);
+  font-size: 14px;
+}
 @media only screen and (max-width: 767px) {
 
     .desktop-only {
@@ -91,6 +104,10 @@ td{
     }
     .box1{
       margin-right: 10px;
+    }
+
+    .select-container{
+      max-width: 230px;
     }
 }
 

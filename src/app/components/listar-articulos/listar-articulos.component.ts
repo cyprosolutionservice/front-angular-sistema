@@ -14,6 +14,7 @@ export class ListarArticulosComponent implements OnInit {
   listCategorias: any[] = [];
 
   listProducts: any[] = [];
+  allProducts: any;
 
   constructor(private authService: AuthService,
     private router: Router,
@@ -82,6 +83,7 @@ export class ListarArticulosComponent implements OnInit {
       if (!res.error) {
       //console.log(res);
       this.listProducts = res;
+      this.allProducts = res;
       console.log(res);
 
       // this.filteredCategorias = res;
@@ -114,4 +116,25 @@ export class ListarArticulosComponent implements OnInit {
     this.router.navigate(['crear-articulo']);
   }
 
+  searchText: string = '';
+
+  filteredProducts() {
+    let searchTerm = this.searchText.toLowerCase(); // Convertir el término de búsqueda a minúsculas
+    this.listProducts = this.allProducts.filter(producto => {
+      let precio = producto.PRECIO.toString(); // Convertir el precio a string para poder buscar
+      return producto.CODPRODUCTO.toLowerCase().includes(searchTerm) ||
+             producto.DESCRIPCION.toLowerCase().includes(searchTerm) ||
+             producto.FAMILY.toLowerCase().includes(searchTerm) ||
+             producto.DEPARTAMENT.toLowerCase().includes(searchTerm) ||
+             producto.CATEGORY.toLowerCase().includes(searchTerm) ||
+             precio.includes(searchTerm);
+    });
+  }
+
+  onSearchKeyUp(event: any) {
+    this.searchText = event.target.value;
+    this.filteredProducts();
+  }
+
+  
 }
