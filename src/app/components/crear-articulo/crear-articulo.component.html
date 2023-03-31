@@ -3,7 +3,8 @@
     <div class="card">
 
         <span class="titulo">CREAR ARTICULO</span>
-        <form [formGroup]="form" (ngSubmit)="crearArticulo()">
+        <!-- <form [formGroup]="form" (ngSubmit)="crearArticulo()"> -->
+            <form [formGroup]="form" >
 
             <div class="mt-2 mb-3">
                 <label for="exampleFormControlInput1" class="etiquetas">CODPRODUCTO</label>
@@ -34,6 +35,18 @@
                         <p class="clave-error">Por favor, complete el campo.</p>
                     </div>
                 </div>
+            </div>
+
+            <div class="input-container mt-2 mb-3">
+                <label for="exampleFormControlInput1" class="etiquetas">PRECIO</label>
+                <input class="form-control colorInput" formControlName="PRECIO" pattern="[0-9]*" minlength="3"
+                    maxlength="19" inputmode="numeric" type="text" placeholder="2000"
+                    (keypress)="soloNumeros($event)" (blur)="quitarComa($event)">
+                    <div *ngIf="form.get('PRECIO').invalid && form.get('PRECIO').touched">
+                        <div *ngIf="form.get('PRECIO')?.hasError('required')">
+                            <p class="clave-error">Por favor, complete el campo.</p>
+                        </div>
+                    </div>
             </div>
 
             <div class="familiabox mb-2">
@@ -98,6 +111,20 @@
                         <mat-option [value]="categoria" *ngFor="let categoria of listCategories"
                             [value]="categoria.CODCATEGORIA">
                             {{categoria.NOMBRE}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="mb-2">
+                <label for="exampleFormControlInput1" class="etiquetas me-2">Lista de Precios: </label>
+                <br>
+                <mat-form-field appearance="fill">
+                    <mat-label>Lista</mat-label>
+                    <mat-select formControlName="CODLISTA">
+                        <mat-option [value]="precio" *ngFor="let precio of listPrice"
+                            [value]="precio.CODLISTA">
+                            {{precio.NOMBRE}}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>

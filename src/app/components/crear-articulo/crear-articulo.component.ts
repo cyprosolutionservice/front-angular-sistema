@@ -35,7 +35,8 @@ export class CrearArticuloComponent implements OnInit {
                   CODFAMILIA: ['', [Validators.required]],
                   CODDEPARTAMENTO: ['',[Validators.required]],
                   CODCATEGORIA: ['',[Validators.required]],
-                  
+                  CODLISTA: ['', [Validators.required]],
+                  PRECIO: ['', [Validators.required,  Validators.pattern('^[0-9]*$')]]
                 })
               }
    
@@ -67,6 +68,7 @@ export class CrearArticuloComponent implements OnInit {
 
   ngOnInit(): void {
     this.obtenerFamilias();
+    this.getListPrice();
     //this.obtenerDepartamentos();
   }
 
@@ -180,6 +182,37 @@ export class CrearArticuloComponent implements OnInit {
     });
   }
 
+  listPrice: any [] = [];
+
+  getListPrice(){
+    this.authService.getPriceList()
+    .pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error.status === 409) {
+          console.log(error.error);
+          this.toastr.error('Error', 'No Hay precios');
+        } else {
+          console.error('Unknown error occurred!');
+          this.toastr.error('Error', 'Desconocido');
+          console.error(error);
+        }
+        return throwError(() => error);
+    })
+    ) .subscribe( (res:any) =>{
+      if (res.length >0) {
+      //console.log(res);
+      this.listPrice = res;
+      
+      }else{
+        this.listDepartaments = null;
+        console.log('Lista de precios no encontrados en la base de Datos');
+        this.toastr.error(`No tiene Lista de precios`, 'Error');
+      }
+        
+    });
+  }
+
+
   crearArticulo(){
     const PRODUCTO: Producto = {
       CODPRODUCTO: this.form.value.CODPRODUCTO,
@@ -189,7 +222,9 @@ export class CrearArticuloComponent implements OnInit {
       TIPOA: this.form.value.TIPOA,
       CODFAMILIA: this.form.value.CODFAMILIA,
       CODDEPTO: this.form.value.CODDEPARTAMENTO.CODDEPARTAMENTO,
-      CODCATEGORIA: this.form.value.CODCATEGORIA
+      CODCATEGORIA: this.form.value.CODCATEGORIA,
+      CODLISTA: this.form.value.CODLISTA,
+      PRECIO: this.form.value.PRECIO
     }
     console.log('Este es el producto -> '+PRODUCTO.TIPOA);
 
@@ -226,5 +261,45 @@ export class CrearArticuloComponent implements OnInit {
  
 }
 
+// soloNumeros(event) {
+//   const charCode = event.which ? event.which : event.keyCode;
+//   if (charCode !== 44 && (charCode < 48 || charCode > 57)) {
+//     event.preventDefault();
+//   }
+// }
+
+soloNumeros(event) {
+  const input = event.target.value;
+  const charCode = event.which ? event.which : event.keyCode;
+  
+  // permitir solo números y una coma después de un número
+  if (charCode !== 44 && (charCode < 48 || charCode > 57)) {
+    event.preventDefault();
+  }
+  
+  // verificar si ya hay una coma en el valor del input
+  if (input.indexOf(',') !== -1 && charCode === 44) {
+    event.preventDefault();
+  }
+  
+  // no permitir coma al principio sin número previo
+  if (input === '' && charCode === 44) {
+    event.preventDefault();
+  }
+  
+  // no permitir coma después de otra coma
+  if (input.endsWith(',') && charCode === 44) {
+    event.preventDefault();
+  }
+}
+
+quitarComa(event) {
+  const input = event.target.value;
+  
+  // verificar si el valor del input termina con una coma y no tiene un número después
+  if (input.endsWith(',') && input.match(/\d,\d$/) === null) {
+    event.target.value = input.slice(0, -1);
+  }
+}
 
 }

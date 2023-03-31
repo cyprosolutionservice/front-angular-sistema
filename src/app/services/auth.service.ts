@@ -167,6 +167,15 @@ export class AuthService {
     return this.http.get(`${this.URL}/product/get/products`, httpOptions);
   }
 
+  getPriceList(){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'x-db-name': localStorage.getItem('DB'),
+      })
+    };
+    return this.http.get(`${this.URL}/product/get/pricelist`, httpOptions);
+  }
+
   createProduct(producto: any){
     const httpOptions = {
       headers: new HttpHeaders({
