@@ -3,8 +3,7 @@
     <div class="card">
 
         <span class="titulo">CREAR ARTICULO</span>
-        <!-- <form [formGroup]="form" (ngSubmit)="crearArticulo()"> -->
-            <form [formGroup]="form" >
+        <form [formGroup]="form" (ngSubmit)="crearArticulo()"> 
 
             <div class="mt-2 mb-3">
                 <label for="exampleFormControlInput1" class="etiquetas">CODPRODUCTO</label>
@@ -39,7 +38,7 @@
 
             <div class="input-container mt-2 mb-3">
                 <label for="exampleFormControlInput1" class="etiquetas">PRECIO</label>
-                <input class="form-control colorInput" formControlName="PRECIO" pattern="[0-9]*" minlength="3"
+                <input class="form-control colorInput" formControlName="PRECIO" 
                     maxlength="19" inputmode="numeric" type="text" placeholder="2000"
                     (keypress)="soloNumeros($event)" (blur)="quitarComa($event)">
                     <div *ngIf="form.get('PRECIO').invalid && form.get('PRECIO').touched">

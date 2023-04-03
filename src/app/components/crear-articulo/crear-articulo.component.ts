@@ -36,7 +36,8 @@ export class CrearArticuloComponent implements OnInit {
                   CODDEPARTAMENTO: ['',[Validators.required]],
                   CODCATEGORIA: ['',[Validators.required]],
                   CODLISTA: ['', [Validators.required]],
-                  PRECIO: ['', [Validators.required,  Validators.pattern('^[0-9]*$')]]
+                  // PRECIO: ['', [Validators.required,  Validators.pattern('^[0-9]*$')]]
+                  PRECIO: ['', [Validators.required]]
                 })
               }
    
@@ -268,38 +269,165 @@ export class CrearArticuloComponent implements OnInit {
 //   }
 // }
 
+// soloNumeros(event) {
+//   const input = event.target.value;
+//   const charCode = event.which ? event.which : event.keyCode;
+  
+//   // permitir solo números y una coma después de un número
+//   if (charCode !== 44 && (charCode < 48 || charCode > 57)) {
+//     event.preventDefault();
+//   }
+  
+//   // verificar si ya hay una coma en el valor del input
+//   if (input.indexOf(',') !== -1 && charCode === 44) {
+//     event.preventDefault();
+//   }
+  
+//   // no permitir coma al principio sin número previo
+//   if (input === '' && charCode === 44) {
+//     event.preventDefault();
+//   }
+  
+//   // no permitir coma después de otra coma
+//   if (input.endsWith(',') && charCode === 44) {
+//     event.preventDefault();
+//   }
+// }
+
+// quitarComa(event) {
+//   const input = event.target.value;
+  
+//   // verificar si el valor del input termina con una coma y no tiene un número después
+//   if (input.endsWith(',') && input.match(/\d,\d$/) === null) {
+//     event.target.value = input.slice(0, -1);
+//   }
+// }
+
+// soloNumeros(event) {
+//   const input = event.target.value;
+//   const charCode = event.which ? event.which : event.keyCode;
+  
+//   // permitir solo números y una coma después de un número
+//   if (charCode !== 44 && (charCode < 48 || charCode > 57)) {
+//     event.preventDefault();
+//   }
+  
+//   // verificar si ya hay una coma en el valor del input
+//   if (input.indexOf(',') !== -1 && charCode === 44) {
+//     event.preventDefault();
+//   }
+  
+//   // no permitir coma al principio sin número previo
+//   if (input === '' && charCode === 44) {
+//     event.preventDefault();
+//   }
+  
+//   // no permitir coma después de otra coma
+//   if (input.endsWith(',') && charCode === 44) {
+//     event.preventDefault();
+//   }
+
+//   // Permitir solo dos números después de la coma
+//   if (input.includes(',')) {
+//     const decimals = input.split(',')[1];
+//     if (decimals && decimals.length >= 2) {
+//       event.preventDefault();
+//     }
+//   }
+// }
+
+// quitarComa(event) {
+//   let input = event.target.value;
+  
+//   // Verificar si el valor del input termina con una coma y no tiene un número después
+//   if (input.endsWith(',') && input.match(/\d,\d$/) === null) {
+//     input = input.slice(0, -1);
+//   }
+
+//   // Verificar si hay un cero después de la coma y eliminar la coma y el cero
+//   if (input.includes(',')) {
+//     const decimals = input.split(',')[1];
+//     if (decimals === '0') {
+//       input = input.split(',')[0];
+//     }
+//   }
+
+//   // // Agregar un cero al salir del input si hay un número diferente de cero después de la coma
+//   // if (input.includes(',') && !input.endsWith('0,')) {
+//   //   input += '0';
+//   // }
+//   // Agregar un cero al salir del input si hay un número diferente de cero después de la coma
+// if (input.includes(',')) {
+//   const [, decimals] = input.split(',');
+//   if (decimals.length < 2 || (decimals[1] !== '0' && decimals.length != 2)) {
+//     input += '0';
+//   }
+// }
+
+//   event.target.value = input;
+// }
+
 soloNumeros(event) {
   const input = event.target.value;
   const charCode = event.which ? event.which : event.keyCode;
-  
-  // permitir solo números y una coma después de un número
-  if (charCode !== 44 && (charCode < 48 || charCode > 57)) {
+
+  // permitir solo números y un punto después de un número
+  if (charCode !== 46 && (charCode < 48 || charCode > 57)) {
     event.preventDefault();
   }
-  
-  // verificar si ya hay una coma en el valor del input
-  if (input.indexOf(',') !== -1 && charCode === 44) {
+
+  // verificar si ya hay un punto en el valor del input
+  if (input.indexOf('.') !== -1 && charCode === 46) {
     event.preventDefault();
   }
-  
-  // no permitir coma al principio sin número previo
-  if (input === '' && charCode === 44) {
+
+  // no permitir punto al principio sin número previo
+  if (input === '' && charCode === 46) {
     event.preventDefault();
   }
-  
-  // no permitir coma después de otra coma
-  if (input.endsWith(',') && charCode === 44) {
+
+  // no permitir punto después de otro punto
+  if (input.endsWith('.') && charCode === 46) {
     event.preventDefault();
+  }
+
+  // Permitir solo dos números después del punto
+  if (input.includes('.')) {
+    const decimals = input.split('.')[1];
+    if (decimals && decimals.length >= 2) {
+      event.preventDefault();
+    }
   }
 }
 
 quitarComa(event) {
-  const input = event.target.value;
-  
-  // verificar si el valor del input termina con una coma y no tiene un número después
-  if (input.endsWith(',') && input.match(/\d,\d$/) === null) {
-    event.target.value = input.slice(0, -1);
+  let input = event.target.value;
+
+  // Verificar si el valor del input termina con un punto y no tiene un número después
+  if (input.endsWith('.') && input.match(/\d\.\d$/) === null) {
+    input = input.slice(0, -1);
+  }
+
+  // Verificar si hay un cero después del punto y eliminar el punto y el cero
+  if (input.includes('.')) {
+    const decimals = input.split('.')[1];
+    if (decimals === '0') {
+      input = input.split('.')[0];
+    }
+  }
+
+  // // Agregar un cero al salir del input si hay un número diferente de cero después del punto
+  // if (input.includes('.') && !input.endsWith('0.')) {
+  //   input += '0';
+  // }
+    //Agregar un cero al salir del input si hay un número diferente de cero después de la coma
+if (input.includes('.')) {
+  const [, decimals] = input.split('.');
+  if (decimals.length < 2 || (decimals[1] !== '0' && decimals.length != 2)) {
+    input += '0';
   }
 }
 
+  event.target.value = input;
+}
 }
