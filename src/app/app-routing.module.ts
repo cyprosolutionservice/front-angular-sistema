@@ -20,6 +20,7 @@ import { PrivateComponent } from './components/private/private.component';
 import { TerminosComponent } from './components/terminos/terminos.component';
 import { AuthGuard } from './guards/auth.guard';
 import { RoleGuard } from './guards/role.guard';
+import { EditarArticuloComponent } from './components/editar-articulo/editar-articulo.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent},
@@ -39,6 +40,7 @@ const routes: Routes = [
   { path: 'crear-categoria', component: CrearCategoriaComponent, canActivate: [AuthGuard]},
   { path: 'listar-articulos', component: ListarArticulosComponent, canActivate: [AuthGuard]},
   { path: 'crear-articulo', component: CrearArticuloComponent, canActivate: [AuthGuard]},
+  { path: 'editar-articulo', component: EditarArticuloComponent, canActivate: [AuthGuard]},
   { path: 'crear-familia', component: CrearFamiliaComponent, canActivate: [AuthGuard]},
   
   { path: '**', pathMatch: 'full', redirectTo: 'login'}

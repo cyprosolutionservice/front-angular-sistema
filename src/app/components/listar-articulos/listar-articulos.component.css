@@ -42,8 +42,12 @@
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: 19px;
 }
-td{
+/* td{
     cursor: pointer;
+} */
+
+.material-symbols-outlined{
+  cursor: pointer;
 }
 
 .select-container{
@@ -93,11 +97,14 @@ td{
         margin-bottom: 2rem;
     }
     .encabezados{
-        font-size: 11.6px;
+        font-size: 11px;
         font-weight: bold;
     }
     .table{
-        font-size: 8.9px;
+        font-size: 8px;
+    }
+    .material-symbols-outlined{
+      font-size: 16px;
     }
     .mat-form-field-type-mat-select{
       width: 165px;

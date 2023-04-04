@@ -136,5 +136,9 @@ export class ListarArticulosComponent implements OnInit {
     this.filteredProducts();
   }
 
+  editar(){
+    this.router.navigate(['editar-articulo']);
+  }
+
   
 }

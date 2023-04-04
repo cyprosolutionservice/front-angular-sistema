@@ -12,34 +12,7 @@
         <input type="text" class="form-control colorInput" placeholder="Buscador" 
         (keyup)="onSearchKeyUp($event)">
     </div>
-      
 
-    <!-- <div class="select-container">
-        <div class="familiabox mb-2 box1">
-            <label for="exampleFormControlInput1" class="etiquetas me-2">Familias: </label>
-            <mat-form-field appearance="fill">
-                <mat-label>Family</mat-label>
-                <mat-select [(ngModel)]="selectedFamily" (selectionChange)="filtrarCategorias()">
-                    <mat-option value="Todos">Todos</mat-option>
-                    <mat-option *ngFor="let family of listFamilies" [value]="family">
-                        {{family}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-        <div class="familiabox mb-2 ">
-            <label for="exampleFormControlInput1" class="etiquetas me-2">Departamentos: </label>
-            <mat-form-field appearance="fill">
-                <mat-label>Depa</mat-label>
-                <mat-select [(ngModel)]="selectedDepartamento" (selectionChange)="filtrarCategorias()">
-                    <mat-option value="Todos">Todos</mat-option>
-                    <mat-option *ngFor="let depa of listDepartamento" [value]="depa">
-                        {{depa}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-    </div> -->
 
     <table *ngIf="listProducts.length > 0" class="table table-hover text-center">
         <thead class="encabezados">
@@ -48,6 +21,7 @@
                     <span class="desktop-only">{{ codTitle }}</span>
                     <span class="mobile-only">COD</span>
                 </th> -->
+                <th></th>
                 <th scope="col">NOMBRE</th>
                 <th scope="col">FAMILIA</th>
                 <th scope="col">
@@ -61,7 +35,10 @@
         <tbody>
             <tr *ngFor="let producto of listProducts">
                 <!-- <td (click)="getEvento(producto)">{{ producto.CODPRODUCTO }}</td> -->
-                <td (click)="getEvento(producto)">{{ producto.DESCRIPCION }} <br>
+                <td (click)="editar()"><span class="material-symbols-outlined">
+                    edit_square
+                    </span></td>
+                <td >{{ producto.DESCRIPCION }} <br>
                 <td (click)="getEvento(producto)">{{ producto.FAMILY}}</td>
                 <td (click)="getEvento(producto)">{{ producto.DEPARTAMENT}}</td>
                 <td (click)="getEvento(producto)">{{ producto.CATEGORY}}</td>

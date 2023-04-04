@@ -1,0 +1,142 @@
+<div class="col-sm-4 mx-auto h-70">
+
+    <div class="card">
+
+        <span class="titulo">EDITAR ARTICULO</span>
+        <form [formGroup]="form" (ngSubmit)="crearArticulo()"> 
+
+            <!-- <div class="mt-2 mb-3">
+                <label for="exampleFormControlInput1" class="etiquetas">CODPRODUCTO</label>
+                <input formControlName="CODPRODUCTO" type="text" class="form-control colorInput" placeholder="3001">
+                <div *ngIf="form.get('CODPRODUCTO').invalid && form.get('CODPRODUCTO').touched">
+                    <div *ngIf="form.get('CODPRODUCTO')?.hasError('required')">
+                        <p class="clave-error">Por favor, complete el campo.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-2 mb-3">
+                <label for="exampleFormControlInput1" class="etiquetas">CODPRODTEC</label>
+                <input formControlName="CODPRODTEC" type="text" class="form-control colorInput" placeholder="3001">
+                <div *ngIf="form.get('CODPRODTEC').invalid && form.get('CODPRODTEC').touched">
+                    <div *ngIf="form.get('CODPRODTEC')?.hasError('required')">
+                        <p class="clave-error">Por favor, complete el campo.</p>
+                    </div>
+                </div>
+            </div> -->
+
+            <div class="mt-2 mb-3">
+                <label for="exampleFormControlInput1" class="etiquetas">DESCRIPCION</label>
+                <input formControlName="DESCRIPCION" type="text" class="form-control colorInput"
+                    placeholder="COCA COLA NORMAL">
+                <div *ngIf="form.get('DESCRIPCION').invalid && form.get('DESCRIPCION').touched">
+                    <div *ngIf="form.get('DESCRIPCION')?.hasError('required')">
+                        <p class="clave-error">Por favor, complete el campo.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-container mt-2 mb-3">
+                <label for="exampleFormControlInput1" class="etiquetas">PRECIO</label>
+                <input class="form-control colorInput" formControlName="PRECIO" 
+                    maxlength="19" inputmode="numeric" type="text" placeholder="2000"
+                    (keypress)="soloNumeros($event)" (blur)="quitarComa($event)">
+                    <div *ngIf="form.get('PRECIO').invalid && form.get('PRECIO').touched">
+                        <div *ngIf="form.get('PRECIO')?.hasError('required')">
+                            <p class="clave-error">Por favor, complete el campo.</p>
+                        </div>
+                    </div>
+            </div>
+
+            <div class="familiabox mb-2">
+                <label for="exampleFormControlInput1" class="etiquetas me-2">Unidades: </label>
+                <br>
+                <mat-form-field appearance="fill">
+                    <mat-label>Unidad</mat-label>
+                    <mat-select formControlName="UNIDAD">
+                        <mat-option [value]="unidad" *ngFor="let unidad of listUnidades" [value]="unidad">
+                            {{unidad}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="familiabox mb-2">
+                <label for="exampleFormControlInput1" class="etiquetas me-2">Tipos: </label>
+                <br>
+                <mat-form-field appearance="fill">
+                    <mat-label>Tipo</mat-label>
+                    <mat-select formControlName="TIPOA">
+                        <mat-option [value]="tipo" *ngFor="let tipo of listTipos" [value]="tipo">
+                            {{tipo}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+<!-- 
+            <div class="familiabox mb-2">
+                <label for="exampleFormControlInput1" class="etiquetas me-2">Familias: </label>
+                <br>
+                <mat-form-field appearance="fill">
+                    <mat-label>Family</mat-label>
+                    <mat-select formControlName="CODFAMILIA" (selectionChange)="onFamilyChange()">
+                        <mat-option [value]="family" *ngFor="let family of listFamilies" [value]="family.CODFAMILIA">
+                            {{family.NOMBRE}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="mb-2">
+                <label for="exampleFormControlInput1" class="etiquetas me-2">DEPARTAMENTOS: </label>
+                <br>
+                <mat-form-field appearance="fill">
+                    <mat-label>Departament</mat-label>
+                    <mat-select formControlName="CODDEPARTAMENTO" (selectionChange)="onDepaChange()">
+                        <mat-option [value]="departamento" *ngFor="let departamento of listDepartaments"
+                            [value]="departamento">
+                            {{departamento.NOMBRE}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="mb-2">
+                <label for="exampleFormControlInput1" class="etiquetas me-2">CATEGORIAS: </label>
+                <br>
+                <mat-form-field appearance="fill">
+                    <mat-label>Category</mat-label>
+                    <mat-select formControlName="CODCATEGORIA">
+                        <mat-option [value]="categoria" *ngFor="let categoria of listCategories"
+                            [value]="categoria.CODCATEGORIA">
+                            {{categoria.NOMBRE}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div> -->
+
+            <div class="mb-2">
+                <label for="exampleFormControlInput1" class="etiquetas me-2">Lista de Precios: </label>
+                <br>
+                <mat-form-field appearance="fill">
+                    <mat-label>Lista</mat-label>
+                    <mat-select formControlName="CODLISTA">
+                        <mat-option [value]="precio" *ngFor="let precio of listPrice"
+                            [value]="precio.CODLISTA">
+                            {{precio.NOMBRE}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="botones">
+                <button (click)="volverInicio()" class="btn btn-secondary float-start">CANCELAR</button>
+                <button type="submit" [disabled]="form.invalid" class="btn btn-warning float-end">ACTUALIZAR</button>
+
+            </div>
+
+        </form>
+
+
+    </div>
+</div>

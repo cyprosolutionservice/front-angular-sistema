@@ -51,6 +51,7 @@ import { ListarCategoriasComponent } from './components/listar-categorias/listar
 import { CrearCategoriaComponent } from './components/crear-categoria/crear-categoria.component';
 import { ListarArticulosComponent } from './components/listar-articulos/listar-articulos.component';
 import { CrearArticuloComponent } from './components/crear-articulo/crear-articulo.component';
+import { EditarArticuloComponent } from './components/editar-articulo/editar-articulo.component';
 
 
 @NgModule({
@@ -74,6 +75,7 @@ import { CrearArticuloComponent } from './components/crear-articulo/crear-articu
     CrearCategoriaComponent,
     ListarArticulosComponent,
     CrearArticuloComponent,
+    EditarArticuloComponent,
   ],
   imports: [
     BrowserModule,
