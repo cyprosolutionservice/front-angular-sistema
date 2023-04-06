@@ -5,9 +5,54 @@
         <span class="titulo">CREAR ARTICULO</span>
         <form [formGroup]="form" (ngSubmit)="crearArticulo()"> 
 
+
+            <div class="familiabox mb-2">
+                <label for="exampleFormControlInput1" class="etiquetas me-2">Familias: </label>
+                <br>
+                <mat-form-field appearance="fill">
+                    <mat-label>Family</mat-label>
+                    <mat-select formControlName="CODFAMILIA" (selectionChange)="onFamilyChange()">
+                        <mat-option [value]="family" *ngFor="let family of listFamilies" 
+                            [value]="family">
+                            {{family.NOMBRE}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="mb-2">
+                <label for="exampleFormControlInput1" class="etiquetas me-2">DEPARTAMENTOS: </label>
+                <br>
+                <mat-form-field appearance="fill">
+                    <mat-label>Departament</mat-label>
+                    <mat-select formControlName="CODDEPARTAMENTO" (selectionChange)="onDepaChange()">
+                        <mat-option [value]="departamento" *ngFor="let departamento of listDepartaments"
+                            [value]="departamento">
+                            {{departamento.NOMBRE}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="mb-2">
+                <label for="exampleFormControlInput1" class="etiquetas me-2">CATEGORIAS: </label>
+                <br>
+                <mat-form-field appearance="fill">
+                    <mat-label>Category</mat-label>
+                    <mat-select formControlName="CODCATEGORIA" (selectionChange)="onCategoryChange()">
+                        <mat-option [value]="categoria" *ngFor="let categoria of listCategories"
+                            [value]="categoria">
+                            {{categoria.NOMBRE}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            
             <div class="mt-2 mb-3">
                 <label for="exampleFormControlInput1" class="etiquetas">CODPRODUCTO</label>
-                <input formControlName="CODPRODUCTO" type="text" class="form-control colorInput" placeholder="3001">
+                <input formControlName="CODPRODUCTO" type="text" class="form-control colorInput" 
+                placeholder="3001" [value]="concetedCODPRODUCTO" (input)="onInput($event)">
                 <div *ngIf="form.get('CODPRODUCTO').invalid && form.get('CODPRODUCTO').touched">
                     <div *ngIf="form.get('CODPRODUCTO')?.hasError('required')">
                         <p class="clave-error">Por favor, complete el campo.</p>
@@ -48,6 +93,20 @@
                     </div>
             </div>
 
+            <div class="mb-2">
+                <label for="exampleFormControlInput1" class="etiquetas me-2">Lista de Precios: </label>
+                <br>
+                <mat-form-field appearance="fill">
+                    <mat-label>Lista</mat-label>
+                    <mat-select formControlName="CODLISTA">
+                        <mat-option [value]="precio" *ngFor="let precio of listPrice"
+                            [value]="precio.CODLISTA">
+                            {{precio.NOMBRE}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
             <div class="familiabox mb-2">
                 <label for="exampleFormControlInput1" class="etiquetas me-2">Unidades: </label>
                 <br>
@@ -69,61 +128,6 @@
                     <mat-select formControlName="TIPOA">
                         <mat-option [value]="tipo" *ngFor="let tipo of listTipos" [value]="tipo">
                             {{tipo}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
-
-            <div class="familiabox mb-2">
-                <label for="exampleFormControlInput1" class="etiquetas me-2">Familias: </label>
-                <br>
-                <mat-form-field appearance="fill">
-                    <mat-label>Family</mat-label>
-                    <mat-select formControlName="CODFAMILIA" (selectionChange)="onFamilyChange()">
-                        <mat-option [value]="family" *ngFor="let family of listFamilies" [value]="family.CODFAMILIA">
-                            {{family.NOMBRE}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
-
-            <div class="mb-2">
-                <label for="exampleFormControlInput1" class="etiquetas me-2">DEPARTAMENTOS: </label>
-                <br>
-                <mat-form-field appearance="fill">
-                    <mat-label>Departament</mat-label>
-                    <mat-select formControlName="CODDEPARTAMENTO" (selectionChange)="onDepaChange()">
-                        <mat-option [value]="departamento" *ngFor="let departamento of listDepartaments"
-                            [value]="departamento">
-                            {{departamento.NOMBRE}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
-
-            <div class="mb-2">
-                <label for="exampleFormControlInput1" class="etiquetas me-2">CATEGORIAS: </label>
-                <br>
-                <mat-form-field appearance="fill">
-                    <mat-label>Category</mat-label>
-                    <mat-select formControlName="CODCATEGORIA">
-                        <mat-option [value]="categoria" *ngFor="let categoria of listCategories"
-                            [value]="categoria.CODCATEGORIA">
-                            {{categoria.NOMBRE}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
-
-            <div class="mb-2">
-                <label for="exampleFormControlInput1" class="etiquetas me-2">Lista de Precios: </label>
-                <br>
-                <mat-form-field appearance="fill">
-                    <mat-label>Lista</mat-label>
-                    <mat-select formControlName="CODLISTA">
-                        <mat-option [value]="precio" *ngFor="let precio of listPrice"
-                            [value]="precio.CODLISTA">
-                            {{precio.NOMBRE}}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>

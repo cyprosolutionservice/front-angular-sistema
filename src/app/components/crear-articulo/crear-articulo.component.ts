@@ -41,11 +41,19 @@ export class CrearArticuloComponent implements OnInit {
                 })
               }
    
-   
+   concatedFamily: string;
+   concatedDepa: string;
+   concatedCate: string;
+   concetedCODPRODUCTO: string = "";
+
     onFamilyChange() {
       let selectedFamily = this.form.controls['CODFAMILIA'].value;
+      if (selectedFamily) {
+        this.concatedFamily = selectedFamily.NOMBRE[0];
+        console.log(this.concatedFamily);
+      }
       this.form.controls['CODDEPARTAMENTO'].setValue(null);
-      localStorage.setItem('cod-family', selectedFamily);
+      localStorage.setItem('cod-family', selectedFamily.CODFAMILIA);
       this.obtenerDepartamentos();
      
       //console.log(selectedFamily);
@@ -58,7 +66,9 @@ export class CrearArticuloComponent implements OnInit {
       const selectedDepartment = this.form.get('CODDEPARTAMENTO').value;
       if (selectedDepartment) {
         this.depaSelected = selectedDepartment.NOMBRE;
-        console.log(this.depaSelected);
+        this.concatedDepa= this.depaSelected[0];
+        //console.log(this.depaSelected);
+        console.log(this.concatedDepa);
       }
       this.form.controls['CODCATEGORIA'].setValue(null);
       localStorage.setItem('cod-depa', selectedDepartment.CODDEPARTAMENTO);
@@ -66,6 +76,47 @@ export class CrearArticuloComponent implements OnInit {
      
       //console.log(selectedFamily);
     }
+
+    onCategoryChange(){
+      const selectedCategory = this.form.get('CODCATEGORIA').value;
+      if (selectedCategory) {
+        this.concatedCate = selectedCategory.NOMBRE[0];
+        console.log(this.concatedCate);
+        this.concetedCODPRODUCTO = this.concatedFamily+this.concatedDepa+this.concatedCate+"-";
+        console.log(this.concetedCODPRODUCTO)
+      }
+    }
+
+  //   public onInput(event: any) {
+  //     // Obtén el valor del input
+  //     const inputValue = event.target.value;
+  //     // Verifica si el contenido inicial se ha borrado
+  //     if (!inputValue.includes(this.concetedCODPRODUCTO)) {
+  //         // Si se ha borrado, restablece el valor del input al contenido inicial
+  //         event.target.value = this.concetedCODPRODUCTO;
+  //     }
+  // }
+
+  public onInput(event: any) {
+    // Obtén el valor del input
+    const inputValue = event.target.value;
+    // Verifica si el contenido inicial se ha borrado
+    if (!inputValue.includes(this.concetedCODPRODUCTO)) {
+        // Si se ha borrado, verifica si se ha ingresado un valor adicional
+        if (inputValue.length <= this.concetedCODPRODUCTO.length) {
+            // Si no se ha ingresado un valor adicional, marca el campo como inválido
+            this.form.get('CODPRODUCTO').setErrors({ 'required': true });
+        } else {
+            // Si se ha ingresado un valor adicional, permite que se borre el contenido
+            this.form.get('CODPRODUCTO').setErrors(null);
+        }
+        // Restablece el valor del input al contenido inicial
+        event.target.value = this.concetedCODPRODUCTO;
+    } else {
+        // Si el contenido inicial no se ha borrado, permite que se edite el input
+        this.form.get('CODPRODUCTO').setErrors(null);
+    }
+}
 
   ngOnInit(): void {
     this.obtenerFamilias();
@@ -221,9 +272,9 @@ export class CrearArticuloComponent implements OnInit {
       DESCRIPCION: this.form.value.DESCRIPCION,
       UNIDAD: this.form.value.UNIDAD,
       TIPOA: this.form.value.TIPOA,
-      CODFAMILIA: this.form.value.CODFAMILIA,
+      CODFAMILIA: this.form.value.CODFAMILIA.CODFAMILIA,
       CODDEPTO: this.form.value.CODDEPARTAMENTO.CODDEPARTAMENTO,
-      CODCATEGORIA: this.form.value.CODCATEGORIA,
+      CODCATEGORIA: this.form.value.CODCATEGORIA.CODCATEGORIA,
       CODLISTA: this.form.value.CODLISTA,
       PRECIO: this.form.value.PRECIO
     }
