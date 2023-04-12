@@ -35,14 +35,14 @@
         <tbody>
             <tr *ngFor="let producto of listProducts">
                 <!-- <td (click)="getEvento(producto)">{{ producto.CODPRODUCTO }}</td> -->
-                <td (click)="editar()"><span class="material-symbols-outlined">
+                <td (click)="editar(producto)"><span class="material-symbols-outlined">
                     edit_square
                     </span></td>
                 <td >{{ producto.DESCRIPCION }} <br>
-                <td (click)="getEvento(producto)">{{ producto.FAMILY}}</td>
-                <td (click)="getEvento(producto)">{{ producto.DEPARTAMENT}}</td>
-                <td (click)="getEvento(producto)">{{ producto.CATEGORY}}</td>
-                <td (click)="getEvento(producto)">{{ producto.PRECIO}}</td>
+                <td>{{ producto.FAMILY}}</td>
+                <td>{{ producto.DEPARTAMENT}}</td>
+                <td>{{ producto.CATEGORY}}</td>
+                <td>{{ producto.PRECIO}}</td>
             </tr>
         </tbody>
     </table>

@@ -43,13 +43,12 @@ export class CrearArticuloComponent implements OnInit {
    
    concatedFamily: string;
    concatedDepa: string;
-   concatedCate: string;
    concetedCODPRODUCTO: string = "";
 
     onFamilyChange() {
       let selectedFamily = this.form.controls['CODFAMILIA'].value;
       if (selectedFamily) {
-        this.concatedFamily = selectedFamily.NOMBRE[0];
+        this.concatedFamily = selectedFamily.NOMBRE;
         console.log(this.concatedFamily);
       }
       this.form.controls['CODDEPARTAMENTO'].setValue(null);
@@ -69,54 +68,85 @@ export class CrearArticuloComponent implements OnInit {
         this.concatedDepa= this.depaSelected[0];
         //console.log(this.depaSelected);
         console.log(this.concatedDepa);
+
+        //Asignar Valor a CODPRODUCTO
+        let palabras = this.concatedFamily.split(" ");
+        let codigo = palabras[0][0];
+        if (palabras.length >1) {
+          let lastFrase = palabras[palabras.length -1]
+          codigo += lastFrase[0];
+          
+        }
+        this.concetedCODPRODUCTO = codigo+this.concatedDepa+"-";
+        localStorage.setItem('characters-xxx', this.concetedCODPRODUCTO);
+        this.getLastCodproduct();
+
+        //console.log(this.concetedCODPRODUCTO)
       }
-      this.form.controls['CODCATEGORIA'].setValue(null);
+      this.form.controls['CODCATEGORIA'].setValue('');
       localStorage.setItem('cod-depa', selectedDepartment.CODDEPARTAMENTO);
       this.obtenerCategorias();
      
       //console.log(selectedFamily);
     }
 
+    getLastCodproduct(){
+      this.authService.getLastCodproduct()
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          if (error.status === 400) {
+            console.log(error.error);
+            //this.toastr.error('Error', 'COD NO existe');
+          } else {
+            console.error('CODPRODUCTO error occurred!');
+            this.toastr.error('Error', 'Desconocido');
+            console.error(error);
+          }
+          return throwError(() => error);
+        })
+      )
+      .subscribe( (res:any) =>{
+        if (res) {
+          
+        console.log('ESTE ES EL CODPRODUCTO ENCONTRADO ->'+ res.CODPRODUCTO);
+       // Extraer el número actual
+        const numeroActual = parseInt(res.CODPRODUCTO.split("-")[1]);
+
+        // Calcular el número consecutivo sumándole 1
+        const numeroConsecutivo = numeroActual + 1;
+
+        // Obtener la longitud del número consecutivo
+        const longitudNumero = numeroConsecutivo.toString().length;
+
+        // Crear la nueva variable con el número consecutivo actualizado
+        const nuevoCodigo = `${res.CODPRODUCTO.split("-")[0]}-${numeroConsecutivo.toString().padStart(2, "0")}`;
+
+        console.log("este es el nuevo codigo -> "+nuevoCodigo); // Output: "VBL-08"
+
+        this.form.get('CODPRODUCTO').setValue(nuevoCodigo);
+        // }else if (res.length=0) {
+        //   this.concetedCODPRODUCTO += '01';
+        
+        
+        } else{
+          console.log("esta es otra forma");
+          this.concetedCODPRODUCTO += '01';
+          this.form.get('CODPRODUCTO').setValue(this.concetedCODPRODUCTO);
+        }
+          
+      });
+    }
+
     onCategoryChange(){
       const selectedCategory = this.form.get('CODCATEGORIA').value;
       if (selectedCategory) {
-        this.concatedCate = selectedCategory.NOMBRE[0];
-        console.log(this.concatedCate);
-        this.concetedCODPRODUCTO = this.concatedFamily+this.concatedDepa+this.concatedCate+"-";
+        //this.concatedCate = selectedCategory.NOMBRE[0];
+        //console.log(this.concatedCate);
+       // this.concetedCODPRODUCTO = this.concatedFamily+this.concatedDepa+this.concatedCate+"-";
         console.log(this.concetedCODPRODUCTO)
       }
     }
 
-  //   public onInput(event: any) {
-  //     // Obtén el valor del input
-  //     const inputValue = event.target.value;
-  //     // Verifica si el contenido inicial se ha borrado
-  //     if (!inputValue.includes(this.concetedCODPRODUCTO)) {
-  //         // Si se ha borrado, restablece el valor del input al contenido inicial
-  //         event.target.value = this.concetedCODPRODUCTO;
-  //     }
-  // }
-
-  public onInput(event: any) {
-    // Obtén el valor del input
-    const inputValue = event.target.value;
-    // Verifica si el contenido inicial se ha borrado
-    if (!inputValue.includes(this.concetedCODPRODUCTO)) {
-        // Si se ha borrado, verifica si se ha ingresado un valor adicional
-        if (inputValue.length <= this.concetedCODPRODUCTO.length) {
-            // Si no se ha ingresado un valor adicional, marca el campo como inválido
-            this.form.get('CODPRODUCTO').setErrors({ 'required': true });
-        } else {
-            // Si se ha ingresado un valor adicional, permite que se borre el contenido
-            this.form.get('CODPRODUCTO').setErrors(null);
-        }
-        // Restablece el valor del input al contenido inicial
-        event.target.value = this.concetedCODPRODUCTO;
-    } else {
-        // Si el contenido inicial no se ha borrado, permite que se edite el input
-        this.form.get('CODPRODUCTO').setErrors(null);
-    }
-}
 
   ngOnInit(): void {
     this.obtenerFamilias();
@@ -203,6 +233,10 @@ export class CrearArticuloComponent implements OnInit {
   ]
 
   listCategories: any []= [];
+  sinCategoria = {
+    "NOMBRE": "SIN CATEGORIA",
+    "CODCATEGORIA": null
+  };
   obtenerCategorias(){
     this.authService.getCategoriesByDepa()
     .pipe(
@@ -222,9 +256,15 @@ export class CrearArticuloComponent implements OnInit {
       if (res.length >0) {
       //console.log(res);
       this.listCategories = res;
+      this.listCategories.unshift(this.sinCategoria);
+      
       //console.log('Este es el metodo Departamento->'+res.NOMBRE);
       
-      }else{
+      }else if (res) {
+        this.toastr.warning("Aviso: Departamento sin categoria", "Advertencia");
+        this.listCategories = [];
+        this.listCategories.push(this.sinCategoria);
+      } else{
         this.listDepartaments = null;
         console.log('Categorias no encontrados en la base de Datos');
         this.toastr.error(`Departamento: ${this.depaSelected}. No tiene Categoria`, 'Error');
@@ -266,6 +306,14 @@ export class CrearArticuloComponent implements OnInit {
 
 
   crearArticulo(){
+    let categoriaByRequest: string;
+
+    console.log("Esto es lo que hay categoria vacia ->"+this.form.value.CODCATEGORIA.CODCATEGORIA);
+    // if (this.form.value.CODCATEGORIA.CODCATEGORIA == null) {
+    //     categoriaByRequest = '';
+    // }else{
+    //   categoriaByRequest = this.form.value.CODCATEGORIA.CODCATEGORIA
+    // }
     const PRODUCTO: Producto = {
       CODPRODUCTO: this.form.value.CODPRODUCTO,
       CODPRODTEC: this.form.value.CODPRODTEC,
@@ -278,7 +326,7 @@ export class CrearArticuloComponent implements OnInit {
       CODLISTA: this.form.value.CODLISTA,
       PRECIO: this.form.value.PRECIO
     }
-    console.log('Este es el producto -> '+PRODUCTO.TIPOA);
+    console.log('Este es el producto.CODCATEGORIA -> '+PRODUCTO.CODCATEGORIA);
 
     this.authService.createProduct(PRODUCTO)
     .pipe(
@@ -312,111 +360,6 @@ export class CrearArticuloComponent implements OnInit {
 
  
 }
-
-// soloNumeros(event) {
-//   const charCode = event.which ? event.which : event.keyCode;
-//   if (charCode !== 44 && (charCode < 48 || charCode > 57)) {
-//     event.preventDefault();
-//   }
-// }
-
-// soloNumeros(event) {
-//   const input = event.target.value;
-//   const charCode = event.which ? event.which : event.keyCode;
-  
-//   // permitir solo números y una coma después de un número
-//   if (charCode !== 44 && (charCode < 48 || charCode > 57)) {
-//     event.preventDefault();
-//   }
-  
-//   // verificar si ya hay una coma en el valor del input
-//   if (input.indexOf(',') !== -1 && charCode === 44) {
-//     event.preventDefault();
-//   }
-  
-//   // no permitir coma al principio sin número previo
-//   if (input === '' && charCode === 44) {
-//     event.preventDefault();
-//   }
-  
-//   // no permitir coma después de otra coma
-//   if (input.endsWith(',') && charCode === 44) {
-//     event.preventDefault();
-//   }
-// }
-
-// quitarComa(event) {
-//   const input = event.target.value;
-  
-//   // verificar si el valor del input termina con una coma y no tiene un número después
-//   if (input.endsWith(',') && input.match(/\d,\d$/) === null) {
-//     event.target.value = input.slice(0, -1);
-//   }
-// }
-
-// soloNumeros(event) {
-//   const input = event.target.value;
-//   const charCode = event.which ? event.which : event.keyCode;
-  
-//   // permitir solo números y una coma después de un número
-//   if (charCode !== 44 && (charCode < 48 || charCode > 57)) {
-//     event.preventDefault();
-//   }
-  
-//   // verificar si ya hay una coma en el valor del input
-//   if (input.indexOf(',') !== -1 && charCode === 44) {
-//     event.preventDefault();
-//   }
-  
-//   // no permitir coma al principio sin número previo
-//   if (input === '' && charCode === 44) {
-//     event.preventDefault();
-//   }
-  
-//   // no permitir coma después de otra coma
-//   if (input.endsWith(',') && charCode === 44) {
-//     event.preventDefault();
-//   }
-
-//   // Permitir solo dos números después de la coma
-//   if (input.includes(',')) {
-//     const decimals = input.split(',')[1];
-//     if (decimals && decimals.length >= 2) {
-//       event.preventDefault();
-//     }
-//   }
-// }
-
-// quitarComa(event) {
-//   let input = event.target.value;
-  
-//   // Verificar si el valor del input termina con una coma y no tiene un número después
-//   if (input.endsWith(',') && input.match(/\d,\d$/) === null) {
-//     input = input.slice(0, -1);
-//   }
-
-//   // Verificar si hay un cero después de la coma y eliminar la coma y el cero
-//   if (input.includes(',')) {
-//     const decimals = input.split(',')[1];
-//     if (decimals === '0') {
-//       input = input.split(',')[0];
-//     }
-//   }
-
-//   // // Agregar un cero al salir del input si hay un número diferente de cero después de la coma
-//   // if (input.includes(',') && !input.endsWith('0,')) {
-//   //   input += '0';
-//   // }
-//   // Agregar un cero al salir del input si hay un número diferente de cero después de la coma
-// if (input.includes(',')) {
-//   const [, decimals] = input.split(',');
-//   if (decimals.length < 2 || (decimals[1] !== '0' && decimals.length != 2)) {
-//     input += '0';
-//   }
-// }
-
-//   event.target.value = input;
-// }
 
 soloNumeros(event) {
   const input = event.target.value;

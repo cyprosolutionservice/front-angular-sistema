@@ -1,12 +1,12 @@
 export class Producto{
-    CODPRODUCTO: string;
-    CODPRODTEC: string;
+    CODPRODUCTO?: string;
+    CODPRODTEC?: string;
     DESCRIPCION: string;
     UNIDAD: string;
     TIPOA: string;
-    CODFAMILIA: string;
-    CODDEPTO: string;
-    CODCATEGORIA: string;
+    CODFAMILIA?: string;
+    CODDEPTO?: string;
+    CODCATEGORIA?: string;
     CODLISTA: string;
     PRECIO: string;
 

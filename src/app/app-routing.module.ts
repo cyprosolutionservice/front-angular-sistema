@@ -40,7 +40,7 @@ const routes: Routes = [
   { path: 'crear-categoria', component: CrearCategoriaComponent, canActivate: [AuthGuard]},
   { path: 'listar-articulos', component: ListarArticulosComponent, canActivate: [AuthGuard]},
   { path: 'crear-articulo', component: CrearArticuloComponent, canActivate: [AuthGuard]},
-  { path: 'editar-articulo', component: EditarArticuloComponent, canActivate: [AuthGuard]},
+  { path: 'editar-articulo/:id', component: EditarArticuloComponent, canActivate: [AuthGuard]},
   { path: 'crear-familia', component: CrearFamiliaComponent, canActivate: [AuthGuard]},
   
   { path: '**', pathMatch: 'full', redirectTo: 'login'}

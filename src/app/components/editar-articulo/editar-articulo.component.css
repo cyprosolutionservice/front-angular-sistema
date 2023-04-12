@@ -82,3 +82,9 @@ form,  .card{
     font-weight: bold;
 }
 
+
+@media only screen and (max-width: 767px) {
+    .btn{
+        font-size: 18px;
+    }
+}

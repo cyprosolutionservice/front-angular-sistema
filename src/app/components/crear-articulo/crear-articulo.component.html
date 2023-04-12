@@ -39,7 +39,8 @@
                 <br>
                 <mat-form-field appearance="fill">
                     <mat-label>Category</mat-label>
-                    <mat-select formControlName="CODCATEGORIA" (selectionChange)="onCategoryChange()">
+                    <!-- <mat-select formControlName="CODCATEGORIA" (selectionChange)="onCategoryChange()"> -->
+                    <mat-select formControlName="CODCATEGORIA">
                         <mat-option [value]="categoria" *ngFor="let categoria of listCategories"
                             [value]="categoria">
                             {{categoria.NOMBRE}}
@@ -52,7 +53,7 @@
             <div class="mt-2 mb-3">
                 <label for="exampleFormControlInput1" class="etiquetas">CODPRODUCTO</label>
                 <input formControlName="CODPRODUCTO" type="text" class="form-control colorInput" 
-                placeholder="3001" [value]="concetedCODPRODUCTO" (input)="onInput($event)">
+                placeholder="3001" readonly>
                 <div *ngIf="form.get('CODPRODUCTO').invalid && form.get('CODPRODUCTO').touched">
                     <div *ngIf="form.get('CODPRODUCTO')?.hasError('required')">
                         <p class="clave-error">Por favor, complete el campo.</p>

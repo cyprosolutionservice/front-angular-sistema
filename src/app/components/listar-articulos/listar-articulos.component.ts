@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Producto } from 'src/app/Model/Product';
 import { AuthService } from 'src/app/services/auth.service';
 import { MenuService } from 'src/app/services/menu.service';
 
@@ -46,37 +47,37 @@ export class ListarArticulosComponent implements OnInit {
   selectedFamily: string = '';
   selectedDepartamento: string = '';
 
-  filtrarCategorias() {
-    if (this.selectedFamily === 'Todos' && this.selectedDepartamento === 'Todos') {
-      this.filteredCategorias = this.listCategorias;
-    } else {
-      this.filteredCategorias = this.listCategorias.filter(
-        categoria =>
-          (!this.selectedFamily || this.selectedFamily === 'Todos' || categoria.FAMILY === this.selectedFamily) &&
-          (!this.selectedDepartamento || this.selectedDepartamento === 'Todos' || categoria.DEPARTAMENT === this.selectedDepartamento)
-      );
-    }
-  }
+  // filtrarCategorias() {
+  //   if (this.selectedFamily === 'Todos' && this.selectedDepartamento === 'Todos') {
+  //     this.filteredCategorias = this.listCategorias;
+  //   } else {
+  //     this.filteredCategorias = this.listCategorias.filter(
+  //       categoria =>
+  //         (!this.selectedFamily || this.selectedFamily === 'Todos' || categoria.FAMILY === this.selectedFamily) &&
+  //         (!this.selectedDepartamento || this.selectedDepartamento === 'Todos' || categoria.DEPARTAMENT === this.selectedDepartamento)
+  //     );
+  //   }
+  // }
 
-  obtenerCategorias(){
-    this.authService.getCategorias().subscribe( (res:any) =>{
-      if (!res.error) {
-      //console.log(res);
-      this.listCategorias = res;
-      this.filteredCategorias = res;
-      this.listFamilies = Array.from(new Set(res.map(categoria => categoria.FAMILY)));
-      this.listDepartamento = Array.from(new Set(res.map(categoria => categoria.DEPARTAMENT))).sort();
+  // obtenerCategorias(){
+  //   this.authService.getCategorias().subscribe( (res:any) =>{
+  //     if (!res.error) {
+  //     //console.log(res);
+  //     this.listCategorias = res;
+  //     this.filteredCategorias = res;
+  //     this.listFamilies = Array.from(new Set(res.map(categoria => categoria.FAMILY)));
+  //     this.listDepartamento = Array.from(new Set(res.map(categoria => categoria.DEPARTAMENT))).sort();
 
-      //console.log('Esta es la lista de Departamentos-> '+this.listDepartamento);
+  //     //console.log('Esta es la lista de Departamentos-> '+this.listDepartamento);
 
-      //console.log('Esta es la Familia -> '+this.listFamilies);
-      }else{
-        console.log('Usuarios No encontrado en la base de Datos');
-        this.toastr.error('Error', 'Error al buscar Categorias')
-      }
+  //     //console.log('Esta es la Familia -> '+this.listFamilies);
+  //     }else{
+  //       console.log('Usuarios No encontrado en la base de Datos');
+  //       this.toastr.error('Error', 'Error al buscar Categorias')
+  //     }
         
-    });
-  }
+  //   });
+  // }
 
   obtenerProductos(){
     this.authService.getProducts().subscribe( (res:any) =>{
@@ -121,12 +122,21 @@ export class ListarArticulosComponent implements OnInit {
   filteredProducts() {
     let searchTerm = this.searchText.toLowerCase(); // Convertir el término de búsqueda a minúsculas
     this.listProducts = this.allProducts.filter(producto => {
-      let precio = producto.PRECIO.toString(); // Convertir el precio a string para poder buscar
+      let precio: string ='';
+      let cate: string = '';
+      if (producto.PRECIO != null) {
+         precio= producto.PRECIO.toString(); // Convertir el precio a string para poder buscar
+      }
+      if (producto.CATEGORY != null) {
+        cate = producto.CATEGORY.toString();
+      }
+      
       return producto.CODPRODUCTO.toLowerCase().includes(searchTerm) ||
              producto.DESCRIPCION.toLowerCase().includes(searchTerm) ||
              producto.FAMILY.toLowerCase().includes(searchTerm) ||
              producto.DEPARTAMENT.toLowerCase().includes(searchTerm) ||
-             producto.CATEGORY.toLowerCase().includes(searchTerm) ||
+            //  producto.CATEGORY.toLowerCase().includes(searchTerm) ||
+            cate.includes(searchTerm) ||
              precio.includes(searchTerm);
     });
   }
@@ -136,8 +146,9 @@ export class ListarArticulosComponent implements OnInit {
     this.filteredProducts();
   }
 
-  editar(){
-    this.router.navigate(['editar-articulo']);
+
+  editar(producto: Producto){
+    this.router.navigate(['editar-articulo', producto.CODPRODUCTO]);
   }
 
   

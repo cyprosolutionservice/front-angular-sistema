@@ -185,6 +185,34 @@ export class AuthService {
     return this.http.post(`${this.URL}/product/create/product`, producto, httpOptions);
   }
 
+  getLastCodproduct(){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'x-db-name': localStorage.getItem('DB'),
+        'characters-xxx': localStorage.getItem('characters-xxx')
+      })
+    };
+    return this.http.get(`${this.URL}/product/get/last/codproduct`, httpOptions);
+  }
+
+  getProductById(id: string): Observable<any>{
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'x-db-name': localStorage.getItem('DB')
+      })
+    };
+    return this.http.get(`${this.URL}/product/get/product/'${id}'`, httpOptions);
+  }
+
+  updateProductById(id: string, producto: any): Observable<any>{
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'x-db-name': localStorage.getItem('DB'),
+      })
+    };
+    return this.http.put(`${this.URL}/product/edit/${id}`, producto,  httpOptions);
+  }
+
 
   setAuthenticated(value: boolean) {
     this.isAuthenticatedSubject.next(value);
