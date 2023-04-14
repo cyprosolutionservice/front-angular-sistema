@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -14,6 +14,8 @@ import { MenuService } from 'src/app/services/menu.service';
   styleUrls: ['./crear-articulo.component.css']
 })
 export class CrearArticuloComponent implements OnInit {
+
+ 
 
   form: FormGroup;
 
@@ -40,10 +42,15 @@ export class CrearArticuloComponent implements OnInit {
                   PRECIO: ['', [Validators.required]]
                 })
               }
+
+              
+
    
    concatedFamily: string;
    concatedDepa: string;
    concetedCODPRODUCTO: string = "";
+
+  
 
     onFamilyChange() {
       let selectedFamily = this.form.controls['CODFAMILIA'].value;
@@ -65,7 +72,8 @@ export class CrearArticuloComponent implements OnInit {
       const selectedDepartment = this.form.get('CODDEPARTAMENTO').value;
       if (selectedDepartment) {
         this.depaSelected = selectedDepartment.NOMBRE;
-        this.concatedDepa= this.depaSelected[0];
+        // this.concatedDepa= this.depaSelected[0];
+        this.concatedDepa= this.depaSelected.substring(0, 3);
         //console.log(this.depaSelected);
         console.log(this.concatedDepa);
 
@@ -124,6 +132,7 @@ export class CrearArticuloComponent implements OnInit {
         console.log("este es el nuevo codigo -> "+nuevoCodigo); // Output: "VBL-08"
 
         this.form.get('CODPRODUCTO').setValue(nuevoCodigo);
+        this.form.get('CODPRODTEC').setValue(nuevoCodigo);
         // }else if (res.length=0) {
         //   this.concetedCODPRODUCTO += '01';
         
@@ -132,6 +141,7 @@ export class CrearArticuloComponent implements OnInit {
           console.log("esta es otra forma");
           this.concetedCODPRODUCTO += '01';
           this.form.get('CODPRODUCTO').setValue(this.concetedCODPRODUCTO);
+          this.form.get('CODPRODTEC').setValue(this.concetedCODPRODUCTO);
         }
           
       });
@@ -148,11 +158,21 @@ export class CrearArticuloComponent implements OnInit {
     }
 
 
+    @ViewChild('myButton') myButton: ElementRef;
   ngOnInit(): void {
     this.obtenerFamilias();
     this.getListPrice();
-    //this.obtenerDepartamentos();
+    
   }
+  ngAfterViewInit() {
+    // Lógica para ejecutar el botón en el método ngAfterViewInit
+    // if (this.myButton) {
+    //   this.myButton.nativeElement.click();
+    // }
+  }
+
+
+
 
   volverInicio(){
     this.router.navigate(['listar-articulos']);
@@ -213,7 +233,9 @@ export class CrearArticuloComponent implements OnInit {
       //console.log(res);
       this.listDepartaments = res;
       //console.log('Este es el metodo Departamento->'+res.NOMBRE);
+
       
+   
       }else{
         this.listDepartaments = null;
         console.log('Departamentos no encontrados en la base de Datos');
@@ -345,10 +367,14 @@ export class CrearArticuloComponent implements OnInit {
     .subscribe( (res:any) =>{
       if (!res.error) {
 
+        //Prueba Pop-Up
+      if (this.myButton) {
+        this.myButton.nativeElement.click();
+      }
         this.router.navigate(['listar-articulos']); 
         // this.menuService.toggleSidenav();
         // this.menuService.updateSidenavOpen(true);
-        this.toastr.info('Exito', 'Articulo Creado!')
+        //this.toastr.info('Exito', 'Articulo Creado!')
       }else{
         console.log('Articulo No creado en la base de Datos');
         //alert('Error Al Crear Usuario');

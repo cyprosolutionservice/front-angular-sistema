@@ -1,15 +1,6 @@
 
-
-.activo {
-    color: #00FF00;
-  }
-  
-  .inactivo {
-    color: #cc0000f7;
-  }
-
   .listado{
-    width: 632px;
+    width: 655px;
     background: rgba(46,75,131,255);
     border: none;
     border-radius: 19px;
