@@ -114,8 +114,8 @@
                 <mat-form-field appearance="fill">
                     <mat-label>Unidad</mat-label>
                     <mat-select formControlName="UNIDAD">
-                        <mat-option [value]="unidad" *ngFor="let unidad of listUnidades" [value]="unidad">
-                            {{unidad}}
+                        <mat-option [value]="unidad" *ngFor="let unidad of listUnits" [value]="unidad.CODUNIDAD">
+                            {{unidad.DESCRIPCION}}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
@@ -127,8 +127,8 @@
                 <mat-form-field appearance="fill">
                     <mat-label>Tipo</mat-label>
                     <mat-select formControlName="TIPOA">
-                        <mat-option [value]="tipo" *ngFor="let tipo of listTipos" [value]="tipo">
-                            {{tipo}}
+                        <mat-option [value]="tipo" *ngFor="let tipo of listTypes" [value]="tipo.CODTIPO">
+                            {{tipo.TIPO}}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>

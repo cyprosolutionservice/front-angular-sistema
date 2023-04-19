@@ -18,7 +18,8 @@
             <div class="botones">
                 <button (click)="volverInicio()" class="btn btn-secondary float-start">CANCELAR</button>
                 <button type="submit" [disabled]="form.invalid" class="btn btn-success float-end">GUARDAR</button>
-
+                <button #myButton type="button" class="btn btn-primary btn-ms" 
+                data-bs-toggle="modal" data-bs-target="#exampleModal" hidden>POP-UP</button>
             </div>
 
         </form>

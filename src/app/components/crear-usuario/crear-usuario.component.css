@@ -81,3 +81,8 @@ form,  .card{
     color: rgb(233, 93, 93);
     font-weight: bold;
 }
+
+
+#myButton {
+    display: none;
+  }

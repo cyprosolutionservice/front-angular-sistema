@@ -82,3 +82,6 @@ form,  .card{
     font-weight: bold;
 }
 
+#myButton {
+    display: none;
+  }

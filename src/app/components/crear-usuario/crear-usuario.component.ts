@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -7,6 +7,7 @@ import { catchError, throwError } from 'rxjs';
 import { UserDataCreate } from 'src/app/Model/UserDataCreate';
 import { AuthService } from 'src/app/services/auth.service';
 import { MenuService } from 'src/app/services/menu.service';
+import { ModalServiceService } from 'src/app/services/modal-service.service';
 import { XsegundoService } from 'src/app/services/xsegundo-service.service';
 
 @Component({
@@ -26,6 +27,7 @@ export class CrearUsuarioComponent implements OnInit {
 
 
   constructor(private authService: AuthService,
+    private modalService: ModalServiceService,
               private router: Router,
               private fb: FormBuilder,
               private menuService: MenuService,
@@ -43,6 +45,9 @@ export class CrearUsuarioComponent implements OnInit {
     this.getRoles();
   }
 
+  
+  @ViewChild('myButton') myButton: ElementRef;
+
   crearUsuario(){
     const USER: UserDataCreate = {
       NOMBRE: this.form.value.NOMBRE,
@@ -53,31 +58,28 @@ export class CrearUsuarioComponent implements OnInit {
     }
       this.authService.crearUsuer(USER).subscribe( (res:any) =>{
         if (!res.error) {
-          // LoginComponent.botonMenu = true;
-          // console.log(res);
-          // console.log(USER.ROL_ID);
-          console.log('Usuario creado EXITOSAMENTE!')
           this.router.navigate(['listar-usuarios']); 
-          // this.menuService.toggleSidenav();
-          // this.menuService.updateSidenavOpen(true);
-          this.toastr.info('Exito', 'Usuario Creado!')
+           //Prueba Pop-Up
+           if (this.myButton) {
+            this.modalService.modalTitle = 'Exito';
+            this.modalService.modalBody = 'Usuario: '+USER.NOMBRE+'. Creado!!';
+            this.myButton.nativeElement.click();
+          }
+          //this.toastr.info('Exito', 'Usuario Creado!')
         }else{
-          console.log('Usuario No encontrado en la base de Datos');
-          //alert('Error Al Crear Usuario');
-          this.toastr.error('Error', 'Error al crear usuario')
-          // LoginComponent.botonMenu = false;
+         //this.toastr.error('Error', 'Error al crear usuario')
+         if (this.myButton) {
+          this.modalService.modalTitle = 'ERROR';
+          this.modalService.modalBody = 'Usuario: '+USER.NOMBRE+'. NO Creado!!';
+          this.myButton.nativeElement.click();
+        }
         }
           
       });
  
    
   }
-  // listRoles: any[] = [
-  //   {value: 'ADMIN', viewValue: 'ADMIN'},
-  //   {value: 'GARZON', viewValue: 'GARZON'},
-  //   {value: 'USUARIO', viewValue: 'USUARIO'},
-  //   {value: 'VENDEDOR', viewValue: 'VENDEDOR'},
-  // ];
+
 
   volverInicio(){
     this.router.navigate(['listar-usuarios']);

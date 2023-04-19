@@ -88,3 +88,8 @@ form,  .card{
         font-size: 18px;
     }
 }
+
+
+#myButton {
+    display: none;
+  }

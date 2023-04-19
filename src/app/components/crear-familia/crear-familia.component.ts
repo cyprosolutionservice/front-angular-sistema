@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -7,6 +7,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { AuthService } from 'src/app/services/auth.service';
 import { MenuService } from 'src/app/services/menu.service';
+import { ModalServiceService } from 'src/app/services/modal-service.service';
 
 @Component({
   selector: 'app-crear-familia',
@@ -18,6 +19,7 @@ export class CrearFamiliaComponent implements OnInit {
   form: FormGroup;
 
   constructor(private authService: AuthService,
+    private modalService: ModalServiceService,
     private router: Router,
     private fb: FormBuilder,
     private menuService: MenuService,
@@ -29,6 +31,7 @@ export class CrearFamiliaComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  @ViewChild('myButton') myButton: ElementRef;
 
   crearFamilia(){
     const FAMILY: any = {
@@ -39,27 +42,40 @@ export class CrearFamiliaComponent implements OnInit {
         catchError((error: HttpErrorResponse) => {
           if (error.status === 409) {
             console.log(error.error);
-            this.toastr.error('Error', 'Familia YA existe');
+            if (this.myButton) {
+              this.modalService.modalTitle = 'ERROR';
+              this.modalService.modalBody = 'FAMILIA: '+FAMILY.NOMBRE+'. NO Creada!!';
+              this.myButton.nativeElement.click();
+            }
           } else {
-            console.error('Unknown error occurred!');
+            if (this.myButton) {
+              this.modalService.modalTitle = 'ERROR';
+              this.modalService.modalBody = 'FAMILIA: '+FAMILY.NOMBRE+'. NO Creada!!';
+              this.myButton.nativeElement.click();
+            }
             console.error(error);
           }
           return throwError(() => error);
         })
       ).subscribe( (res:any) =>{
         if (!res.error) {
-          // LoginComponent.botonMenu = true;
-          // console.log('****Entró en el primero***'+res);
-          // console.log('Familia creada EXITOSAMENTE!')
           this.router.navigate(['listar-familias']); 
-          // this.menuService.toggleSidenav();
-          // this.menuService.updateSidenavOpen(true);
-          this.toastr.info('Exito', 'Familia Creada!')
+          
+           //Prueba Pop-Up
+           if (this.myButton) {
+            this.modalService.modalTitle = 'Exito';
+            this.modalService.modalBody = 'Familia: '+FAMILY.NOMBRE+'. Creada!!';
+            this.myButton.nativeElement.click();
+          }
+          //this.toastr.info('Exito', 'Familia Creada!')
         }else{
-          console.log('Usuario No encontrado en la base de Datos');
-          //alert('Error Al Crear Usuario');
-          this.toastr.error('Error', 'Error al crear Familia')
-          // LoginComponent.botonMenu = false;
+          if (this.myButton) {
+            this.modalService.modalTitle = 'ERROR';
+            this.modalService.modalBody = 'Familia: '+FAMILY.NOMBRE+'. NO CREADA!!';
+            this.myButton.nativeElement.click();
+          }
+          //this.toastr.error('Error', 'Error al crear Familia')
+    
         }
           
       });

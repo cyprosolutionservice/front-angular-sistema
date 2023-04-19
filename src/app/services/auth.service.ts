@@ -213,6 +213,24 @@ export class AuthService {
     return this.http.put(`${this.URL}/product/edit/${id}`, producto,  httpOptions);
   }
 
+  getProductType(){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'x-db-name': localStorage.getItem('DB'),
+      })
+    };
+    return this.http.get(`${this.URL}/product/get/tipos`, httpOptions);
+  }
+
+  getUnits(){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'x-db-name': localStorage.getItem('DB'),
+      })
+    };
+    return this.http.get(`${this.URL}/product/get/unidades`, httpOptions);
+  }
+
 
   setAuthenticated(value: boolean) {
     this.isAuthenticatedSubject.next(value);

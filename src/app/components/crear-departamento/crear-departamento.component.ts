@@ -1,11 +1,12 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { catchError, throwError } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { MenuService } from 'src/app/services/menu.service';
+import { ModalServiceService } from 'src/app/services/modal-service.service';
 
 @Component({
   selector: 'app-crear-departamento',
@@ -25,6 +26,7 @@ export class CrearDepartamentoComponent implements OnInit {
 
 
   constructor(private authService: AuthService,
+    private modalService: ModalServiceService,
               private router: Router,
               private fb: FormBuilder,
               private menuService: MenuService,
@@ -35,6 +37,7 @@ export class CrearDepartamentoComponent implements OnInit {
                   
                 })
               }
+  @ViewChild('myButton') myButton: ElementRef;
   ngOnInit(): void {
     this.obtenerFamilias();
   }
@@ -49,10 +52,17 @@ export class CrearDepartamentoComponent implements OnInit {
         catchError((error: HttpErrorResponse) => {
           if (error.status === 409) {
             console.log(error.error);
-            this.toastr.error('Error', 'Departamento YA existe');
+            if (this.myButton) {
+              this.modalService.modalTitle = 'ERROR';
+              this.modalService.modalBody = 'Departamento: '+DEP.NOMBRE+'. NO Creado!!';
+              this.myButton.nativeElement.click();
+            }
           } else {
-            console.error('Unknown error occurred!');
-            this.toastr.error('Error', 'Desconocido');
+            if (this.myButton) {
+              this.modalService.modalTitle = 'ERROR';
+              this.modalService.modalBody = 'Departamento: '+DEP.NOMBRE+'. NO Creado!!';
+              this.myButton.nativeElement.click();
+            }
             console.error(error);
           }
           return throwError(() => error);
@@ -60,18 +70,21 @@ export class CrearDepartamentoComponent implements OnInit {
       )
       .subscribe( (res:any) =>{
         if (!res.error) {
-          // LoginComponent.botonMenu = true;
-          //console.log(res);
-          console.log('Departamento creado EXITOSAMENTE!')
           this.router.navigate(['listar-departamentos']); 
-          // this.menuService.toggleSidenav();
-          // this.menuService.updateSidenavOpen(true);
-          this.toastr.info('Exito', 'Departamento Creado!')
+          //Prueba Pop-Up
+          if (this.myButton) {
+            this.modalService.modalTitle = 'Exito';
+            this.modalService.modalBody = 'Departamento: '+DEP.NOMBRE+'. Creado!!';
+            this.myButton.nativeElement.click();
+          }
+          //this.toastr.info('Exito', 'Departamento Creado!')
         }else{
-          console.log('Departamento No creado en la base de Datos');
-          //alert('Error Al Crear Usuario');
-          this.toastr.error('Error', 'Error al crear Departamento')
-          // LoginComponent.botonMenu = false;
+          //this.toastr.error('Error', 'Error al crear Departamento')
+          if (this.myButton) {
+            this.modalService.modalTitle = 'ERROR';
+            this.modalService.modalBody = 'Departamento: '+DEP.NOMBRE+'. NO Creado!!';
+            this.myButton.nativeElement.click();
+          }
         }
           
       });

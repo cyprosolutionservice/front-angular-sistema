@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -7,6 +7,7 @@ import { catchError, throwError } from 'rxjs';
 import { Producto } from 'src/app/Model/Product';
 import { AuthService } from 'src/app/services/auth.service';
 import { MenuService } from 'src/app/services/menu.service';
+import { ModalServiceService } from 'src/app/services/modal-service.service';
 
 @Component({
   selector: 'app-editar-articulo',
@@ -23,6 +24,7 @@ export class EditarArticuloComponent implements OnInit {
   id:string | null;
 
   constructor(private authService: AuthService,
+    private modalService: ModalServiceService,
               private router: Router,
               private fb: FormBuilder,
               private menuService: MenuService,
@@ -50,6 +52,8 @@ export class EditarArticuloComponent implements OnInit {
     this.esEditar();
     //this.obtenerDepartamentos();
   }
+
+  @ViewChild('myButton') myButton: ElementRef;
 
   volverInicio(){
     this.router.navigate(['listar-articulos']);
@@ -141,10 +145,17 @@ export class EditarArticuloComponent implements OnInit {
       catchError((error: HttpErrorResponse) => {
         if (error.status === 409) {
           console.log(error.error);
-          this.toastr.error('Error', 'No se actualizó el producto');
+          if (this.myButton) {
+            this.modalService.modalTitle = 'ERROR';
+            this.modalService.modalBody = 'ARTICULO: '+PRODUCTO.DESCRIPCION+'. NO Editado!!';
+            this.myButton.nativeElement.click();
+          }
         } else {
-          console.error('Unknown error occurred!');
-          this.toastr.error('Error', 'Desconocido');
+          if (this.myButton) {
+            this.modalService.modalTitle = 'ERROR';
+            this.modalService.modalBody = 'ARTICULO: '+PRODUCTO.DESCRIPCION+'. NO Editado!!';
+            this.myButton.nativeElement.click();
+          }
           console.error(error);
         }
         return throwError(() => error);
@@ -152,16 +163,22 @@ export class EditarArticuloComponent implements OnInit {
     )
     .subscribe( (res:any) =>{
       if (!res.error) {
-
         this.router.navigate(['listar-articulos']); 
-        // this.menuService.toggleSidenav();
-        // this.menuService.updateSidenavOpen(true);
-        this.toastr.info('Exito', 'Articulo Actualizado!')
+        // this.toastr.info('Exito', 'Articulo Actualizado!')
+         //Prueba Pop-Up
+         if (this.myButton) {
+          this.modalService.modalTitle = 'Exito';
+          this.modalService.modalBody = 'Ariculo: '+PRODUCTO.DESCRIPCION+'. Editado!!';
+          this.myButton.nativeElement.click();
+        }
       }else{
         console.log('Articulo No actualizado en la base de Datos');
-        //alert('Error Al Crear Usuario');
-        this.toastr.error('Error', 'Error al Actualizar Articulo')
-        // LoginComponent.botonMenu = false;
+        // this.toastr.error('Error', 'Error al Actualizar Articulo')
+        if (this.myButton) {
+          this.modalService.modalTitle = 'ERROR';
+          this.modalService.modalBody = 'Ariculo: '+PRODUCTO.DESCRIPCION+'. NO Editado!!';
+          this.myButton.nativeElement.click();
+        }
       }
         
     });

@@ -52,6 +52,8 @@ import { CrearCategoriaComponent } from './components/crear-categoria/crear-cate
 import { ListarArticulosComponent } from './components/listar-articulos/listar-articulos.component';
 import { CrearArticuloComponent } from './components/crear-articulo/crear-articulo.component';
 import { EditarArticuloComponent } from './components/editar-articulo/editar-articulo.component';
+import { ModalPopUpComponent } from './components/modal-pop-up/modal-pop-up.component';
+import { ModalServiceService } from './services/modal-service.service';
 
 
 @NgModule({
@@ -76,6 +78,7 @@ import { EditarArticuloComponent } from './components/editar-articulo/editar-art
     ListarArticulosComponent,
     CrearArticuloComponent,
     EditarArticuloComponent,
+    ModalPopUpComponent,
   ],
   imports: [
     BrowserModule,
@@ -97,7 +100,7 @@ import { EditarArticuloComponent } from './components/editar-articulo/editar-art
     ToastrModule.forRoot()
 
   ],
-  providers: [XsegundoService,
+  providers: [XsegundoService, ModalServiceService,
   //JWT
   {provide: JWT_OPTIONS, useValue: JWT_OPTIONS},
   JwtHelperService,

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -8,6 +8,9 @@ import { MenuService } from 'src/app/services/menu.service';
 import { XsegundoService } from 'src/app/services/xsegundo-service.service';
 import { LoginComponent } from '../login/login.component';
 import { MenuComponent } from '../menu/menu.component';
+import { ModalServiceService } from 'src/app/services/modal-service.service';
+import { catchError, throwError } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-editar-usuario',
@@ -30,6 +33,7 @@ export class EditarUsuarioComponent implements OnInit {
 
 
   constructor(private authService: AuthService,
+    private modalService: ModalServiceService,
               private router: Router,
               private fb: FormBuilder,
               private menuService: MenuService,
@@ -49,7 +53,8 @@ export class EditarUsuarioComponent implements OnInit {
   ngOnInit(): void {
     this.esEditar();
   }
-
+  @ViewChild('myButton') myButton: ElementRef;
+  
   crearUsuario(){
     const USER: UserDataCreate = {
       NOMBRE: this.form.value.NOMBRE,
@@ -62,17 +67,37 @@ export class EditarUsuarioComponent implements OnInit {
     //console.log('este es el valor de Clave ->'+USER.CLAVE);
     if (this.id !== null) {
       // Editamos producto
-      this.authService.actualizarUser(this.id, USER).subscribe(data => {
-        this.toastr.info('Actualizacion de USUARIO Completada', '!Usuario Actualizado!')
+      this.authService.actualizarUser(this.id, USER)
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          if (error.status === 409) {
+            console.log(error.error);
+            if (this.myButton) {
+              this.modalService.modalTitle = 'ERROR';
+              this.modalService.modalBody = 'USUARIO: '+USER.NOMBRE+'. NO Editado!!';
+              this.myButton.nativeElement.click();
+            }
+          } else {
+            if (this.myButton) {
+              this.modalService.modalTitle = 'ERROR';
+              this.modalService.modalBody = 'USUARIO: '+USER.NOMBRE+'. NO Editado!!';
+              this.myButton.nativeElement.click();
+            }
+            console.error(error);
+          }
+          return throwError(() => error);
+        })
+      ).subscribe(data => {
+        //this.toastr.info('Actualizacion de USUARIO Completada', '!Usuario Actualizado!')
         this.router.navigate(['listar-usuarios']);
-        //EditarUsuarioComponent.editBoton = true;
-        // MenuComponent.checkMenu = true;
-        this.menuService.toggleSidenav();
-        this.menuService.updateSidenavOpen(true);
-      }, error => {
-        console.log(error),
-        // this.form.reset();
-        this.toastr.error('Clave Duplicada', 'Operacion Fallida')
+         //Prueba Pop-Up
+         if (this.myButton) {
+          this.modalService.modalTitle = 'Exito';
+          this.modalService.modalBody = 'USUARIO: '+USER.NOMBRE+'. Editado!!';
+          this.myButton.nativeElement.click();
+        }
+        //this.menuService.toggleSidenav();
+        //this.menuService.updateSidenavOpen(true);
       })
     }
    

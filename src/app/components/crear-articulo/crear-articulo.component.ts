@@ -7,6 +7,7 @@ import { catchError, throwError } from 'rxjs';
 import { Producto } from 'src/app/Model/Product';
 import { AuthService } from 'src/app/services/auth.service';
 import { MenuService } from 'src/app/services/menu.service';
+import { ModalServiceService } from 'src/app/services/modal-service.service';
 
 @Component({
   selector: 'app-crear-articulo',
@@ -24,6 +25,7 @@ export class CrearArticuloComponent implements OnInit {
 
 
   constructor(private authService: AuthService,
+              private modalService: ModalServiceService,
               private router: Router,
               private fb: FormBuilder,
               private menuService: MenuService,
@@ -41,11 +43,9 @@ export class CrearArticuloComponent implements OnInit {
                   // PRECIO: ['', [Validators.required,  Validators.pattern('^[0-9]*$')]]
                   PRECIO: ['', [Validators.required]]
                 })
+            
               }
 
-              
-
-   
    concatedFamily: string;
    concatedDepa: string;
    concetedCODPRODUCTO: string = "";
@@ -75,7 +75,7 @@ export class CrearArticuloComponent implements OnInit {
         // this.concatedDepa= this.depaSelected[0];
         this.concatedDepa= this.depaSelected.substring(0, 3);
         //console.log(this.depaSelected);
-        console.log(this.concatedDepa);
+        //console.log(this.concatedDepa);
 
         //Asignar Valor a CODPRODUCTO
         let palabras = this.concatedFamily.split(" ");
@@ -94,8 +94,6 @@ export class CrearArticuloComponent implements OnInit {
       this.form.controls['CODCATEGORIA'].setValue('');
       localStorage.setItem('cod-depa', selectedDepartment.CODDEPARTAMENTO);
       this.obtenerCategorias();
-     
-      //console.log(selectedFamily);
     }
 
     getLastCodproduct(){
@@ -129,7 +127,7 @@ export class CrearArticuloComponent implements OnInit {
         // Crear la nueva variable con el número consecutivo actualizado
         const nuevoCodigo = `${res.CODPRODUCTO.split("-")[0]}-${numeroConsecutivo.toString().padStart(2, "0")}`;
 
-        console.log("este es el nuevo codigo -> "+nuevoCodigo); // Output: "VBL-08"
+        //console.log("este es el nuevo codigo -> "+nuevoCodigo); // Output: "VBL-08"
 
         this.form.get('CODPRODUCTO').setValue(nuevoCodigo);
         this.form.get('CODPRODTEC').setValue(nuevoCodigo);
@@ -153,7 +151,7 @@ export class CrearArticuloComponent implements OnInit {
         //this.concatedCate = selectedCategory.NOMBRE[0];
         //console.log(this.concatedCate);
        // this.concetedCODPRODUCTO = this.concatedFamily+this.concatedDepa+this.concatedCate+"-";
-        console.log(this.concetedCODPRODUCTO)
+       // console.log(this.concetedCODPRODUCTO)
       }
     }
 
@@ -162,22 +160,12 @@ export class CrearArticuloComponent implements OnInit {
   ngOnInit(): void {
     this.obtenerFamilias();
     this.getListPrice();
-    
+    this.obtenerUnidades();
+    this.obtenerTipos();
   }
-  ngAfterViewInit() {
-    // Lógica para ejecutar el botón en el método ngAfterViewInit
-    // if (this.myButton) {
-    //   this.myButton.nativeElement.click();
-    // }
-  }
-
-
-
 
   volverInicio(){
     this.router.navigate(['listar-articulos']);
-    // this.menuService.toggleSidenav();
-    // this.menuService.updateSidenavOpen(true);
   }
 
  
@@ -232,10 +220,6 @@ export class CrearArticuloComponent implements OnInit {
       if (res.length >0) {
       //console.log(res);
       this.listDepartaments = res;
-      //console.log('Este es el metodo Departamento->'+res.NOMBRE);
-
-      
-   
       }else{
         this.listDepartaments = null;
         console.log('Departamentos no encontrados en la base de Datos');
@@ -253,6 +237,57 @@ export class CrearArticuloComponent implements OnInit {
   listTipos: string[] = [
     'A', 'B', 'C', 'D', 'F', 'V'
   ]
+
+  listUnits: any [] = [];
+  obtenerUnidades(){
+    this.authService.getUnits()
+    .pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error.status === 400) {
+          console.log(error.error);
+          //this.toastr.error('Error', 'Departamento YA existe');
+        } else {
+          console.error('Unknown error occurred!');
+          this.toastr.error('Error', 'Desconocido');
+          console.error(error);
+        }
+        return throwError(() => error);
+      })
+    )
+    .subscribe( (res:any) =>{
+      if (res.length >0) {
+      this.listUnits = res;
+
+      }
+        
+    });
+  }
+  listTypes: any [] = [];
+  obtenerTipos(){
+    this.authService.getProductType()
+    .pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error.status === 400) {
+          console.log(error.error);
+          //this.toastr.error('Error', 'Departamento YA existe');
+        } else {
+          console.error('Unknown error occurred!');
+          this.toastr.error('Error', 'Desconocido');
+          console.error(error);
+        }
+        return throwError(() => error);
+      })
+    )
+    .subscribe( (res:any) =>{
+      if (res.length >0) {
+      this.listTypes = res;
+      //console.log(this.listTypes);
+
+      }
+        
+    });
+  }
+  
 
   listCategories: any []= [];
   sinCategoria = {
@@ -331,11 +366,7 @@ export class CrearArticuloComponent implements OnInit {
     let categoriaByRequest: string;
 
     console.log("Esto es lo que hay categoria vacia ->"+this.form.value.CODCATEGORIA.CODCATEGORIA);
-    // if (this.form.value.CODCATEGORIA.CODCATEGORIA == null) {
-    //     categoriaByRequest = '';
-    // }else{
-    //   categoriaByRequest = this.form.value.CODCATEGORIA.CODCATEGORIA
-    // }
+ 
     const PRODUCTO: Producto = {
       CODPRODUCTO: this.form.value.CODPRODUCTO,
       CODPRODTEC: this.form.value.CODPRODTEC,
@@ -355,10 +386,17 @@ export class CrearArticuloComponent implements OnInit {
       catchError((error: HttpErrorResponse) => {
         if (error.status === 409) {
           console.log(error.error);
-          this.toastr.error('Error', 'Producto YA existe');
+          if (this.myButton) {
+            this.modalService.modalTitle = 'ERROR';
+            this.modalService.modalBody = 'Articulo: '+PRODUCTO.DESCRIPCION+'. No fué Creado!!';
+            this.myButton.nativeElement.click();
+          }
         } else {
-          console.error('Unknown error occurred!');
-          this.toastr.error('Error', 'Desconocido');
+          if (this.myButton) {
+            this.modalService.modalTitle = 'ERROR';
+            this.modalService.modalBody = 'Articulo: '+PRODUCTO.DESCRIPCION+'. No fué Creado!!';
+            this.myButton.nativeElement.click();
+          }
           console.error(error);
         }
         return throwError(() => error);
@@ -367,18 +405,26 @@ export class CrearArticuloComponent implements OnInit {
     .subscribe( (res:any) =>{
       if (!res.error) {
 
-        //Prueba Pop-Up
-      if (this.myButton) {
+      //   //Prueba Pop-Up
+      // if (this.myButton) {
+      //   this.myButton.nativeElement.click();
+      // }
+       //Prueba Pop-Up
+       if (this.myButton) {
+        this.modalService.modalTitle = 'Exito';
+        this.modalService.modalBody = 'Articulo: '+PRODUCTO.DESCRIPCION+'. Creado!!';
         this.myButton.nativeElement.click();
       }
         this.router.navigate(['listar-articulos']); 
-        // this.menuService.toggleSidenav();
-        // this.menuService.updateSidenavOpen(true);
-        //this.toastr.info('Exito', 'Articulo Creado!')
       }else{
         console.log('Articulo No creado en la base de Datos');
         //alert('Error Al Crear Usuario');
         this.toastr.error('Error', 'Error al crear Articulo')
+        if (this.myButton) {
+          this.modalService.modalTitle = 'ERROR';
+          this.modalService.modalBody = 'Articulo: '+PRODUCTO.DESCRIPCION+'. No fué Creado!!';
+          this.myButton.nativeElement.click();
+        }
         // LoginComponent.botonMenu = false;
       }
         
@@ -436,10 +482,7 @@ quitarComa(event) {
     }
   }
 
-  // // Agregar un cero al salir del input si hay un número diferente de cero después del punto
-  // if (input.includes('.') && !input.endsWith('0.')) {
-  //   input += '0';
-  // }
+
     //Agregar un cero al salir del input si hay un número diferente de cero después de la coma
 if (input.includes('.')) {
   const [, decimals] = input.split('.');
