@@ -230,14 +230,6 @@ export class CrearArticuloComponent implements OnInit {
     });
   }
 
-  listUnidades: string[] =[
-    'KG', 'L', 'UN', 'M'
-  ]
-
-  listTipos: string[] = [
-    'A', 'B', 'C', 'D', 'F', 'V'
-  ]
-
   listUnits: any [] = [];
   obtenerUnidades(){
     this.authService.getUnits()

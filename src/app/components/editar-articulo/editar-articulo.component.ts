@@ -50,6 +50,8 @@ export class EditarArticuloComponent implements OnInit {
   ngOnInit(): void {
     this.getListPrice();
     this.esEditar();
+    this.obtenerUnidades();
+    this.obtenerTipos();
     //this.obtenerDepartamentos();
   }
 
@@ -63,14 +65,55 @@ export class EditarArticuloComponent implements OnInit {
 
  
 
-  listUnidades: string[] =[
-    'KG', 'L', 'UN', 'M'
-  ]
+  listUnits: any [] = [];
+  obtenerUnidades(){
+    this.authService.getUnits()
+    .pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error.status === 400) {
+          console.log(error.error);
+          //this.toastr.error('Error', 'Departamento YA existe');
+        } else {
+          console.error('Unknown error occurred!');
+          this.toastr.error('Error', 'Desconocido');
+          console.error(error);
+        }
+        return throwError(() => error);
+      })
+    )
+    .subscribe( (res:any) =>{
+      if (res.length >0) {
+      this.listUnits = res;
 
-  listTipos: string[] = [
-    'A', 'B', 'C', 'D', 'F', 'V'
-  ]
+      }
+        
+    });
+  }
+  listTypes: any [] = [];
+  obtenerTipos(){
+    this.authService.getProductType()
+    .pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error.status === 400) {
+          console.log(error.error);
+          //this.toastr.error('Error', 'Departamento YA existe');
+        } else {
+          console.error('Unknown error occurred!');
+          this.toastr.error('Error', 'Desconocido');
+          console.error(error);
+        }
+        return throwError(() => error);
+      })
+    )
+    .subscribe( (res:any) =>{
+      if (res.length >0) {
+      this.listTypes = res;
+      //console.log(this.listTypes);
 
+      }
+        
+    });
+  }
   listCategories: any []= [];
   obtenerCategorias(){
     this.authService.getCategoriesByDepa()
