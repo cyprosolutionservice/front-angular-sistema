@@ -12,6 +12,7 @@ import { MatExpansionPanel } from '@angular/material/expansion';
 import { MatSidenav } from '@angular/material/sidenav';
 import { EditarUsuarioComponent } from '../editar-usuario/editar-usuario.component';
 import { MenuService } from 'src/app/services/menu.service';
+import { SwitchMenuService } from 'src/app/services/switch-menu.service';
 
 function capitalizeInitials(str: string): string {
   const words = str.split(' ');
@@ -63,6 +64,7 @@ export class MenuComponent implements OnInit {
   private _mobileQueryListener: () => void;
 
   constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher,
+              private menu2Service: SwitchMenuService,
               private segundo: XsegundoService,
               private menuService: MenuService,
               private router: Router,
@@ -176,6 +178,10 @@ volverInicio(){
 
   irListarCategorias(){
     this.router.navigate(['listar-categorias']);
+  }
+
+  switchMenu(){
+    this.menu2Service.setSwitchMenu(!this.menu2Service.switchMenu);
   }
 }
 

@@ -54,6 +54,7 @@ import { CrearArticuloComponent } from './components/crear-articulo/crear-articu
 import { EditarArticuloComponent } from './components/editar-articulo/editar-articulo.component';
 import { ModalPopUpComponent } from './components/modal-pop-up/modal-pop-up.component';
 import { ModalServiceService } from './services/modal-service.service';
+import { Menu2Component } from './components/menu2/menu2.component';
 
 
 @NgModule({
@@ -79,6 +80,7 @@ import { ModalServiceService } from './services/modal-service.service';
     CrearArticuloComponent,
     EditarArticuloComponent,
     ModalPopUpComponent,
+    Menu2Component,
   ],
   imports: [
     BrowserModule,

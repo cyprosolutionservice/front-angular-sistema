@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SwitchMenuService } from './services/switch-menu.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Sistema Cypro';
+
+  constructor(public menuService: SwitchMenuService) {}
+  
 }

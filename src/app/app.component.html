@@ -1,4 +1,6 @@
-<app-menu></app-menu>
+<app-menu *ngIf="!menuService.switchMenu"></app-menu>
+<app-menu2 *ngIf="menuService.switchMenu"></app-menu2>
+
 
 <!-- <router-outlet></router-outlet> -->
 <app-modal-pop-up></app-modal-pop-up>

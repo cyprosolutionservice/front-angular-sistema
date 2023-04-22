@@ -1,0 +1,135 @@
+<div class="example-container" [class.example-is-mobile]="mobileQuery.matches" *ngIf="shouldRun">
+
+    <mat-toolbar class="example-toolbar ">
+      <button [disabled]="boton==false" class="boton mt-2" mat-icon-button
+        (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
+      <div class="container" id="hora">
+        <a>{{totalString}}</a>
+      </div>
+      <!-- <div class="container text-end">
+        <i>
+          <img class="icono2" matTooltip={{usuario}} src="../../../assets/user.png">
+        </i>
+      </div> -->
+    </mat-toolbar>
+  
+    <!-- [opened]="isSidenavInitialized" -->
+    <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+      <mat-sidenav #sidenav class="second-slider" [opened]="sidenavOpen" #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
+        [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
+  
+        <mat-nav-list class="slider-menu">
+          <a mat-list-item (click)="volverInicio()" class="icono-color"><span
+              class="material-symbols-outlined start-icons me-2">
+              grade
+            </span>
+            <p class="first-icon">INICIO </p>
+          </a>
+  
+          <a mat-list-item class="icono-color"><span class="material-symbols-outlined start-icons me-2">
+              sync_saved_locally
+            </span>VENTA DIRECTA </a>
+  
+          <a mat-list-item class="icono-color"><span class="material-symbols-outlined start-icons me-2">
+              restaurant_menu
+            </span>MESAS </a>
+          <a mat-list-item class="icono-color"><span class="material-symbols-outlined start-icons me-2">
+              description
+            </span>FACTURACIÓN </a>
+          <a mat-list-item class="icono-color"><span class="material-symbols-outlined start-icons me-2">
+              shopping_cart
+            </span>DELIVERY </a>
+          <a mat-list-item class="icono-color"><span class="material-symbols-outlined start-icons me-2">
+              groups
+            </span>CLIENTES </a>
+  
+          <!-- <a mat-list-item class="icono-color"><span class="material-symbols-outlined start-icons me-2">
+              window
+            </span>PRODUCTOS </a> -->
+  
+          <mat-expansion-panel hideToggle #panel2 class="panelexpansionado">
+              <mat-expansion-panel-header class="tituloConfig">
+                <a mat-list-item class="icono-color"><span class="material-symbols-outlined start-icons me-2">
+                  window
+                </span>
+                  <mat-panel-title class="tituloLetra">PRODUCTOS</mat-panel-title> </a>
+              </mat-expansion-panel-header>
+              <mat-nav-list>
+        
+              <div class="container submenu text-center">
+                <div class="container">
+                  <button class="btn btn-secondary btn-configs" (click)="irListarProdutos()" (click)="cerrarPanel2()"
+                  (click)="snav.toggle()" >ARTICULOS</button>
+                </div>
+                <div class="container">
+                  <button class="btn btn-secondary btn-configs" (click)="irListarFamilias()" (click)="cerrarPanel2()"
+                  (click)="snav.toggle()" >FAMILIAS</button>
+                </div>
+                <div class="container">
+                  <button class="btn btn-secondary btn-configs" (click)="irListarDepartamentos()" (click)="cerrarPanel2()"
+                  (click)="snav.toggle()" >DEPARTAMENTOS</button>
+                </div>
+                <div class="container">
+                  <button class="btn btn-secondary btn-configs" (click)="irListarCategorias()" (click)="cerrarPanel2()"
+                  (click)="snav.toggle()" >CATEGORIAS</button>
+                  <!-- <button class="btn btn-secondary btn-configs"
+                  (click)="snav.toggle()" >CATEGORIAS</button> -->
+                </div>
+              </div>
+            </mat-nav-list>
+              </mat-expansion-panel>
+  
+          <a mat-list-item class="icono-color"><span class="material-symbols-outlined start-icons me-2">
+              swap_vert
+            </span>OPERACIONES </a>
+          <a mat-list-item class="icono-color"><span class="material-symbols-outlined start-icons me-2">
+              bar_chart
+            </span>INFORMES </a>
+          <a mat-list-item class="icono-color"><span class="material-symbols-outlined start-icons me-2">
+              fact_check
+            </span>INVENTARIO </a>
+  
+          <mat-expansion-panel hideToggle #panel1 class="panelexpansionado">
+            <mat-expansion-panel-header class="tituloConfig">
+              <a mat-list-item class="icono-color"><span class="material-symbols-outlined start-icons me-2 ">
+                  tune
+                </span>
+                <mat-panel-title class="tituloLetra"> CONFIGURACIONES</mat-panel-title> </a>
+            </mat-expansion-panel-header>
+            <mat-nav-list>
+              <!-- <mat-panel-description>
+              <button mat-button (click)="cerrarPanel()" (click)="snav.toggle()">Cerrar panel</button>
+            </mat-panel-description> -->
+              <div class="container submenu text-center">
+                <div class="container">
+                  <button class="btn btn-secondary btn-configs" (click)="cerrarPanel()" (click)="irCrearUsuario()"
+                    (click)="snav.toggle()" *ngIf="crearUsuarioMenu">Agregar usuario</button>
+                </div>
+                <div class="container">
+                  <button class="btn btn-secondary btn-configs" (click)="cerrarPanel()" (click)="irListarUsuarios()"
+                    (click)="snav.toggle()" *ngIf="crearUsuarioMenu">Listar usuario</button>
+                </div>
+  
+              </div>
+            </mat-nav-list>
+          </mat-expansion-panel>
+  
+          <a mat-list-item (click)="logOut()" (click)="snav.toggle()" class="icono-color mb-3"><span
+              class="material-symbols-outlined start-icons me-2 ">
+              search_off
+            </span>CERRAR SESIÓN </a>
+        </mat-nav-list>
+      </mat-sidenav>
+  
+      <mat-sidenav-content class="contenido-menu">
+        <div class="container mt-4">
+          <router-outlet></router-outlet>
+        </div>
+  
+        
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </div>
+  
+  
+  <div *ngIf="!shouldRun">Please open on Stackblitz to see result</div>
