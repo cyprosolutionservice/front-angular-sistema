@@ -3,14 +3,19 @@
     <mat-toolbar class="example-toolbar ">
       <button [disabled]="boton==false" class="boton mt-2" mat-icon-button
         (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
-      <div class="container" id="hora">
-        <a>{{totalString}}</a>
+      <div class="container text-center" id="hora">
+        <!-- <a>{{totalString}}</a> -->
+        <a>Menu Autoservicio</a>
       </div>
-      <!-- <div class="container text-end">
-        <i>
-          <img class="icono2" matTooltip={{usuario}} src="../../../assets/user.png">
+       <div class="container text-end">
+        <i >
+          <!-- <img class="icono2" matTooltip={{usuario}} src="../../../assets/user.png"> -->
+          <span (click)="switchMenu()" class="material-symbols-outlined icono2">
+            account_circle_off
+            </span>
         </i>
-      </div> -->
+        <p class="salir">SALIR</p>
+      </div> 
     </mat-toolbar>
   
     <!-- [opened]="isSidenavInitialized" -->
@@ -27,27 +32,26 @@
           </a>
   
           <a mat-list-item class="icono-color"><span class="material-symbols-outlined start-icons me-2">
-              sync_saved_locally
-            </span>VENTA DIRECTA </a>
+            local_pizza
+            </span>PIZZA </a>
   
           <a mat-list-item class="icono-color"><span class="material-symbols-outlined start-icons me-2">
-              restaurant_menu
-            </span>MESAS </a>
+            soup_kitchen
+            </span>ALMUERZOS</a>
+
+          <a mat-list-item class="icono-color"> <span class="material-symbols-outlined start-icons me-2">
+            egg_alt
+            </span>DESAYUNOS </a>
+
           <a mat-list-item class="icono-color"><span class="material-symbols-outlined start-icons me-2">
-              description
-            </span>FACTURACIÓN </a>
-          <a mat-list-item class="icono-color"><span class="material-symbols-outlined start-icons me-2">
-              shopping_cart
+            directions_bike
             </span>DELIVERY </a>
+
           <a mat-list-item class="icono-color"><span class="material-symbols-outlined start-icons me-2">
-              groups
-            </span>CLIENTES </a>
+            brunch_dining
+            </span>CENA </a>
   
-          <!-- <a mat-list-item class="icono-color"><span class="material-symbols-outlined start-icons me-2">
-              window
-            </span>PRODUCTOS </a> -->
-  
-          <mat-expansion-panel hideToggle #panel2 class="panelexpansionado">
+          <!-- <mat-expansion-panel hideToggle #panel2 class="panelexpansionado">
               <mat-expansion-panel-header class="tituloConfig">
                 <a mat-list-item class="icono-color"><span class="material-symbols-outlined start-icons me-2">
                   window
@@ -72,24 +76,24 @@
                 <div class="container">
                   <button class="btn btn-secondary btn-configs" (click)="irListarCategorias()" (click)="cerrarPanel2()"
                   (click)="snav.toggle()" >CATEGORIAS</button>
-                  <!-- <button class="btn btn-secondary btn-configs"
-                  (click)="snav.toggle()" >CATEGORIAS</button> -->
                 </div>
               </div>
             </mat-nav-list>
-              </mat-expansion-panel>
+              </mat-expansion-panel> -->
   
           <a mat-list-item class="icono-color"><span class="material-symbols-outlined start-icons me-2">
-              swap_vert
-            </span>OPERACIONES </a>
+            cake
+            </span>POSTRES</a>
+
           <a mat-list-item class="icono-color"><span class="material-symbols-outlined start-icons me-2">
-              bar_chart
-            </span>INFORMES </a>
+            local_drink
+            </span>BEBIDAS</a>
+
           <a mat-list-item class="icono-color"><span class="material-symbols-outlined start-icons me-2">
-              fact_check
-            </span>INVENTARIO </a>
+            icecream
+            </span>HELADOS</a>
   
-          <mat-expansion-panel hideToggle #panel1 class="panelexpansionado">
+          <!-- <mat-expansion-panel hideToggle #panel1 class="panelexpansionado">
             <mat-expansion-panel-header class="tituloConfig">
               <a mat-list-item class="icono-color"><span class="material-symbols-outlined start-icons me-2 ">
                   tune
@@ -97,9 +101,7 @@
                 <mat-panel-title class="tituloLetra"> CONFIGURACIONES</mat-panel-title> </a>
             </mat-expansion-panel-header>
             <mat-nav-list>
-              <!-- <mat-panel-description>
-              <button mat-button (click)="cerrarPanel()" (click)="snav.toggle()">Cerrar panel</button>
-            </mat-panel-description> -->
+
               <div class="container submenu text-center">
                 <div class="container">
                   <button class="btn btn-secondary btn-configs" (click)="cerrarPanel()" (click)="irCrearUsuario()"
@@ -112,12 +114,12 @@
   
               </div>
             </mat-nav-list>
-          </mat-expansion-panel>
+          </mat-expansion-panel> -->
   
-          <a mat-list-item (click)="logOut()" (click)="snav.toggle()" class="icono-color mb-3"><span
-              class="material-symbols-outlined start-icons me-2 ">
-              search_off
-            </span>CERRAR SESIÓN </a>
+          <!-- <a mat-list-item (click)="switchMenu()" class="icono-color mb-3"><span 
+            class="material-symbols-outlined start-icons me-2">
+            switch_left
+            </span>MENU AUTOSERVICIO</a> -->
         </mat-nav-list>
       </mat-sidenav>
   

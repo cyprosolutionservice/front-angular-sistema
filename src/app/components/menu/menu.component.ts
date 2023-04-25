@@ -182,6 +182,7 @@ volverInicio(){
 
   switchMenu(){
     this.menu2Service.setSwitchMenu(!this.menu2Service.switchMenu);
+    this.router.navigate(['autoservicio']);
   }
 }
 
