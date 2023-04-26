@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
         alert('Error de clave');
       }
     }, error => {
-      if (error.status === 401) {
+      if (error.status === 500) {
         console.log('Error de Autorizacion 2023');
         this.toastr.error('Error', 'Usuario o Clave incorrectos');
       }
