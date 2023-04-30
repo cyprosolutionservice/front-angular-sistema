@@ -56,6 +56,8 @@ import { ModalPopUpComponent } from './components/modal-pop-up/modal-pop-up.comp
 import { ModalServiceService } from './services/modal-service.service';
 import { Menu2Component } from './components/menu2/menu2.component';
 import { AutoservicioComponent } from './components/autoservicio/autoservicio.component';
+import { ListarSeccionesComponent } from './components/listar-secciones/listar-secciones.component';
+import { CrearSeccionComponent } from './components/crear-seccion/crear-seccion.component';
 
 
 @NgModule({
@@ -83,6 +85,8 @@ import { AutoservicioComponent } from './components/autoservicio/autoservicio.co
     ModalPopUpComponent,
     Menu2Component,
     AutoservicioComponent,
+    ListarSeccionesComponent,
+    CrearSeccionComponent,
   ],
   imports: [
     BrowserModule,

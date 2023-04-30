@@ -130,6 +130,10 @@ irCrearUsuario(){
 irListarUsuarios(){
   this.router.navigate(['listar-usuarios']);
 }
+
+irListarSecciones(){
+  this.router.navigate(['listar-secciones']);
+}
 irListarFamilias(){
   this.router.navigate(['listar-familias']);
 }

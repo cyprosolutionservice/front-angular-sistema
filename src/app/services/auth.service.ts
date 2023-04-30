@@ -16,7 +16,7 @@ import { UserDataCreate } from '../Model/UserDataCreate';
 export class AuthService {
 
   private URL = 'http://34.176.28.73:3000';
-  // private URL = 'http://localhost:3000';
+  //  private URL = 'http://localhost:3000';
 
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
 
@@ -229,6 +229,41 @@ export class AuthService {
       })
     };
     return this.http.get(`${this.URL}/product/get/unidades`, httpOptions);
+  }
+
+  getMenuBarSale(){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'x-db-name': localStorage.getItem('DB'),
+      })
+    };
+    return this.http.get(`${this.URL}/product/get/barsale`, httpOptions);
+  }
+
+  getTypeSale(){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'x-db-name': localStorage.getItem('DB'),
+      })
+    };
+    return this.http.get(`${this.URL}/product/get/typesale`, httpOptions);
+  }
+  getSecciones(){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'x-db-name': localStorage.getItem('DB'),
+      })
+    };
+    return this.http.get(`${this.URL}/product/get/secciones`, httpOptions);
+  }
+
+  createSeccion(seccion: any){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'x-db-name': localStorage.getItem('DB'),
+      })
+    };
+    return this.http.post(`${this.URL}/product/create/barsale`, seccion, httpOptions);
   }
 
 

@@ -22,6 +22,8 @@ import { AuthGuard } from './guards/auth.guard';
 import { RoleGuard } from './guards/role.guard';
 import { EditarArticuloComponent } from './components/editar-articulo/editar-articulo.component';
 import { AutoservicioComponent } from './components/autoservicio/autoservicio.component';
+import { ListarSeccionesComponent } from './components/listar-secciones/listar-secciones.component';
+import { CrearSeccionComponent } from './components/crear-seccion/crear-seccion.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent},
@@ -44,6 +46,8 @@ const routes: Routes = [
   { path: 'editar-articulo/:id', component: EditarArticuloComponent, canActivate: [AuthGuard]},
   { path: 'crear-familia', component: CrearFamiliaComponent, canActivate: [AuthGuard]},
   { path: 'autoservicio', component: AutoservicioComponent, canActivate: [AuthGuard]},
+  { path: 'listar-secciones', component: ListarSeccionesComponent, canActivate: [AuthGuard]},
+  { path: 'crear-seccion', component: CrearSeccionComponent, canActivate: [AuthGuard]},
   
   { path: '**', pathMatch: 'full', redirectTo: 'login'}
 ];

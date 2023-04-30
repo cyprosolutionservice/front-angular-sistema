@@ -1,0 +1,112 @@
+
+.listado{
+    width: 715px;
+    background: rgba(46,75,131,255);
+    border: none;
+    border-radius: 19px;
+    margin-bottom: 5px;
+    margin-top: 45px;
+  }
+
+  .titulo{
+    color: aliceblue;
+    font-size: 1.9rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 3rem;
+
+}
+
+  .car-body{
+    background: rgba(46,75,131,255);
+    border: none;
+  }
+
+
+.table{
+    border: black;
+    color: aliceblue;
+    font-size: 14px;
+}
+
+.encabezados{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 19px;
+}
+/* td{
+    cursor: pointer;
+} */
+
+.material-symbols-outlined{
+  cursor: pointer;
+}
+
+.select-container{
+  display: block;
+  margin-bottom: 15px;
+  max-width: 310px;
+  
+}
+
+.mat-form-field-type-mat-select{
+  width: 185px;
+}
+.box1{
+  margin-right: 15px;
+}
+
+.mobile-only {
+    display: none;
+}
+
+.colorInput{
+  background-color:rgba(0,31,70,255);
+  border-radius: 12px;
+  color: aliceblue;
+  font-family: Tahoma; font-size: 19px; font-style: normal;
+}
+
+.form-control::placeholder{
+  color: rgba(221, 230, 240, 0.658);
+  font-size: 14px;
+}
+@media only screen and (max-width: 767px) {
+
+    .desktop-only {
+        display: none;
+      }
+    
+      .mobile-only {
+        display: inline;
+      }
+    .listado{
+        width: 368px;
+        
+    }
+    .titulo{
+        font-size: 23px;
+        margin-bottom: 2rem;
+    }
+    .encabezados{
+        font-size: 11px;
+        font-weight: bold;
+    }
+    .table{
+        font-size: 8px;
+    }
+    .material-symbols-outlined{
+      font-size: 16px;
+    }
+    .mat-form-field-type-mat-select{
+      width: 165px;
+    }
+    .box1{
+      margin-right: 10px;
+    }
+
+    .select-container{
+      max-width: 230px;
+    }
+}
+
+
