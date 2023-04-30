@@ -29,9 +29,27 @@
           <p class="first-icon">INICIO </p>
         </a>
 
-        <a mat-list-item class="icono-color"><span class="material-symbols-outlined start-icons me-2">
+        <mat-expansion-panel hideToggle #panel2 class="panelexpansionado">
+          <mat-expansion-panel-header class="tituloConfig">
+            <a mat-list-item class="icono-color"><span class="material-symbols-outlined start-icons me-2">
+              sync_saved_locally
+            </span>
+              <mat-panel-title class="tituloLetra">VENTA DIRECTA</mat-panel-title> </a>
+          </mat-expansion-panel-header>
+          <mat-nav-list>
+
+            <div class="container submenu text-center">
+              <div class="container" *ngFor="let item of listVentaDirecta">
+                <!-- <button class="btn btn-secondary btn-configs">ARTICULOS</button> -->
+                <button class="btn btn-secondary btn-configs">{{ item.DESCRIPCION }}</button>
+              </div>
+            </div>
+          </mat-nav-list>
+        </mat-expansion-panel>
+
+        <!-- <a mat-list-item class="icono-color"><span class="material-symbols-outlined start-icons me-2">
             sync_saved_locally
-          </span>VENTA DIRECTA </a>
+          </span>VENTA DIRECTA </a> -->
 
         <a mat-list-item class="icono-color"><span class="material-symbols-outlined start-icons me-2">
             restaurant_menu
@@ -121,16 +139,16 @@
           </mat-nav-list>
         </mat-expansion-panel>
 
-        <a mat-list-item (click)="switchMenu()" class="icono-color mb-3"><span 
-          class="material-symbols-outlined start-icons me-2">
-          switch_right
+        <a mat-list-item (click)="switchMenu()" class="icono-color mb-3"><span
+            class="material-symbols-outlined start-icons me-2">
+            switch_right
           </span>MENU AUTOSERVICIO</a>
-      
 
-      <a mat-list-item (click)="logOut()" (click)="snav.toggle()" class="icono-color mb-3"><span
-          class="material-symbols-outlined start-icons me-2 ">
-          search_off
-        </span>CERRAR SESIÓN </a>
+
+        <a mat-list-item (click)="logOut()" (click)="snav.toggle()" class="icono-color mb-3"><span
+            class="material-symbols-outlined start-icons me-2 ">
+            search_off
+          </span>CERRAR SESIÓN </a>
       </mat-nav-list>
     </mat-sidenav>
 

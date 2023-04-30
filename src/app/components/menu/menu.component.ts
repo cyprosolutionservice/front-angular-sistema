@@ -13,6 +13,7 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { EditarUsuarioComponent } from '../editar-usuario/editar-usuario.component';
 import { MenuService } from 'src/app/services/menu.service';
 import { SwitchMenuService } from 'src/app/services/switch-menu.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 function capitalizeInitials(str: string): string {
   const words = str.split(' ');
@@ -64,6 +65,7 @@ export class MenuComponent implements OnInit {
   private _mobileQueryListener: () => void;
 
   constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher,
+              private authService: AuthService,
               private menu2Service: SwitchMenuService,
               private segundo: XsegundoService,
               private menuService: MenuService,
@@ -78,6 +80,7 @@ export class MenuComponent implements OnInit {
   }
   ngOnInit() {
     this.datos$=this.segundo.getInfoReloj();
+    this.obtenerVentaDirecta();
     this.datos$.subscribe(x => {
       this.hora = x.hora;
       this.minutos = x.minutos;
@@ -187,6 +190,22 @@ volverInicio(){
   switchMenu(){
     this.menu2Service.setSwitchMenu(!this.menu2Service.switchMenu);
     this.router.navigate(['autoservicio']);
+  }
+
+  listVentaDirecta: any[] = [];
+
+  obtenerVentaDirecta(){
+    this.authService.getSeccionTypeById('1').subscribe( (res:any) =>{
+      if (!res.error) {
+      //console.log(res);
+      this.listVentaDirecta = res;
+      console.log(res);
+      }else{
+        console.log('Secciones No encontrados en la base de Datos');
+        this.toastr.error('Error', 'Error al buscar Categorias')
+      }
+        
+    });
   }
 }
 
