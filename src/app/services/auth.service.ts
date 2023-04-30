@@ -15,7 +15,7 @@ import { UserDataCreate } from '../Model/UserDataCreate';
 })
 export class AuthService {
 
-  private URL = 'http://34.176.159.223:3000';
+  private URL = 'http://34.176.28.73:3000';
   // private URL = 'http://localhost:3000';
 
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
